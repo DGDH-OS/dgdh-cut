@@ -19,7 +19,7 @@ import {
 	getExportFileExtension,
 	downloadBuffer,
 } from "@/export";
-import { Check, Copy, Download, RotateCcw } from "lucide-react";
+import { Check, Copy, Download, RotateCcw, Server } from "lucide-react";
 import {
 	EXPORT_FORMAT_VALUES,
 	EXPORT_QUALITY_VALUES,
@@ -41,6 +41,45 @@ function isExportFormat(value: string): value is ExportFormat {
 
 function isExportQuality(value: string): value is ExportQuality {
 	return EXPORT_QUALITY_VALUES.some((qualityValue) => qualityValue === value);
+}
+
+const SERVER_MEDIA_EXTENSIONS = new Set([
+	".mp4",
+	".mov",
+	".m4v",
+	".webm",
+	".jpg",
+	".jpeg",
+	".png",
+	".webp",
+	".heic",
+]);
+
+const SERVER_MIME_TO_EXTENSION: Record<string, string> = {
+	"video/mp4": ".mp4",
+	"video/quicktime": ".mov",
+	"video/x-m4v": ".m4v",
+	"video/webm": ".webm",
+	"image/jpeg": ".jpg",
+	"image/png": ".png",
+	"image/webp": ".webp",
+	"image/heic": ".heic",
+};
+
+/**
+ * Bepaal de originele bestandsextensie van een media-asset, met een mime-
+ * fallback voor blob-bestanden zonder herkenbare naam. Valt terug op .mp4.
+ */
+function getFileExtension(file: File): string {
+	const name = file.name || "";
+	const dot = name.lastIndexOf(".");
+	if (dot >= 0 && dot < name.length - 1) {
+		const ext = name.slice(dot).toLowerCase();
+		if (SERVER_MEDIA_EXTENSIONS.has(ext)) {
+			return ext;
+		}
+	}
+	return SERVER_MIME_TO_EXTENSION[file.type] ?? ".mp4";
 }
 
 export function ExportButton() {
@@ -110,6 +149,8 @@ function ExportPopover({
 	const [shouldIncludeAudio, setShouldIncludeAudio] = useState<boolean>(
 		DEFAULT_EXPORT_OPTIONS.includeAudio ?? true,
 	);
+	const [serverExporting, setServerExporting] = useState(false);
+	const [serverError, setServerError] = useState<string | null>(null);
 
 	const handleExport = async () => {
 		if (!activeProject) return;
@@ -142,6 +183,82 @@ function ExportPopover({
 
 	const handleCancel = () => {
 		editor.project.cancelExport();
+	};
+
+	/**
+	 * Server-render pad (Fase 1): stuurt de timeline-JSON + media-blobs naar
+	 * /api/export, dat doorstuur naar de CUT Engine en de ffmpeg-MP4 terug
+	 * streamt. Alleen de main-scene en main track + text-tracks; effecten/
+	 * masks/animaties/audio-mix zijn bewust buiten scope (Fase 2+).
+	 */
+	const handleServerRender = async () => {
+		if (!activeProject) return;
+		setServerError(null);
+
+		const mainScene =
+			activeProject.scenes.find((scene) => scene.isMain) ??
+			activeProject.scenes[0];
+		const elements = mainScene?.tracks.main.elements ?? [];
+
+		if (elements.length === 0) {
+			setServerError(
+				"No clips to render. Add a video or image to the main track first.",
+			);
+			return;
+		}
+
+		const assets = editor.media.getAssets();
+		const assetById = new Map(assets.map((asset) => [asset.id, asset]));
+
+		const form = new FormData();
+		form.append("timeline", JSON.stringify(activeProject));
+
+		const usedMediaIds = new Set(
+			elements.map((element) => element.mediaId),
+		);
+		for (const mediaId of usedMediaIds) {
+			const asset = assetById.get(mediaId);
+			if (!asset?.file) {
+				setServerError(
+					`Media ${mediaId} is missing from the media bin. Re-add it and try again.`,
+				);
+				return;
+			}
+			const ext = getFileExtension(asset.file);
+			form.append(`${mediaId}${ext}`, asset.file, `${mediaId}${ext}`);
+		}
+
+		setServerExporting(true);
+		try {
+			const response = await fetch("/api/export", {
+				method: "POST",
+				body: form,
+			});
+			if (!response.ok) {
+				let message = `Server render failed (${response.status}).`;
+				try {
+					const data = (await response.json()) as { error?: string };
+					if (data?.error) {
+						message = data.error;
+					}
+				} catch {
+					// non-JSON error body; keep the generic message.
+				}
+				setServerError(message);
+				return;
+			}
+			const blob = await response.blob();
+			downloadBuffer({
+				buffer: await blob.arrayBuffer(),
+				filename: `${activeProject.metadata.name}.mp4`,
+				mimeType: "video/mp4",
+			});
+			onOpenChange(false);
+		} catch (error) {
+			setServerError(`Could not reach render server: ${String(error)}`);
+		} finally {
+			setServerExporting(false);
+		}
 	};
 
 	return (
@@ -252,11 +369,23 @@ function ExportPopover({
 									</Section>
 								</div>
 
-								<div className="p-3 pt-0">
+								<div className="flex flex-col gap-2 p-3 pt-0">
 									<Button onClick={handleExport} className="w-full gap-2">
 										<Download className="size-4" />
 										Export
 									</Button>
+									<Button
+										variant="outline"
+										onClick={handleServerRender}
+										disabled={serverExporting}
+										className="w-full gap-2"
+									>
+										<Server className="size-4" />
+										{serverExporting ? "Rendering…" : "Render (server)"}
+									</Button>
+									{serverError && (
+										<p className="text-destructive text-xs">{serverError}</p>
+									)}
 								</div>
 							</>
 						)}
