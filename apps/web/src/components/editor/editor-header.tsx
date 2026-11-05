@@ -32,6 +32,9 @@ export function EditorHeader() {
 		<header className="bg-background flex h-[3.4rem] items-center justify-between px-3 pt-0.5">
 			<div className="flex items-center gap-1">
 				<ProjectDropdown />
+				<span className="ml-1 hidden select-none text-[0.8rem] font-semibold tracking-wide text-primary sm:inline">
+					DGDH CUT
+				</span>
 				<EditableProjectName />
 			</div>
 			<nav className="flex items-center gap-2">

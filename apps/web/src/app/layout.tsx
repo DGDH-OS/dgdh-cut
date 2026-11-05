@@ -7,9 +7,24 @@ import { TooltipProvider } from "../components/ui/tooltip";
 import { baseMetaData } from "./metadata";
 import { BotIdClient } from "botid/client";
 import { webEnv } from "@/env/web";
-import { Inter } from "next/font/google";
+import { Fraunces, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 
-const siteFont = Inter({ subsets: ["latin"] });
+const fraunces = Fraunces({
+	subsets: ["latin"],
+	variable: "--font-fraunces",
+});
+
+const plexMono = IBM_Plex_Mono({
+	subsets: ["latin"],
+	weight: ["400", "500", "600"],
+	variable: "--font-plex-mono",
+});
+
+const plexSans = IBM_Plex_Sans({
+	subsets: ["latin"],
+	weight: ["400", "500", "600", "700"],
+	variable: "--font-plex-sans",
+});
 
 export const metadata = baseMetaData;
 
@@ -39,7 +54,9 @@ export default function RootLayout({
 					</>
 				)}
 			</head>
-			<body className={`${siteFont.className} font-sans antialiased`}>
+			<body
+				className={`${plexSans.variable} ${plexMono.variable} ${fraunces.variable} font-sans antialiased`}
+			>
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="system"

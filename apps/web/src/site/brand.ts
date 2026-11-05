@@ -1,9 +1,9 @@
-export const SITE_URL = "https://opencut.app";
+export const SITE_URL = "https://cut.dgdh-os.com";
 
 export const SITE_INFO = {
-	title: "OpenCut",
+	title: "DGDH CUT",
 	description:
-		"A simple but powerful video editor that gets the job done. In your browser.",
+		"DGDH CUT — the browser-based video editor for short-form. Cut, grade, and export reels fast.",
 	url: SITE_URL,
 	openGraphImage: "/open-graph/default.jpg",
 	twitterImage: "/open-graph/default.jpg",
