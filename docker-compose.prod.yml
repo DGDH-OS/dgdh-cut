@@ -26,6 +26,7 @@ services:
       MARBLE_WORKSPACE_KEY: ${MARBLE_WORKSPACE_KEY:?}
       FREESOUND_CLIENT_ID: ${FREESOUND_CLIENT_ID:?}
       FREESOUND_API_KEY: ${FREESOUND_API_KEY:?}
+      CUT_SUPABASE_SERVICE_ROLE_KEY: ${CUT_SUPABASE_SERVICE_ROLE_KEY:?set (agent keys + usage in Supabase, server-side only)}
     networks: [coolify]
     mem_limit: 1g
     logging: { driver: json-file, options: { max-size: "10m", max-file: "3" } }
