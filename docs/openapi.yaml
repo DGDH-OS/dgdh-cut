@@ -1,0 +1,788 @@
+openapi: 3.1.0
+info: 
+  title: DGDH CUT Agent API
+  version: 1.0.0
+  description: "Headless video tools for agents. Same tools are available over MCP at /api/mcp (Streamable HTTP). Auth: `Authorization: Bearer cut_live_…`."
+servers: 
+  - url: https://studio.dgdh-os.com
+paths: 
+  /api/v1/tools: 
+    get: 
+      operationId: listTools
+      summary: Tools this key may call (with JSON Schemas)
+      security: 
+        - bearer: 
+            []
+      responses: 
+        "200": 
+          description: OK
+        "401": 
+          &401
+          description: Error
+          content: 
+            application/json: 
+              schema: 
+                $ref: "#/components/schemas/Error"
+        "429": 
+          *401
+  /api/v1/usage: 
+    get: 
+      operationId: usage
+      summary: Metered units per tool (default last 30 days)
+      security: 
+        - bearer: 
+            []
+      parameters: 
+        - name: since
+          in: query
+          schema: 
+            type: string
+            format: date-time
+      responses: 
+        "200": 
+          description: OK
+        "401": 
+          *401
+  "/api/v1/media/{file}": 
+    get: 
+      operationId: downloadMedia
+      summary: Download a media-bin file (renders)
+      security: 
+        - bearer: 
+            []
+      parameters: 
+        - name: file
+          in: path
+          required: true
+          schema: 
+            type: string
+      responses: 
+        "200": 
+          description: Video bytes
+        "401": 
+          *401
+        "404": 
+          *401
+  /api/v1/keys: 
+    post: 
+      operationId: createKey
+      summary: Create an API key (Suite browser session required). Key is shown once.
+      security: 
+        - suiteSession: 
+            []
+      requestBody: 
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              properties: 
+                name: 
+                  type: string
+                scopes: 
+                  type: array
+                  items: 
+                    enum: 
+                      - media:read
+                      - media:write
+                      - render
+                      - transcribe
+                      - voice
+                      - editor
+                rate_limit_per_min: 
+                  type: integer
+                  minimum: 1
+                  maximum: 600
+              required: 
+                - name
+      responses: 
+        "201": 
+          description: Created
+        "401": 
+          *401
+    get: 
+      operationId: listKeys
+      summary: List own keys
+      security: 
+        - suiteSession: 
+            []
+      responses: 
+        "200": 
+          description: OK
+    delete: 
+      operationId: revokeKey
+      summary: Revoke a key
+      security: 
+        - suiteSession: 
+            []
+      parameters: 
+        - name: id
+          in: query
+          required: true
+          schema: 
+            type: string
+            format: uuid
+      responses: 
+        "200": 
+          description: OK
+  /api/v1/tools/list_media: 
+    post: 
+      operationId: list_media
+      summary: "List files in the CUT media bin (name, kind, bytes, duration)."
+      description: "Required scope: `media:read`. Metering: 1 unit(s) per successful call."
+      security: 
+        - bearer: 
+            []
+      x-scope: media:read
+      x-units: 1
+      requestBody: 
+        required: true
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              properties: 
+                {}
+              additionalProperties: false
+      responses: 
+        "200": 
+          description: Tool result
+          content: 
+            application/json: 
+              schema: 
+                type: object
+                properties: 
+                  ok: 
+                    type: boolean
+                  download_url: 
+                    type: string
+                additionalProperties: true
+        "400": 
+          *401
+        "401": 
+          *401
+        "403": 
+          *401
+        "422": 
+          *401
+        "429": 
+          *401
+  /api/v1/tools/list_catalog: 
+    post: 
+      operationId: list_catalog
+      summary: "List available LUTs, templates, transitions or SFX for use in grade/compose/sfx_mix."
+      description: "Required scope: `media:read`. Metering: 1 unit(s) per successful call."
+      security: 
+        - bearer: 
+            []
+      x-scope: media:read
+      x-units: 1
+      requestBody: 
+        required: true
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              properties: 
+                kind: 
+                  type: string
+                  enum: 
+                    - luts
+                    - templates
+                    - transitions
+                    - sfx
+              required: 
+                - kind
+              additionalProperties: false
+      responses: 
+        "200": 
+          description: Tool result
+          content: 
+            application/json: 
+              schema: 
+                type: object
+                properties: 
+                  ok: 
+                    type: boolean
+                  download_url: 
+                    type: string
+                additionalProperties: true
+        "400": 
+          *401
+        "401": 
+          *401
+        "403": 
+          *401
+        "422": 
+          *401
+        "429": 
+          *401
+  /api/v1/tools/upload_media_from_url: 
+    post: 
+      operationId: upload_media_from_url
+      summary: Fetch a video/image from an https URL into the media bin (max 95 MB; mp4 mov m4v webm jpg png webp heic).
+      description: "Required scope: `media:write`. Metering: 2 unit(s) per successful call."
+      security: 
+        - bearer: 
+            []
+      x-scope: media:write
+      x-units: 2
+      requestBody: 
+        required: true
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              properties: 
+                url: 
+                  type: string
+                  format: uri
+                  description: https URL to download
+                name: 
+                  description: target file name incl. extension
+                  type: string
+                  pattern: "^[\\w.-]+$"
+              required: 
+                - url
+              additionalProperties: false
+      responses: 
+        "200": 
+          description: Tool result
+          content: 
+            application/json: 
+              schema: 
+                type: object
+                properties: 
+                  ok: 
+                    type: boolean
+                  download_url: 
+                    type: string
+                additionalProperties: true
+        "400": 
+          *401
+        "401": 
+          *401
+        "403": 
+          *401
+        "422": 
+          *401
+        "429": 
+          *401
+  /api/v1/tools/build_reel: 
+    post: 
+      operationId: build_reel
+      summary: "Auto-reel: transcribe speech and cut silences from one clip, output a vertical reel."
+      description: "Required scope: `transcribe`. Metering: 10 unit(s) per successful call."
+      security: 
+        - bearer: 
+            []
+      x-scope: transcribe
+      x-units: 10
+      requestBody: 
+        required: true
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              properties: 
+                file: 
+                  type: string
+                  minLength: 1
+                  description: Media-bin file name (from list_media or upload_media_from_url)
+                output_size: 
+                  description: "e.g. \"1080x1920\""
+                  type: string
+                  pattern: "^\\d{3,4}x\\d{3,4}$"
+              required: 
+                - file
+              additionalProperties: false
+      responses: 
+        "200": 
+          description: Tool result
+          content: 
+            application/json: 
+              schema: 
+                type: object
+                properties: 
+                  ok: 
+                    type: boolean
+                  download_url: 
+                    type: string
+                additionalProperties: true
+        "400": 
+          *401
+        "401": 
+          *401
+        "403": 
+          *401
+        "422": 
+          *401
+        "429": 
+          *401
+  /api/v1/tools/compose: 
+    post: 
+      operationId: compose
+      summary: "Compose a reel from a template + clips, or from an explicit timeline ({output_size, clips:[{file,in,out,grade?,transition?,effects?}], captions?, sfx?, music?})."
+      description: "Required scope: `render`. Metering: 5 unit(s) per successful call."
+      security: 
+        - bearer: 
+            []
+      x-scope: render
+      x-units: 5
+      requestBody: 
+        required: true
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              properties: 
+                template: 
+                  description: product-promo | talking-head-reel | cinematic-trailer
+                  type: string
+                clips: 
+                  description: file names when using a template
+                  type: array
+                  items: 
+                    type: string
+                title: 
+                  type: string
+                output_size: 
+                  description: "e.g. \"1080x1920\""
+                  type: string
+                  pattern: "^\\d{3,4}x\\d{3,4}$"
+                timeline: 
+                  type: object
+                  propertyNames: 
+                    type: string
+                  additionalProperties: 
+                    {}
+              additionalProperties: false
+      responses: 
+        "200": 
+          description: Tool result
+          content: 
+            application/json: 
+              schema: 
+                type: object
+                properties: 
+                  ok: 
+                    type: boolean
+                  download_url: 
+                    type: string
+                additionalProperties: true
+        "400": 
+          *401
+        "401": 
+          *401
+        "403": 
+          *401
+        "422": 
+          *401
+        "429": 
+          *401
+  /api/v1/tools/grade: 
+    post: 
+      operationId: grade
+      summary: Colour-grade a clip with a LUT and/or brightness/contrast/saturation/gamma.
+      description: "Required scope: `render`. Metering: 3 unit(s) per successful call."
+      security: 
+        - bearer: 
+            []
+      x-scope: render
+      x-units: 3
+      requestBody: 
+        required: true
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              properties: 
+                file: 
+                  type: string
+                  minLength: 1
+                  description: Media-bin file name (from list_media or upload_media_from_url)
+                lut: 
+                  type: string
+                brightness: 
+                  type: number
+                contrast: 
+                  type: number
+                saturation: 
+                  type: number
+                gamma: 
+                  type: number
+              required: 
+                - file
+              additionalProperties: false
+      responses: 
+        "200": 
+          description: Tool result
+          content: 
+            application/json: 
+              schema: 
+                type: object
+                properties: 
+                  ok: 
+                    type: boolean
+                  download_url: 
+                    type: string
+                additionalProperties: true
+        "400": 
+          *401
+        "401": 
+          *401
+        "403": 
+          *401
+        "422": 
+          *401
+        "429": 
+          *401
+  /api/v1/tools/karaoke: 
+    post: 
+      operationId: karaoke
+      summary: Transcribe and burn word-by-word karaoke captions into the video.
+      description: "Required scope: `transcribe`. Metering: 10 unit(s) per successful call."
+      security: 
+        - bearer: 
+            []
+      x-scope: transcribe
+      x-units: 10
+      requestBody: 
+        required: true
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              properties: 
+                file: 
+                  type: string
+                  minLength: 1
+                  description: Media-bin file name (from list_media or upload_media_from_url)
+                font_size: 
+                  type: number
+                highlight_color: 
+                  type: string
+                effect: 
+                  type: string
+              required: 
+                - file
+              additionalProperties: false
+      responses: 
+        "200": 
+          description: Tool result
+          content: 
+            application/json: 
+              schema: 
+                type: object
+                properties: 
+                  ok: 
+                    type: boolean
+                  download_url: 
+                    type: string
+                additionalProperties: true
+        "400": 
+          *401
+        "401": 
+          *401
+        "403": 
+          *401
+        "422": 
+          *401
+        "429": 
+          *401
+  /api/v1/tools/reframe: 
+    post: 
+      operationId: reframe
+      summary: Reframe a video to another aspect ratio (e.g. 1080x1920).
+      description: "Required scope: `render`. Metering: 4 unit(s) per successful call."
+      security: 
+        - bearer: 
+            []
+      x-scope: render
+      x-units: 4
+      requestBody: 
+        required: true
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              properties: 
+                file: 
+                  type: string
+                  minLength: 1
+                  description: Media-bin file name (from list_media or upload_media_from_url)
+                output_size: 
+                  description: "e.g. \"1080x1920\""
+                  type: string
+                  pattern: "^\\d{3,4}x\\d{3,4}$"
+              required: 
+                - file
+              additionalProperties: false
+      responses: 
+        "200": 
+          description: Tool result
+          content: 
+            application/json: 
+              schema: 
+                type: object
+                properties: 
+                  ok: 
+                    type: boolean
+                  download_url: 
+                    type: string
+                additionalProperties: true
+        "400": 
+          *401
+        "401": 
+          *401
+        "403": 
+          *401
+        "422": 
+          *401
+        "429": 
+          *401
+  /api/v1/tools/sfx_mix: 
+    post: 
+      operationId: sfx_mix
+      summary: "Mix sound effects into a video: auto (on cuts) or explicit cues [{t, category}]."
+      description: "Required scope: `render`. Metering: 3 unit(s) per successful call."
+      security: 
+        - bearer: 
+            []
+      x-scope: render
+      x-units: 3
+      requestBody: 
+        required: true
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              properties: 
+                file: 
+                  type: string
+                  minLength: 1
+                  description: Media-bin file name (from list_media or upload_media_from_url)
+                auto: 
+                  type: boolean
+                cues: 
+                  type: array
+                  items: 
+                    type: object
+                    properties: 
+                      t: 
+                        type: number
+                      category: 
+                        type: string
+                    required: 
+                      - t
+                      - category
+                    additionalProperties: false
+              required: 
+                - file
+              additionalProperties: false
+      responses: 
+        "200": 
+          description: Tool result
+          content: 
+            application/json: 
+              schema: 
+                type: object
+                properties: 
+                  ok: 
+                    type: boolean
+                  download_url: 
+                    type: string
+                additionalProperties: true
+        "400": 
+          *401
+        "401": 
+          *401
+        "403": 
+          *401
+        "422": 
+          *401
+        "429": 
+          *401
+  /api/v1/tools/voiceover: 
+    post: 
+      operationId: voiceover
+      summary: Generate a voice-over from text (ElevenLabs) into the media bin.
+      description: "Required scope: `voice`. Metering: 8 unit(s) per successful call."
+      security: 
+        - bearer: 
+            []
+      x-scope: voice
+      x-units: 8
+      requestBody: 
+        required: true
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              properties: 
+                text: 
+                  type: string
+                  minLength: 1
+                  maxLength: 5000
+                voice_id: 
+                  type: string
+                model: 
+                  type: string
+                file: 
+                  type: string
+              required: 
+                - text
+              additionalProperties: false
+      responses: 
+        "200": 
+          description: Tool result
+          content: 
+            application/json: 
+              schema: 
+                type: object
+                properties: 
+                  ok: 
+                    type: boolean
+                  download_url: 
+                    type: string
+                additionalProperties: true
+        "400": 
+          *401
+        "401": 
+          *401
+        "403": 
+          *401
+        "422": 
+          *401
+        "429": 
+          *401
+  /api/v1/tools/export: 
+    post: 
+      operationId: export
+      summary: "Export a timeline JSON to a preset (9:16 1:1 4:5 16:9), thumbnail or gif."
+      description: "Required scope: `render`. Metering: 5 unit(s) per successful call."
+      security: 
+        - bearer: 
+            []
+      x-scope: render
+      x-units: 5
+      requestBody: 
+        required: true
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              properties: 
+                timeline: 
+                  type: object
+                  propertyNames: 
+                    type: string
+                  additionalProperties: 
+                    {}
+                preset: 
+                  type: string
+                  enum: 
+                    - 9:16
+                    - 1:1
+                    - 4:5
+                    - 16:9
+                format: 
+                  type: string
+                  enum: 
+                    - thumbnail
+                    - gif
+                loop: 
+                  type: boolean
+              required: 
+                - timeline
+              additionalProperties: false
+      responses: 
+        "200": 
+          description: Tool result
+          content: 
+            application/json: 
+              schema: 
+                type: object
+                properties: 
+                  ok: 
+                    type: boolean
+                  download_url: 
+                    type: string
+                additionalProperties: true
+        "400": 
+          *401
+        "401": 
+          *401
+        "403": 
+          *401
+        "422": 
+          *401
+        "429": 
+          *401
+  /api/v1/tools/open_in_editor: 
+    post: 
+      operationId: open_in_editor
+      summary: Return the link that opens an agent-built project (inbox id from POST /api/agent/projects) in the CUT editor. The user must be signed in to the DGDH Suite.
+      description: "Required scope: `editor`. Metering: 1 unit(s) per successful call."
+      security: 
+        - bearer: 
+            []
+      x-scope: editor
+      x-units: 1
+      requestBody: 
+        required: true
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              properties: 
+                project_id: 
+                  type: string
+                  format: uuid
+                  pattern: "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+              required: 
+                - project_id
+              additionalProperties: false
+      responses: 
+        "200": 
+          description: Tool result
+          content: 
+            application/json: 
+              schema: 
+                type: object
+                properties: 
+                  ok: 
+                    type: boolean
+                  download_url: 
+                    type: string
+                additionalProperties: true
+        "400": 
+          *401
+        "401": 
+          *401
+        "403": 
+          *401
+        "422": 
+          *401
+        "429": 
+          *401
+components: 
+  securitySchemes: 
+    bearer: 
+      type: http
+      scheme: bearer
+      description: CUT API key
+    suiteSession: 
+      type: apiKey
+      in: cookie
+      name: sb-auth-token
+  schemas: 
+    Error: 
+      type: object
+      properties: 
+        ok: 
+          const: false
+        error: 
+          type: string
+      required: 
+        - ok
+        - error

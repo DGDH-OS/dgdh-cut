@@ -7,12 +7,18 @@ import {
 } from "@/lib/suite-auth/config";
 import { getSuiteSession } from "@/lib/suite-auth/session";
 
+const isAgentApiPath = (p: string) =>
+	p === "/api/mcp" || (p.startsWith("/api/v1/") && !p.startsWith("/api/v1/keys"));
+
 // Suite-login gate for DGDH CUT. Protects every route except statics + /api/health,
 // including /api/engine and /api/export (401 JSON instead of redirect for /api/*).
 export async function proxy(request: NextRequest) {
 	const { pathname, search } = request.nextUrl;
 	if (isPublicPath(pathname)) return NextResponse.next();
 	if (devAuthEnabled()) return NextResponse.next();
+	// Agent surface: authenticated by Bearer API key inside the route handlers (fail closed there),
+	// not by browser session. /api/v1/keys stays session-only (key management by Suite users).
+	if (isAgentApiPath(pathname)) return NextResponse.next();
 
 	let response = NextResponse.next({ request });
 	const session = await getSuiteSession(request, (values) => {
