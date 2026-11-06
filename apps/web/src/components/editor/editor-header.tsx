@@ -26,23 +26,34 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { ShortcutsDialog } from "@/actions/components/shortcuts-dialog";
 import Image from "next/image";
 import { cn } from "@/utils/ui";
+import { WorkspaceSwitcher } from "./workspaces/workspace-switcher";
 
 export function EditorHeader() {
 	return (
-		<header className="bg-background flex h-[3.4rem] items-center justify-between px-3 pt-0.5">
-			<div className="flex items-center gap-1">
-				<ProjectDropdown />
-				<span className="ml-1 hidden select-none text-[0.8rem] font-semibold tracking-wide text-primary sm:inline">
-					DGDH CUT
-				</span>
-				<EditableProjectName />
+		<>
+			<header className="bg-background flex h-[3.4rem] items-center justify-between px-3 pt-0.5">
+				<div className="flex min-w-0 items-center gap-1">
+					<ProjectDropdown />
+					<span className="ml-1 hidden select-none text-[0.8rem] font-semibold tracking-wide text-primary sm:inline">
+						DGDH CUT
+					</span>
+					<EditableProjectName />
+				</div>
+				<div className="mx-2 hidden min-w-0 flex-1 justify-center md:flex">
+					<WorkspaceSwitcher />
+				</div>
+				<nav className="flex shrink-0 items-center gap-2">
+					<div className="hidden sm:block">
+						<FeedbackPopover />
+					</div>
+					<ExportButton />
+					<ThemeToggle />
+				</nav>
+			</header>
+			<div className="bg-background flex justify-center px-3 pb-1 md:hidden">
+				<WorkspaceSwitcher />
 			</div>
-			<nav className="flex items-center gap-2">
-				<FeedbackPopover />
-				<ExportButton />
-				<ThemeToggle />
-			</nav>
-		</header>
+		</>
 	);
 }
 
