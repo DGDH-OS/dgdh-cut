@@ -12,7 +12,8 @@ Alle tokens staan in `apps/web/src/app/globals.css`. Geen hex in components; geb
 | `foreground` | #f8f7f4 | tekst, primaire knop (`bg-primary`, tekst #161a11) |
 | `muted-foreground` | #a7a9ae | meta, captions |
 | `brand` | #00665e racing green | actieve workspace-tab, focus-ring (binnenkant), merkvlak |
-| `bronze` | #b58c67 | eyebrows (`.eyebrow`), waarschuwing (`caution`), handles |
+| `bronze` | #b58c67 | lijnen, iconen, handles, vlakken (NIET voor tekst) |
+| `bronze-text` (`text-bronze-text`, `.eyebrow`) | #c8aa8e | bronze TEKST op donker: eyebrows, caution-tekst. Canvas 8,54:1 · surface 8,08:1 · raised 7,22:1 (AAA). Op licht vlak: #6b4e34 (7,6:1 op wit) |
 | `border` / `border-strong` | #2a303b / #707379 | hairlines / inputs |
 | `destructive` / `constructive` | #e0584f / #3fa37a | alleen samen met icoon of tekst |
 
@@ -35,4 +36,4 @@ Alle tokens staan in `apps/web/src/app/globals.css`. Geen hex in components; geb
 - Logo: `public/logos/dgdh-cut/` (symbol, text, logo, -light varianten); favicon en app-iconen daaruit gegenereerd.
 
 ## Contrast (gemeten met Playwright over landing, projects, onboarding, 4 workspaces)
-Zie `docs/design-evidence/`. 171 unieke tekstkleuren-combinaties: 159 haalden AAA (7:1). De rest: bronze eyebrows 6,2:1 (AA), tekst op groen 6,4:1 (AA), drop-zone-tekst nu `foreground`, uitgeschakelde knoppen (vrijgesteld).
+Zie `docs/design-evidence/`. 171 unieke tekstkleuren-combinaties: 159 haalden AAA (7:1). De rest: tekst op groen 6,4:1 (AA), drop-zone-tekst nu `foreground`, uitgeschakelde knoppen (vrijgesteld).

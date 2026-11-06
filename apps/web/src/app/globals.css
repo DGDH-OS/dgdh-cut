@@ -17,7 +17,8 @@
      ink #f8f7f4 op canvas #121212        17,0:1  AAA
      muted #a7a9ae op canvas              8,0:1   AAA
      primary-knop #16130e op #f8f7f4      16,0:1  AAA
-     brons #b58c67 op canvas              6,2:1   AA (alleen eyebrows/accent)
+     brons-tekst #c8aa8e op canvas        8,5:1   AAA (canvas 8,54 · surface 8,08 · raised 7,22)
+     brons #b58c67 (lijnen/iconen/vlak)  6,2:1 op canvas, niet voor tekst
      groen #00665e met tekst #f8f7f4      6,4:1   AA (merkvlak, niet voor UI-randen)
      danger #e0584f op canvas             5,4:1   AA
    ══════════════════════════════════════════════════════════════════════════ */
@@ -34,6 +35,7 @@
   --muted-ink: #b3ada4;
   --brand: #8a5f3a; /* diep brons: merkvlak, tooltip */
   --brand-hover: #9a6b43;
+  --bronze-text: #c8aa8e; /* bronze TEKST op donker (AAA). Licht vlak: #6b4e34. */
   --bronze: #b58c67; /* eer: eyebrows, badges. Nooit vlakken. */
   --line: #3a352f;
   --line-strong: #7f7970;
@@ -179,7 +181,7 @@
 
 /* Eyebrow-label: brons, klein, gespatieerd. */
 @utility eyebrow {
-  color: var(--bronze);
+  color: var(--bronze-text);
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.18em;
@@ -256,6 +258,7 @@
 
   --color-brand: var(--brand);
   --color-bronze: var(--bronze);
+  --color-bronze-text: var(--bronze-text);
   --color-surface: var(--surface);
   --color-surface-raised: var(--surface-raised);
 
