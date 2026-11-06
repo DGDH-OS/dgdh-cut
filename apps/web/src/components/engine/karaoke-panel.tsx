@@ -158,7 +158,7 @@ export function KaraokePanel() {
 					<img
 						src={engineUrl(styleReference)}
 						alt={style}
-						className="bg-black aspect-video w-full rounded-md border object-cover"
+						className="bg-background aspect-video w-full rounded-md border object-cover"
 					/>
 				)}
 				<SectionField label={`Font size (${fontSize})`}>
@@ -226,7 +226,7 @@ export function KaraokePanel() {
 						src={engineUrl(result.preview)}
 						controls
 						preload="metadata"
-						className="bg-black aspect-video w-full rounded-md border"
+						className="bg-background aspect-video w-full rounded-md border"
 					/>
 				</div>
 			)}

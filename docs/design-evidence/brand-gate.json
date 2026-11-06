@@ -1,0 +1,116 @@
+{
+  "target": "apps/web/src",
+  "root": "/Users/r.h.wdegoededeheij/DGDH OS/1. OPS/tool-pilots/opencut/dgdh-cut-wt-design/apps/web/src",
+  "blocking": [
+    {
+      "rule": "emoji_in_code",
+      "count": 16,
+      "voorbeelden": [
+        {
+          "file": "actions/use-keyboard-shortcuts-help.ts",
+          "line": 25,
+          "char": "←",
+          "content": ".replace(\"left\", \"←\")"
+        },
+        {
+          "file": "actions/use-keyboard-shortcuts-help.ts",
+          "line": 26,
+          "char": "→",
+          "content": ".replace(\"right\", \"→\")"
+        },
+        {
+          "file": "actions/use-keyboard-shortcuts-help.ts",
+          "line": 27,
+          "char": "↑",
+          "content": ".replace(\"up\", \"↑\")"
+        },
+        {
+          "file": "actions/use-keyboard-shortcuts-help.ts",
+          "line": 28,
+          "char": "↓",
+          "content": ".replace(\"down\", \"↓\")"
+        },
+        {
+          "file": "components/editor/panels/assets/views/assets.tsx",
+          "line": 635,
+          "char": "↑",
+          "content": "const arrow = isActive ? (currentSortOrder === \"asc\" ? \"↑\" : \"↓\") : \"\";"
+        },
+        {
+          "file": "components/editor/panels/assets/views/assets.tsx",
+          "line": 635,
+          "char": "↓",
+          "content": "const arrow = isActive ? (currentSortOrder === \"asc\" ? \"↑\" : \"↓\") : \"\";"
+        },
+        {
+          "file": "feedback/components/feedback-popover.tsx",
+          "line": 151,
+          "char": "←",
+          "content": "← Back"
+        },
+        {
+          "file": "masks/handle-positions.ts",
+          "line": 31,
+          "char": "→",
+          "content": "* So rotation=0 → normal points right → line runs vertically."
+        },
+        {
+          "file": "masks/handle-positions.ts",
+          "line": 31,
+          "char": "→",
+          "content": "* So rotation=0 → normal points right → line runs vertically."
+        },
+        {
+          "file": "services/renderer/compositor/frame-descriptor.ts",
+          "line": 567,
+          "char": "→",
+          "content": "// Stable identity key for CanvasImageSource. Using a WeakMap → counter keeps"
+        },
+        {
+          "file": "services/storage/migrations/v1-to-v2.ts",
+          "line": 35,
+          "char": "→",
+          "content": "`V1→V2 migration cleanup failed for project ${projectId}:`,"
+        },
+        {
+          "file": "timeline/controllers/playhead-controller.ts",
+          "line": 66,
+          "char": "→",
+          "content": "// --- Pure helpers (px → logical) ---"
+        },
+        {
+          "file": "timeline/hooks/use-timeline-playhead.ts",
+          "line": 61,
+          "char": "→",
+          "content": "// Scroll → keep playhead position in sync with scroll offset."
+        },
+        {
+          "file": "timeline/hooks/use-timeline-playhead.ts",
+          "line": 71,
+          "char": "→",
+          "content": "// Playback events → update playhead position and auto-scroll during playback."
+        },
+        {
+          "file": "wasm/media-time.ts",
+          "line": 65,
+          "char": "→",
+          "content": "* Rounds half away from zero (`-1.5 → -2`, `1.5 → 2`) and normalises `-0` to"
+        },
+        {
+          "file": "wasm/media-time.ts",
+          "line": 65,
+          "char": "→",
+          "content": "* Rounds half away from zero (`-1.5 → -2`, `1.5 → 2`) and normalises `-0` to"
+        }
+      ]
+    }
+  ],
+  "warnings": [
+    "Default Tailwind-kleuren: 1x totaal. Top: components/ui/toast.tsx (1x)",
+    "Radius/shadow ratio hardgecodeerd:token = 205:0 (geen tokens gebruikt) (205 Tailwind-utilities vs 0 token-var-gebruik)",
+    "Spacing-grid: 3/3 (100%) padding/margin/gap-waarden niet deelbaar door 4. Top: 5px (1x), 3px (1x), -6px (1x)"
+  ],
+  "bestanden_gescand": 712,
+  "totaal_blokkerende_fouten": 1,
+  "gate": "ROOD"
+}

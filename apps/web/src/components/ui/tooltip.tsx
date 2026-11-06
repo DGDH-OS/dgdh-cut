@@ -11,7 +11,7 @@ const Tooltip = TooltipPrimitive.Root;
 const TooltipTrigger = TooltipPrimitive.Trigger;
 
 const tooltipVariants = cva(
-	"z-50 overflow-visible rounded-sm text-sm shadow-md",
+	"z-50 overflow-visible rounded-sm text-sm",
 	{
 		variants: {
 			variant: {
@@ -20,16 +20,16 @@ const tooltipVariants = cva(
 					"bg-destructive/10 text-destructive dark:bg-destructive/20 border-destructive [border-width:0.5px]",
 				outline: "border-border",
 				important:
-					"bg-amber-100/90 text-amber-900 dark:bg-amber-900/20 dark:text-amber-300 border-amber-900 [border-width:0.5px]",
+					"bg-caution/15 text-caution border-caution [border-width:0.5px]",
 				promotions:
-					"bg-red-100/90 text-redb-900 dark:bg-red-900/20 dark:text-red-300 border-red-900 [border-width:0.5px]",
+					"bg-destructive/15 text-destructive border-destructive [border-width:0.5px]",
 				personal:
-					"bg-green-100/90 text-green-900 dark:bg-green-900/20 dark:text-green-300 border-green-900 [border-width:0.5px]",
+					"bg-constructive/15 text-constructive border-constructive [border-width:0.5px]",
 				updates:
-					"bg-purple-100/90 text-purple-900 dark:bg-purple-900/20 dark:text-purple-300 border-purple-900 [border-width:0.5px]",
+					"bg-brand/40 text-foreground border-brand [border-width:0.5px]",
 				forums:
-					"bg-blue-100/90 text-blue-900 dark:bg-blue-900/20 dark:text-blue-300 border-blue-900 [border-width:0.5px]",
-				sidebar: "bg-white dark:bg-[#413F3E] p-2.5 flex flex-col gap-2",
+					"bg-muted text-foreground border-border [border-width:0.5px]",
+				sidebar: "bg-foreground dark:bg-[#413F3E] p-2.5 flex flex-col gap-2",
 			},
 		},
 		defaultVariants: {

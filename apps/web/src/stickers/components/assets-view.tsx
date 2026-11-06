@@ -446,8 +446,8 @@ function StickerItem({
 				containerClassName={containerClassName ?? "w-full"}
 			/>
 			{isAdding && (
-				<div className="absolute inset-0 z-10 flex items-center justify-center rounded-md bg-black/60">
-					<Spinner className="size-6 text-white" />
+				<div className="absolute inset-0 z-10 flex items-center justify-center rounded-md bg-background/60">
+					<Spinner className="size-6 text-foreground" />
 				</div>
 			)}
 		</div>

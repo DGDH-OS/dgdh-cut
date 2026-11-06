@@ -114,7 +114,7 @@ export function ReframePanel() {
 								src={engineUrl(result.preview)}
 								controls
 								preload="metadata"
-								className="bg-black w-full rounded-md border"
+								className="bg-background w-full rounded-md border"
 							/>
 						</div>
 					)}

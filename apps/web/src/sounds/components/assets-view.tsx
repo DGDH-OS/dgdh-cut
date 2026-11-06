@@ -523,7 +523,7 @@ function AudioItem({ sound, isPlaying, onPlay }: AudioItemProps) {
 				onClick={handleClick}
 			>
 				<div className="bg-accent relative flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-md">
-					<div className="from-primary/20 absolute inset-0 bg-gradient-to-br to-transparent" />
+					<div className="bg-primary/10 absolute inset-0" />
 					{isPlaying ? (
 						<HugeiconsIcon icon={PauseIcon} className="size-5" />
 					) : (
@@ -554,7 +554,7 @@ function AudioItem({ sound, isPlaying, onPlay }: AudioItemProps) {
 					size="icon"
 					className={`hover:text-foreground w-auto !opacity-100 ${
 						isSaved
-							? "text-red-500 hover:text-red-600"
+							? "text-destructive hover:text-destructive/80"
 							: "text-muted-foreground"
 					}`}
 					onClick={handleSaveClick}

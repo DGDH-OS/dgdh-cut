@@ -596,7 +596,7 @@ function ProjectItem({
 				</div>
 
 				{durationLabel && (
-					<div className="absolute bottom-2 right-2 bg-black/60 text-white text-xs font-semibold px-2 py-1 rounded-sm">
+					<div className="absolute bottom-2 right-2 bg-background/60 text-foreground text-xs font-semibold px-2 py-1 rounded-sm">
 						{durationLabel}
 					</div>
 				)}

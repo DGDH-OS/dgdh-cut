@@ -3,7 +3,6 @@
 import { ArrowRightIcon } from "lucide-react";
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { SOCIAL_LINKS } from "@/site/social";
 import { useLocalStorage } from "@/services/storage/use-local-storage";
 import { Button } from "../ui/button";
 import { Dialog, DialogBody, DialogContent, DialogTitle } from "../ui/dialog";
@@ -28,11 +27,11 @@ export function Onboarding() {
 	const getStepTitle = () => {
 		switch (step) {
 			case 0:
-				return "Welcome to DGDH CUT Beta! 🎉";
+				return "Welcome to DGDH CUT";
 			case 1:
-				return "⚠️ This is a super early beta!";
+				return "Early beta";
 			case 2:
-				return "🦋 Have fun testing!";
+				return "Give feedback";
 			default:
 				return "DGDH CUT Onboarding";
 		}
@@ -44,7 +43,7 @@ export function Onboarding() {
 				return (
 					<div className="space-y-5">
 						<div className="space-y-3">
-							<Title title="Welcome to DGDH CUT Beta! 🎉" />
+							<Title title="Welcome to DGDH CUT" />
 							<Description description="You're among the first to try DGDH CUT - the fast browser-based video editor for short-form." />
 						</div>
 						<NextButton onClick={handleNext}>Next</NextButton>
@@ -68,7 +67,7 @@ export function Onboarding() {
 						<div className="space-y-3">
 							<Title title={getStepTitle()} />
 							<Description
-								description={`Join our [Discord](${SOCIAL_LINKS.discord}), chat with cool people and share feedback to help make DGDH CUT the best editor ever.`}
+								description={`Share feedback with the DGDH team to help make DGDH CUT the best short-form editor.`}
 							/>
 						</div>
 						<NextButton onClick={handleClose}>Finish</NextButton>
@@ -92,7 +91,7 @@ export function Onboarding() {
 }
 
 function Title({ title }: { title: string }) {
-	return <h2 className="text-lg font-bold md:text-xl">{title}</h2>;
+	return <h2 className="text-lg md:text-xl">{title}</h2>;
 }
 
 function Description({ description }: { description: string }) {

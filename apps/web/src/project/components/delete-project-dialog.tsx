@@ -59,7 +59,7 @@ export function DeleteProjectDialog({
 						</AlertDescription>
 					</Alert>
 					<div className="flex flex-col gap-3">
-						<Label className="text-xs font-semibold text-slate-500">
+						<Label className="text-xs font-semibold text-muted-foreground">
 							Type "DELETE" to confirm
 						</Label>
 						<Input

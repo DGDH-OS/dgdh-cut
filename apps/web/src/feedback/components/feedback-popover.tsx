@@ -146,7 +146,7 @@ function FeedbackPopoverContent({ onClose }: { onClose: () => void }) {
 					<button
 						type="button"
 						onClick={() => setView("compose")}
-						className="text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors"
+						className="text-xs text-muted-foreground hover:text-muted-foreground transition-colors"
 					>
 						← Back
 					</button>
@@ -179,7 +179,7 @@ function FeedbackPopoverContent({ onClose }: { onClose: () => void }) {
 							<button
 								type="button"
 								onClick={() => setView("history")}
-								className="flex items-center gap-1.5 text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors"
+								className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-muted-foreground transition-colors"
 							>
 								<ClockIcon className="size-3" />
 								{entries.length}
@@ -234,7 +234,7 @@ function FeedbackEntryItem({ entry }: { entry: FeedbackEntry }) {
 			<p className="text-sm text-muted-foreground leading-snug whitespace-pre-wrap break-words">
 				{entry.message}
 			</p>
-			<span className="mt-1 block text-[11px] text-muted-foreground/50">
+			<span className="mt-1 block text-xs text-muted-foreground">
 				{relativeDate(entry.createdAt)}
 			</span>
 		</div>
