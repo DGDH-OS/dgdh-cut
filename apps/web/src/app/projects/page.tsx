@@ -1,5 +1,7 @@
 "use client";
 
+import { ImportInterchangeDialog } from "@/components/editor/interchange/import-dialog";
+import { AgentProjectsSection } from "./agent-projects";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -111,6 +113,7 @@ export default function ProjectsPage() {
 			<ProjectsHeader />
 			<ProjectsToolbar projectIds={projectsToDisplay.map((p) => p.id)} />
 			<main className="mx-auto px-4 pt-2 pb-6 flex flex-col gap-4">
+				<AgentProjectsSection />
 				{isLoading || !isInitialized ? (
 					<ProjectsSkeleton />
 				) : projectsToDisplay.length === 0 ? (
@@ -184,6 +187,7 @@ function ProjectsHeader() {
 
 				<div className="flex items-center gap-3 md:gap-4">
 					<SearchBar className="hidden md:block" />
+					<ImportInterchangeDialog className="hidden md:flex" />
 					<NewProjectButton />
 				</div>
 			</div>
