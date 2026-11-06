@@ -20,7 +20,7 @@ const tooltipVariants = cva(
 					"bg-destructive/10 text-destructive dark:bg-destructive/20 border-destructive [border-width:0.5px]",
 				outline: "border-border",
 				important:
-					"bg-caution/15 text-caution border-caution [border-width:0.5px]",
+					"bg-caution/15 text-bronze-text border-caution [border-width:0.5px]",
 				promotions:
 					"bg-destructive/15 text-destructive border-destructive [border-width:0.5px]",
 				personal:
