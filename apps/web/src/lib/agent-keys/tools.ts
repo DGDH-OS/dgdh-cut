@@ -34,6 +34,20 @@ async function engine(path: string, body?: unknown, form?: FormData): Promise<an
 	return j;
 }
 
+/** Defense in depth: the engine already strips url/source/file for license-restricted
+ * sounds (Mixkit/YouTubeSFX); never pass external source URLs or raw file paths to agents. */
+function sanitizeSfxCatalog(lib: any): any {
+	const sounds = Array.isArray(lib?.sounds) ? lib.sounds : [];
+	return {
+		...lib,
+		sounds: sounds.map((s: any) => {
+			const { url, source, file, license, license_risk, license_risk_note, tags, ...rest } = s ?? {};
+			const restricted = s?.restricted !== false;
+			return restricted ? { ...rest, restricted: true } : { ...rest, restricted: false, url, file, license };
+		}),
+	};
+}
+
 /** Make engine output agent-friendly: absolute, key-protected download link. */
 const withLinks = (r: any, ctx: ToolCtx) => {
 	const file = typeof r?.preview === "string" ? r.preview.replace(/^\/media\//, "") : r?.file;
@@ -55,7 +69,8 @@ export const TOOLS: ToolDef[] = [
 		name: "list_catalog", scope: "media:read", units: 1,
 		description: "List available LUTs, templates, transitions or SFX for use in grade/compose/sfx_mix.",
 		shape: { kind: z.enum(["luts", "templates", "transitions", "sfx"]) },
-		run: async ({ kind }) => engine(kind === "sfx" ? "/api/sfx-library" : `/api/${kind}`),
+		run: async ({ kind }) =>
+			kind === "sfx" ? sanitizeSfxCatalog(await engine("/api/sfx-library")) : engine(`/api/${kind}`),
 	}),
 	t({
 		name: "upload_media_from_url", scope: "media:write", units: 2,

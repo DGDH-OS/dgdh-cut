@@ -23,7 +23,10 @@ interface SfxSound {
 	license_status?: string;
 	trending?: boolean;
 	age_days?: number | null;
-	url: string;
+	url?: string;
+	id?: string;
+	/** true = licentie-beperkt (Mixkit/YouTubeSFX): alleen server-side mixen, geen losse preview/download. */
+	restricted?: boolean;
 	gain_db?: number | null;
 	[k: string]: unknown;
 }
@@ -115,6 +118,7 @@ export function DgdhSfxView() {
 	}, []);
 
 	const togglePreview = (sound: SfxSound) => {
+		if (sound.restricted || !sound.url) return;
 		const url = engineUrl(sound.url);
 		if (playingUrl === url) {
 			audioRef.current?.pause();
@@ -276,19 +280,30 @@ export function DgdhSfxView() {
 				<ScrollArea className="h-full">
 					<div className="flex flex-col gap-1 pr-2">
 						{sounds.map((sound) => {
-							const isPlaying = playingUrl === engineUrl(sound.url);
+							const isPlaying =
+								!!sound.url && playingUrl === engineUrl(sound.url);
+							const canPreview = !sound.restricted && !!sound.url;
 							return (
 								<div
-									key={sound.url}
+									key={sound.url ?? sound.id ?? sound.file}
 									className="group flex items-center gap-3 rounded-md px-2 py-1.5 hover:bg-accent"
 								>
-									<Button
-										variant="ghost"
-										size="sm"
-										onClick={() => togglePreview(sound)}
-									>
-										{isPlaying ? "Stop" : "Play"}
-									</Button>
+									{canPreview ? (
+										<Button
+											variant="ghost"
+											size="sm"
+											onClick={() => togglePreview(sound)}
+										>
+											{isPlaying ? "Stop" : "Play"}
+										</Button>
+									) : (
+										<span
+											className="text-muted-foreground w-[3.25rem] text-center text-xs"
+											title="Alleen server-side gemixt; geen losse preview"
+										>
+											Auto-mix
+										</span>
+									)}
 									<div className="min-w-0 flex-1">
 										<p className="truncate text-sm font-medium">
 											{displayName(sound)}
