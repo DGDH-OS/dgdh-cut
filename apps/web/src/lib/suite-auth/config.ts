@@ -16,10 +16,20 @@ export const suiteLoginUrl = () =>
 
 export const appUrl = () => (process.env.CUT_APP_URL ?? "").replace(/\/$/, "");
 
+const PUBLIC_EXACT = new Set([
+	"/favicon.ico",
+	"/robots.txt",
+	"/manifest.json",
+	"/browserconfig.xml",
+	"/apple-touch-icon.png",
+	"/apple-touch-icon-precomposed.png",
+]);
+
 /** Only static assets and the container healthcheck are reachable without a session. */
 export function isPublicPath(pathname: string): boolean {
+	if (pathname.includes("..") || pathname.includes("//")) return false;
 	if (pathname === "/api/health") return true;
 	if (pathname.startsWith("/_next/static/")) return true;
-	if (pathname === "/favicon.ico" || pathname === "/robots.txt") return true;
-	return /^\/(fonts|icons|logos|flags|effects)\//.test(pathname);
+	if (PUBLIC_EXACT.has(pathname)) return true;
+	return /^\/(fonts|icons|logos|flags|effects|open-graph)\/[^/]/.test(pathname);
 }
