@@ -1,0 +1,15 @@
+# Used only by ./Dockerfile (BuildKit). Keeps host node_modules/.next out of the build context.
+**/node_modules
+**/.next
+**/.turbo
+.git
+.github
+.artifacts
+rust
+target
+**/*.md
+**/.env*
+!**/.env.example
+.cursor
+.vscode
+diffs
