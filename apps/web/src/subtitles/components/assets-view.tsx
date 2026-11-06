@@ -29,6 +29,8 @@ import {
 	SectionContent,
 	SectionField,
 	SectionFields,
+	SectionHeader,
+	SectionTitle,
 } from "@/components/section";
 import { AlertCircleIcon, CloudUploadIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
@@ -39,6 +41,7 @@ import {
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
 import type { DiagnosticSeverity } from "@/diagnostics/types";
+import { KaraokePanel } from "@/components/engine/karaoke-panel";
 
 const DIAGNOSTIC_BUTTON_VARIANT: Record<
 	DiagnosticSeverity,
@@ -332,6 +335,20 @@ export function Captions() {
 							</ul>
 						</div>
 					)}
+				</SectionContent>
+			</Section>
+			<Section
+				collapsible
+				sectionKey="karaoke-dgdh"
+				defaultOpen={false}
+				showTopBorder
+				showBottomBorder={false}
+			>
+				<SectionHeader>
+					<SectionTitle>Karaoke (DGDH)</SectionTitle>
+				</SectionHeader>
+				<SectionContent className="max-h-96 overflow-y-auto">
+					<KaraokePanel />
 				</SectionContent>
 			</Section>
 		</PanelView>

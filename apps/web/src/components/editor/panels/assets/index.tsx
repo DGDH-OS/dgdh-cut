@@ -10,6 +10,7 @@ import { SoundsView } from "@/sounds/components/assets-view";
 import { StickersView } from "@/stickers/components/assets-view";
 import { TextView } from "@/text/components/assets-view";
 import { ReframePanel } from "@/components/engine/reframe-panel";
+import { GradePanel } from "@/components/engine/grade-panel";
 import { VoiceoverPanel } from "@/components/engine/voiceover-panel";
 import { EffectsView } from "@/effects/components/assets-view";
 
@@ -28,11 +29,7 @@ export function AssetsPanel() {
 			</div>
 		),
 		captions: <Captions />,
-		adjustment: (
-			<div className="text-muted-foreground p-4">
-				Adjustment view coming soon...
-			</div>
-		),
+		adjustment: <GradePanel />,
 		reframe: <ReframePanel />,
 		voiceover: <VoiceoverPanel />,
 		settings: <SettingsView />,
