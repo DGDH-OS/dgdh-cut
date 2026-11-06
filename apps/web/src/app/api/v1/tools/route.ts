@@ -11,8 +11,8 @@ export async function GET(request: Request) {
 	return Response.json({
 		ok: true,
 		tools: TOOLS.filter((t) => hasScope(auth.key, t.scope)).map((t) => ({
-			name: t.name, description: t.description, scope: t.scope, units: t.units,
-			input_schema: z.toJSONSchema(z.object(t.shape)),
+			name: t.name, description: t.description, scope: t.scope, billable: !!t.price, gated: !!t.gated,
+			input_schema: z.toJSONSchema(z.object({ ...t.shape, dry_run: z.boolean().optional() })),
 		})),
 	});
 }

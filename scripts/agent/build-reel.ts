@@ -3,7 +3,7 @@
  * DGDH CUT — headless agent pipeline.
  *
  *   bun scripts/agent/build-reel.ts --media clip.mp4 [--media b.mp4] \
- *       [--brief brief.json] [--name "My reel"] [--out ./inbox | --post http://localhost:3104]
+ *       [--brief brief.json] [--name "My reel"] [--out ./inbox | --post http://localhost:3104 [--key cut_live_...]]
  *
  * Talks to the CUT Engine (server.py, default http://localhost:8765), renders a
  * baked reel (compose [+ karaoke] [+ sfx-mix]) and writes the result as an
@@ -56,6 +56,7 @@ async function main() {
 	const name = arg("name")[0] || brief.name || "Agent reel";
 	const outDir = arg("out")[0] || process.env.CUT_AGENT_INBOX || join(process.cwd(), ".agent-inbox");
 	const postUrl = arg("post")[0];
+	const apiKey = arg("key")[0] || process.env.CUT_API_KEY; // /api/agent/* needs a Bearer key (scope editor)
 	const outputSize = brief.output_size || "1080x1920";
 	const [W, H] = outputSize.split("x").map(Number);
 	const steps: { step: string; ok: boolean; detail?: string }[] = [];
@@ -167,18 +168,37 @@ async function main() {
 		cursor += dur;
 		return el;
 	});
-	const textEls = captions.map((c) => ({
-		id: uid(), type: "text", name: c.text.slice(0, 24), startTime: tk(c.start),
-		duration: tk(Math.max(0.1, c.end - c.start)), trimStart: 0, trimEnd: 0,
-		params: { content: c.text, fontSize: 12 },
-	}));
+	// Phrase captions (editable text elements). With brief.karaoke the baked burn-in is only a reference
+	// render; the editable equivalent is one text element per word with word timing. The engine returns no
+	// word timestamps, so words are spread over each caption's span proportional to word length (interpolated).
+	const mkText = (text: string, start: number, end: number, hidden = false) => ({
+		id: uid(), type: "text", name: text.slice(0, 24), startTime: tk(start),
+		duration: tk(Math.max(0.1, end - start)), trimStart: 0, trimEnd: 0, hidden,
+		params: { content: text, fontSize: 12 },
+	});
+	const textEls = captions.map((c) => mkText(c.text, c.start, c.end, !!brief.karaoke));
+	const wordEls = brief.karaoke
+		? captions.flatMap((c) => {
+				const words = c.text.split(/\s+/).filter(Boolean);
+				const weight = words.reduce((a, w) => a + w.length + 1, 0);
+				let t = c.start;
+				return words.map((w) => {
+					const d = ((c.end - c.start) * (w.length + 1)) / weight;
+					const el = mkText(w, t, t + d);
+					t += d;
+					return el;
+				});
+			})
+		: [];
+	if (brief.karaoke)
+		steps.push({ step: "karaoke-words", ok: wordEls.length > 0, detail: wordEls.length ? `${wordEls.length} editable word elements (interpolated timing)` : "no captions to derive word timing from" });
 
 	let audioEls: any[] = [];
 	if (cues.length) {
 		const lib = await engine<{ sounds: { file: string; category: string; duration_s: number }[] }>("/api/sfx-library");
 		audioEls = cues.flatMap((q) => {
 			const s = lib.sounds.find((x) => x.category === q.category);
-			if (!s) return [];
+			if (!s?.file) return []; // restricted sounds have no file path: skipped (baked render still contains the cue)
 			return [{
 				id: uid(), type: "audio", sourceType: "library", name: `${q.category}`,
 				sourceUrl: `/api/engine/sfx/${s.file}`, startTime: tk(q.t), duration: tk(s.duration_s),
@@ -195,7 +215,10 @@ async function main() {
 			id: sceneId, name: "Main scene", isMain: true, bookmarks: [], createdAt: now, updatedAt: now,
 			tracks: {
 				main: { id: uid(), name: "Main track", type: "video", muted: false, hidden: false, elements: mainEls },
-				overlay: textEls.length ? [{ id: uid(), name: "Captions", type: "text", hidden: false, elements: textEls }] : [],
+				overlay: [
+					...(textEls.length ? [{ id: uid(), name: "Captions", type: "text", hidden: !!brief.karaoke, elements: textEls }] : []),
+					...(wordEls.length ? [{ id: uid(), name: "Karaoke words", type: "text", hidden: false, elements: wordEls }] : []),
+				],
 				audio: audioEls.length ? [{ id: uid(), name: "SFX", type: "audio", muted: false, elements: audioEls }] : [],
 			},
 		}],
@@ -216,7 +239,7 @@ async function main() {
 
 	if (postUrl) {
 		const res = await fetch(`${postUrl.replace(/\/$/, "")}/api/agent/projects`, {
-			method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload),
+			method: "POST", headers: { "content-type": "application/json", ...(apiKey ? { authorization: `Bearer ${apiKey}` } : {}) }, body: JSON.stringify(payload),
 		});
 		const j = await res.json();
 		if (!res.ok) throw new Error(`POST /api/agent/projects: ${JSON.stringify(j)}`);

@@ -1,0 +1,327 @@
+{
+  "schema": "dgdh-cut-agent-project/v1",
+  "project": {
+    "metadata": {
+      "id": "ea333323-ebef-482d-89af-0b8e2e2d2ee0",
+      "name": "Test reel",
+      "duration": 720000,
+      "createdAt": "2026-11-06T17:18:58.503Z",
+      "updatedAt": "2026-11-06T17:18:58.503Z"
+    },
+    "scenes": [
+      {
+        "id": "f42c5e89-94b9-45e9-9580-3660a5fe814f",
+        "name": "Main scene",
+        "isMain": true,
+        "bookmarks": [],
+        "createdAt": "2026-11-06T17:18:58.503Z",
+        "updatedAt": "2026-11-06T17:18:58.503Z",
+        "tracks": {
+          "main": {
+            "id": "28265d5a-f715-48dd-8516-61db36d1f91e",
+            "name": "Main track",
+            "type": "video",
+            "muted": false,
+            "hidden": false,
+            "elements": [
+              {
+                "id": "df783f66-d8a2-41e6-8798-3106f508c748",
+                "type": "video",
+                "mediaId": "9dc9e1ec-585e-4152-a5b3-af4fad44f49a",
+                "name": "a.mp4",
+                "startTime": 0,
+                "duration": 360000,
+                "trimStart": 0,
+                "trimEnd": 0,
+                "sourceDuration": 360000,
+                "isSourceAudioEnabled": true,
+                "hidden": false,
+                "params": {}
+              },
+              {
+                "id": "5223d96b-7149-491c-904d-f5794616d3ae",
+                "type": "video",
+                "mediaId": "3a60f95f-5669-458d-bfc4-34402614b744",
+                "name": "b.mp4",
+                "startTime": 360000,
+                "duration": 360000,
+                "trimStart": 0,
+                "trimEnd": 0,
+                "sourceDuration": 360000,
+                "isSourceAudioEnabled": true,
+                "hidden": false,
+                "params": {}
+              }
+            ]
+          },
+          "overlay": [
+            {
+              "id": "0adcf3c0-f1c8-4e32-93ac-cc68484ace33",
+              "name": "Captions",
+              "type": "text",
+              "hidden": true,
+              "elements": [
+                {
+                  "id": "d7f6773a-3a43-43cd-afa7-921d9a9b1966",
+                  "type": "text",
+                  "name": "Dit is een test reel",
+                  "startTime": 0,
+                  "duration": 300000,
+                  "trimStart": 0,
+                  "trimEnd": 0,
+                  "hidden": true,
+                  "params": {
+                    "content": "Dit is een test reel",
+                    "fontSize": 12
+                  }
+                },
+                {
+                  "id": "a890c62e-60d9-43d1-a657-a5250cfa4919",
+                  "type": "text",
+                  "name": "Tweede zin hier",
+                  "startTime": 360000,
+                  "duration": 300000,
+                  "trimStart": 0,
+                  "trimEnd": 0,
+                  "hidden": true,
+                  "params": {
+                    "content": "Tweede zin hier",
+                    "fontSize": 12
+                  }
+                }
+              ]
+            },
+            {
+              "id": "631e83f0-96d7-4878-89a9-8319ea2e921e",
+              "name": "Karaoke words",
+              "type": "text",
+              "hidden": false,
+              "elements": [
+                {
+                  "id": "0f3acaa6-3e63-427c-9353-6c3b6413f716",
+                  "type": "text",
+                  "name": "Dit",
+                  "startTime": 0,
+                  "duration": 57143,
+                  "trimStart": 0,
+                  "trimEnd": 0,
+                  "hidden": false,
+                  "params": {
+                    "content": "Dit",
+                    "fontSize": 12
+                  }
+                },
+                {
+                  "id": "c2edba5d-ed51-4a3f-bbcb-936eb6f3c336",
+                  "type": "text",
+                  "name": "is",
+                  "startTime": 57143,
+                  "duration": 42857,
+                  "trimStart": 0,
+                  "trimEnd": 0,
+                  "hidden": false,
+                  "params": {
+                    "content": "is",
+                    "fontSize": 12
+                  }
+                },
+                {
+                  "id": "1502547e-43a0-4611-875d-2cc35700ccd9",
+                  "type": "text",
+                  "name": "een",
+                  "startTime": 100000,
+                  "duration": 57143,
+                  "trimStart": 0,
+                  "trimEnd": 0,
+                  "hidden": false,
+                  "params": {
+                    "content": "een",
+                    "fontSize": 12
+                  }
+                },
+                {
+                  "id": "70511787-9de1-4edd-bf69-0e94dbd9cf5d",
+                  "type": "text",
+                  "name": "test",
+                  "startTime": 157143,
+                  "duration": 71429,
+                  "trimStart": 0,
+                  "trimEnd": 0,
+                  "hidden": false,
+                  "params": {
+                    "content": "test",
+                    "fontSize": 12
+                  }
+                },
+                {
+                  "id": "180a196d-2f16-434a-8568-d1198eeb7fda",
+                  "type": "text",
+                  "name": "reel",
+                  "startTime": 228571,
+                  "duration": 71429,
+                  "trimStart": 0,
+                  "trimEnd": 0,
+                  "hidden": false,
+                  "params": {
+                    "content": "reel",
+                    "fontSize": 12
+                  }
+                },
+                {
+                  "id": "d380c217-e7b0-4d72-8736-3c3aaaf8b90f",
+                  "type": "text",
+                  "name": "Tweede",
+                  "startTime": 360000,
+                  "duration": 131250,
+                  "trimStart": 0,
+                  "trimEnd": 0,
+                  "hidden": false,
+                  "params": {
+                    "content": "Tweede",
+                    "fontSize": 12
+                  }
+                },
+                {
+                  "id": "a5c46778-fb6e-4d0e-9b6a-13f9e1280df2",
+                  "type": "text",
+                  "name": "zin",
+                  "startTime": 491250,
+                  "duration": 75000,
+                  "trimStart": 0,
+                  "trimEnd": 0,
+                  "hidden": false,
+                  "params": {
+                    "content": "zin",
+                    "fontSize": 12
+                  }
+                },
+                {
+                  "id": "3668fa95-0f83-4a26-84ee-5645cb257db2",
+                  "type": "text",
+                  "name": "hier",
+                  "startTime": 566250,
+                  "duration": 93750,
+                  "trimStart": 0,
+                  "trimEnd": 0,
+                  "hidden": false,
+                  "params": {
+                    "content": "hier",
+                    "fontSize": 12
+                  }
+                }
+              ]
+            }
+          ],
+          "audio": [
+            {
+              "id": "f45aeacd-6a58-4111-bd25-81e012507596",
+              "name": "SFX",
+              "type": "audio",
+              "muted": false,
+              "elements": [
+                {
+                  "id": "872bccac-88dd-4f9e-b93d-d5cb52a514bb",
+                  "type": "audio",
+                  "sourceType": "library",
+                  "name": "hit",
+                  "sourceUrl": "/api/engine/sfx/hit/mixkit-2047.wav",
+                  "startTime": 0,
+                  "duration": 160800,
+                  "trimStart": 0,
+                  "trimEnd": 0,
+                  "sourceDuration": 160800,
+                  "params": {}
+                },
+                {
+                  "id": "eb6fd75f-8f23-4f47-86be-df74de514dd1",
+                  "type": "audio",
+                  "sourceType": "library",
+                  "name": "whoosh",
+                  "sourceUrl": "/api/engine/sfx/whoosh/mixkit-1489.wav",
+                  "startTime": 336000,
+                  "duration": 278400,
+                  "trimStart": 0,
+                  "trimEnd": 0,
+                  "sourceDuration": 278400,
+                  "params": {}
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "currentSceneId": "f42c5e89-94b9-45e9-9580-3660a5fe814f",
+    "settings": {
+      "fps": {
+        "numerator": 30,
+        "denominator": 1
+      },
+      "canvasSize": {
+        "width": 1080,
+        "height": 1920
+      },
+      "canvasSizeMode": "preset",
+      "lastCustomCanvasSize": null,
+      "originalCanvasSize": null,
+      "background": {
+        "type": "color",
+        "color": "#000000"
+      }
+    },
+    "version": 31
+  },
+  "media": [
+    {
+      "id": "9dc9e1ec-585e-4152-a5b3-af4fad44f49a",
+      "file": "a.mp4",
+      "role": "source",
+      "name": "a.mp4",
+      "type": "video",
+      "url": "/api/engine/media/a.mp4",
+      "duration_s": 3
+    },
+    {
+      "id": "3a60f95f-5669-458d-bfc4-34402614b744",
+      "file": "b.mp4",
+      "role": "source",
+      "name": "b.mp4",
+      "type": "video",
+      "url": "/api/engine/media/b.mp4",
+      "duration_s": 3
+    },
+    {
+      "id": "df000626-7db2-4274-a08d-6c296eb3ef17",
+      "file": "karaoke-a3052e3951.mp4",
+      "role": "render",
+      "name": "karaoke-a3052e3951.mp4",
+      "type": "video",
+      "url": "/api/engine/media/karaoke-a3052e3951.mp4",
+      "duration_s": 6
+    }
+  ],
+  "engine": {
+    "url": "http://localhost:8765",
+    "render": {
+      "file": "karaoke-a3052e3951.mp4",
+      "preview": "/media/karaoke-a3052e3951.mp4"
+    },
+    "steps": [
+      {
+        "step": "compose",
+        "ok": true,
+        "detail": "compose-7ff3dbadd6.mp4 178782B"
+      },
+      {
+        "step": "karaoke",
+        "ok": true,
+        "detail": "karaoke-a3052e3951.mp4 words=1"
+      },
+      {
+        "step": "karaoke-words",
+        "ok": true,
+        "detail": "8 editable word elements (interpolated timing)"
+      }
+    ]
+  }
+}

@@ -5,24 +5,33 @@ import type { AgentKeyRecord, Scope } from "./keys";
 
 /** Append-only metering event: one per agent call. The pricing stream bills pay-as-you-go from this. */
 export type UsageEvent = {
+	id: string; // event id (uuid). Render events are referenced by resolution events (accept_export).
 	key_id: string;
 	org: string;
 	tool: string;
-	units: number;
+	units: number; // billable quantity in pricing.json units (rounded up to 0.1), see pricing.ts
+	eur: number; // units x PAYG rate at call time (CONCEPT prices)
+	unit?: string | null; // e.g. export_min; null for free tools
+	state?: "final" | "pending" | "accepted" | "voided"; // pending = render awaiting accept_export; absent on legacy rows = final
+	ref?: string | null; // resolution events point at the render event they accept/void
 	ts: string; // ISO
 	status: "ok" | "error";
 	ms: number;
 	channel: "mcp" | "rest";
 };
+export type UsageScope = { keyId?: string; org?: string };
 
 export interface AgentKeyStore {
-	create(input: { org: string; name: string; scopes: Scope[]; rate_limit_per_min: number; key_prefix: string; key_hash: string }): Promise<AgentKeyRecord>;
+	create(input: { org: string; name: string; scopes: Scope[]; rate_limit_per_min: number; key_prefix: string; key_hash: string; budget_eur_month?: number | null; budget_units_day?: number | null }): Promise<AgentKeyRecord>;
 	findByHash(hash: string): Promise<AgentKeyRecord | null>;
 	listByOrg(org: string): Promise<AgentKeyRecord[]>;
 	revoke(org: string, id: string): Promise<boolean>;
 	touch(id: string): Promise<void>;
 	appendUsage(event: UsageEvent): Promise<void>;
 	usageSummary(org: string, sinceIso: string): Promise<{ tool: string; calls: number; units: number }[]>;
+	/** Raw append-only events (oldest first) for a key or org since a timestamp. */
+	listUsage(scope: UsageScope, sinceIso: string): Promise<UsageEvent[]>;
+	getUsage(id: string): Promise<UsageEvent | null>;
 }
 
 // ---- Supabase (production): PostgREST with the service-role key, server-side only. Schema: schema.sql
@@ -64,7 +73,18 @@ class SupabaseStore implements AgentKeyStore {
 		await this.rest(`agent_api_keys?id=eq.${id}`, { method: "PATCH", body: JSON.stringify({ last_used_at: new Date().toISOString() }), prefer: "return=minimal" });
 	}
 	async appendUsage(e: UsageEvent) {
-		await this.rest("agent_usage_events", { method: "POST", body: JSON.stringify({ ...e, app: "cut" }), prefer: "return=minimal" });
+		const { id, ...rest } = e; // columns added by schema-v2-budget-accept.sql (event_id, eur, unit, state, ref)
+		await this.rest("agent_usage_events", { method: "POST", body: JSON.stringify({ ...rest, event_id: id, app: "cut" }), prefer: "return=minimal" });
+	}
+	private fromRow(r: any): UsageEvent { const { event_id, app: _a, ...rest } = r; return { ...rest, id: event_id ?? String(r.id), eur: Number(r.eur ?? 0), units: Number(r.units ?? 0) }; }
+	async listUsage(scope: UsageScope, since: string) {
+		const f = scope.keyId ? `key_id=eq.${encodeURIComponent(scope.keyId)}` : `org=eq.${encodeURIComponent(scope.org ?? "")}`;
+		const rows = (await this.rest(`agent_usage_events?${f}&app=eq.cut&ts=gte.${encodeURIComponent(since)}&select=*&order=ts.asc&limit=10000`)) as any[];
+		return rows.map((r) => this.fromRow(r));
+	}
+	async getUsage(id: string) {
+		const rows = (await this.rest(`agent_usage_events?event_id=eq.${encodeURIComponent(id)}&app=eq.cut&select=*`)) as any[];
+		return rows[0] ? this.fromRow(rows[0]) : null;
 	}
 	async usageSummary(org: string, since: string) {
 		const rows = (await this.rest(`agent_usage_events?org=eq.${encodeURIComponent(org)}&app=eq.cut&ts=gte.${since}&select=tool,units`)) as { tool: string; units: number }[];
@@ -119,6 +139,15 @@ class FileStore implements AgentKeyStore {
 		await mkdir(this.dir, { recursive: true });
 		await appendFile(this.usagePath, JSON.stringify(e) + "\n");
 	}
+	private async allUsage(): Promise<UsageEvent[]> {
+		let text = "";
+		try { text = await readFile(this.usagePath, "utf8"); } catch {}
+		return text.split("\n").filter(Boolean).map((l) => { const e = JSON.parse(l) as UsageEvent; return { ...e, id: e.id ?? `legacy-${e.ts}-${e.key_id}`, eur: e.eur ?? 0 }; });
+	}
+	async listUsage(scope: UsageScope, since: string) {
+		return (await this.allUsage()).filter((e) => e.ts >= since && (scope.keyId ? e.key_id === scope.keyId : e.org === scope.org));
+	}
+	async getUsage(id: string) { return (await this.allUsage()).find((e) => e.id === id) ?? null; }
 	async usageSummary(org: string, since: string) {
 		let text = "";
 		try { text = await readFile(this.usagePath, "utf8"); } catch {}

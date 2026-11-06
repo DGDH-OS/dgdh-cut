@@ -21,6 +21,8 @@ const Create = z.object({
 	name: z.string().min(1).max(80),
 	scopes: z.array(z.enum(ALL_SCOPES)).min(1).default([...ALL_SCOPES]),
 	rate_limit_per_min: z.number().int().min(1).max(600).default(60),
+	budget_eur_month: z.number().positive().max(100000).nullable().default(null),
+	budget_units_day: z.number().positive().max(1e7).nullable().default(null),
 });
 
 export async function POST(request: NextRequest) {
