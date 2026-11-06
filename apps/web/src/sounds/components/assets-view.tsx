@@ -24,6 +24,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
 import { useSoundSearch } from "@/sounds/use-sound-search";
 import { useSoundsStore } from "@/sounds/sounds-store";
+import { DgdhSfxView } from "./dgdh-sfx-view";
 import type { SavedSound, SoundEffect } from "@/sounds/types";
 import { cn } from "@/utils/ui";
 import {
@@ -43,6 +44,7 @@ export function SoundsView() {
 					<TabsList>
 						<TabsTrigger value="sound-effects">Sound effects</TabsTrigger>
 						<TabsTrigger value="saved">Saved</TabsTrigger>
+						<TabsTrigger value="dgdh-sfx">DGDH SFX</TabsTrigger>
 					</TabsList>
 				</div>
 				<Separator className="my-4" />
@@ -57,6 +59,12 @@ export function SoundsView() {
 					className="mt-0 flex min-h-0 flex-1 flex-col p-5 pt-0"
 				>
 					<SavedSoundsView />
+				</TabsContent>
+				<TabsContent
+					value="dgdh-sfx"
+					className="mt-0 flex min-h-0 flex-1 flex-col p-5 pt-0"
+				>
+					<DgdhSfxView />
 				</TabsContent>
 			</Tabs>
 		</div>
