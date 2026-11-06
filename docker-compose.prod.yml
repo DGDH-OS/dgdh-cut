@@ -1,0 +1,51 @@
+# DGDH CUT web, production (Hetzner, Traefik via the shared `coolify` network).
+# Hostname: studio.dgdh-os.com (cut.dgdh-os.com is the live CUT Engine). Secrets: env only, never in this file.
+# Usage: docker compose -f docker-compose.prod.yml up -d --build   (env from .env / Coolify)
+name: dgdh-cut-web
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: dgdh-cut-web:${CUT_IMAGE_TAG:-local}
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      CUT_APP_URL: ${CUT_APP_URL:-https://studio.dgdh-os.com}
+      NEXT_PUBLIC_SITE_URL: ${CUT_APP_URL:-https://studio.dgdh-os.com}
+      CUT_ENGINE_URL: ${CUT_ENGINE_URL:?set CUT_ENGINE_URL (internal engine URL)}
+      SUITE_LOGIN_URL: ${SUITE_LOGIN_URL:-https://id.dgdh-os.com/login}
+      AUTH_COOKIE_DOMAIN: ${AUTH_COOKIE_DOMAIN:-.dgdh-os.com}
+      NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL:?}
+      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:?}
+      DATABASE_URL: ${DATABASE_URL:?}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?}
+      UPSTASH_REDIS_REST_URL: ${UPSTASH_REDIS_REST_URL:?}
+      UPSTASH_REDIS_REST_TOKEN: ${UPSTASH_REDIS_REST_TOKEN:?}
+      NEXT_PUBLIC_MARBLE_API_URL: ${NEXT_PUBLIC_MARBLE_API_URL:-https://api.marblecms.com}
+      MARBLE_WORKSPACE_KEY: ${MARBLE_WORKSPACE_KEY:?}
+      FREESOUND_CLIENT_ID: ${FREESOUND_CLIENT_ID:?}
+      FREESOUND_API_KEY: ${FREESOUND_API_KEY:?}
+    networks: [coolify]
+    mem_limit: 1g
+    logging: { driver: json-file, options: { max-size: "10m", max-file: "3" } }
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: coolify
+      traefik.http.middlewares.gzip-dgdh-cut.compress: "true"
+      traefik.http.middlewares.redirect-dgdh-cut.redirectscheme.scheme: https
+      traefik.http.routers.http-0-dgdh-cut.entryPoints: http
+      traefik.http.routers.http-0-dgdh-cut.middlewares: redirect-dgdh-cut
+      traefik.http.routers.http-0-dgdh-cut.rule: Host(`studio.dgdh-os.com`)
+      traefik.http.routers.http-0-dgdh-cut.service: http-0-dgdh-cut
+      traefik.http.routers.https-0-dgdh-cut.entryPoints: https
+      traefik.http.routers.https-0-dgdh-cut.middlewares: gzip-dgdh-cut
+      traefik.http.routers.https-0-dgdh-cut.rule: Host(`studio.dgdh-os.com`)
+      traefik.http.routers.https-0-dgdh-cut.service: https-0-dgdh-cut
+      traefik.http.routers.https-0-dgdh-cut.tls: "true"
+      traefik.http.routers.https-0-dgdh-cut.tls.certresolver: letsencrypt
+      traefik.http.services.http-0-dgdh-cut.loadbalancer.server.port: "3000"
+      traefik.http.services.https-0-dgdh-cut.loadbalancer.server.port: "3000"
+networks:
+  coolify:
+    external: true
