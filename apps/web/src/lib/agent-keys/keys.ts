@@ -2,7 +2,7 @@ import { createHash, randomBytes, timingSafeEqual } from "node:crypto";
 
 export const KEY_PREFIX = "cut_live_";
 
-export const ALL_SCOPES = ["media:read", "media:write", "render", "transcribe", "voice", "editor"] as const;
+export const ALL_SCOPES = ["media:read", "media:write", "render", "transcribe", "voice", "editor", "publish"] as const;
 export type Scope = (typeof ALL_SCOPES)[number];
 
 export type AgentKeyRecord = {
@@ -13,6 +13,8 @@ export type AgentKeyRecord = {
 	key_hash: string; // sha256 hex of the full key; the key itself is never stored
 	scopes: Scope[];
 	rate_limit_per_min: number;
+	budget_eur_month?: number | null; // hard cap in EUR per UTC calendar month (null/undefined = unlimited)
+	budget_units_day?: number | null; // hard cap in billable units per UTC day (null/undefined = unlimited)
 	created_at: string;
 	revoked_at: string | null;
 	last_used_at: string | null;

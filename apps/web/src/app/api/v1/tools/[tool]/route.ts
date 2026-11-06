@@ -8,6 +8,6 @@ export async function POST(request: Request, { params }: { params: Promise<{ too
 	if (!auth.ok) return auth.response;
 	const { tool } = await params;
 	const args = await request.json().catch(() => ({}));
-	const { status, body } = await runTool(auth.key, tool, args, { origin: originOf(request) }, "rest");
-	return Response.json(body, { status });
+	const { status, body, headers } = await runTool(auth.key, tool, args, { origin: originOf(request) }, "rest");
+	return Response.json(body, { status, headers });
 }

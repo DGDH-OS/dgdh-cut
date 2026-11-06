@@ -1,7 +1,12 @@
 import { hashKey, KEY_PREFIX, safeEqualHex, type AgentKeyRecord, type Scope } from "./keys";
 import { rateLimit } from "./ratelimit";
+import { randomUUID } from "node:crypto";
+import { z } from "zod";
+import { budgetState, checkBudget, monthStartIso, AUTO_ACCEPT_MS } from "./billing";
 import { getStore, type UsageEvent } from "./store";
-import { toolByName, ToolError, type ToolCtx } from "./tools";
+import { computePrice, priceHelpers, toolByName, ToolError, type ToolCtx } from "./tools";
+import { devAuthEnabled } from "@/lib/suite-auth/config";
+import { getSuiteSession } from "@/lib/suite-auth/session";
 
 export type AuthResult =
 	| { ok: true; key: AgentKeyRecord }
@@ -31,27 +36,84 @@ export function originOf(request: Request): string {
 	return base || new URL(request.url).origin;
 }
 
-/** Run one tool for an authenticated key: scope check, execution, usage event (always, incl. errors). */
+/** Bearer key (scope `editor`) OR Suite browser session. Used by /api/agent/*; fails closed. */
+export async function authenticateAgentAccess(request: Request, scope: Scope): Promise<
+	| { ok: true; org: string; via: "key" | "session" }
+	| { ok: false; response: Response }
+> {
+	if (request.headers.get("authorization")) {
+		const a = await authenticate(request);
+		if (!a.ok) return a;
+		if (!hasScope(a.key, scope)) return deny(403, `missing scope ${scope}`);
+		return { ok: true, org: a.key.org, via: "key" };
+	}
+	if (devAuthEnabled()) return { ok: true, org: "dev-user", via: "session" };
+	const s = await getSuiteSession(request as never, () => {}).catch(() => null);
+	if (!s?.userId) return deny(401, "missing or invalid API key or session");
+	return { ok: true, org: s.userId, via: "session" };
+}
+
+/** Run one tool for an authenticated key: scope, validation, price estimate, budget gate, execution, usage event. */
 export async function runTool(
-	key: AgentKeyRecord, name: string, args: unknown, ctx: ToolCtx, channel: UsageEvent["channel"],
-): Promise<{ status: number; body: any }> {
+	key: AgentKeyRecord, name: string, rawArgs: unknown, ctx: Pick<ToolCtx, "origin">, channel: UsageEvent["channel"],
+): Promise<{ status: number; body: any; headers?: Record<string, string> }> {
+	const raw = (rawArgs && typeof rawArgs === "object" ? { ...(rawArgs as Record<string, unknown>) } : {}) as Record<string, unknown>;
+	let dryRun = raw.dry_run === true || raw.dry_run === "true";
+	delete raw.dry_run;
+	let args: unknown = raw;
+	if (name === "estimate") { // sugar for dry_run on another tool
+		const e = z.object({ tool: z.string(), args: z.record(z.string(), z.unknown()).optional() }).safeParse(raw);
+		if (!e.success) return { status: 400, body: { ok: false, error: "invalid arguments", issues: e.error.issues } };
+		name = e.data.tool; args = e.data.args ?? {}; dryRun = true;
+		if (name === "estimate") return { status: 400, body: { ok: false, error: "cannot estimate estimate" } };
+	}
 	const tool = toolByName(name);
 	if (!tool) return { status: 404, body: { ok: false, error: `unknown tool ${name}` } };
 	if (!hasScope(key, tool.scope)) return { status: 403, body: { ok: false, error: `missing scope ${tool.scope}` } };
-	const { z } = await import("zod");
 	const parsed = z.object(tool.shape).safeParse(args ?? {});
 	if (!parsed.success) return { status: 400, body: { ok: false, error: "invalid arguments", issues: parsed.error.issues } };
+
+	const price = await computePrice(tool, parsed.data, priceHelpers());
+	const hasBudget = key.budget_eur_month != null || key.budget_units_day != null;
+	let budget: ReturnType<typeof budgetState> | null = null;
+	if (hasBudget || dryRun) {
+		try {
+			budget = budgetState(key, await getStore().listUsage({ keyId: key.id }, monthStartIso()));
+		} catch (e) {
+			console.error("budget lookup failed", e);
+			if (hasBudget) return { status: 503, body: { ok: false, error: "budget check unavailable, refusing to run (fail closed)" } };
+		}
+	}
+	const verdict = budget ? checkBudget(budget, price) : ({ ok: true } as const);
+	if (dryRun) {
+		return { status: 200, body: { ok: true, dry_run: true, tool: name, executed: false, estimate: price, billing: price.gated ? `billed only after accept_export (auto-accepted after ${AUTO_ACCEPT_MS / 3600e3} h)` : price.eur > 0 ? "billed on completion" : "free", budget, would_be_allowed: verdict.ok, ...(verdict.ok ? {} : { blocked_by: (verdict.body as any).error }) } };
+	}
+	if (!verdict.ok) return { status: verdict.status, body: verdict.body, headers: verdict.headers };
+
 	const t0 = Date.now();
 	let status: "ok" | "error" = "ok";
 	let out: { status: number; body: any };
+	const eventId = randomUUID();
 	try {
-		out = { status: 200, body: { ok: true, ...(await tool.run(parsed.data, ctx) as object) } };
+		out = { status: 200, body: { ok: true, ...(await tool.run(parsed.data, { ...ctx, key, channel }) as object) } };
 	} catch (e) {
 		status = "error";
 		out = { status: e instanceof ToolError ? 422 : 500, body: { ok: false, error: e instanceof ToolError ? e.message : "internal error" } };
 	}
-	try {
-		await getStore().appendUsage({ key_id: key.id, org: key.org, tool: name, units: status === "ok" ? tool.units : 0, ts: new Date().toISOString(), status, ms: Date.now() - t0, channel });
-	} catch (e) { console.error("usage event failed", e); }
+	if (!tool.selfMetered) {
+		const billed = status === "ok" ? price : null;
+		const ev: UsageEvent = {
+			id: eventId, key_id: key.id, org: key.org, tool: name, units: billed?.units ?? 0, eur: billed?.eur ?? 0,
+			unit: billed?.lines.map((l) => l.unit).join("+") || null, state: billed?.gated ? "pending" : "final",
+			ts: new Date().toISOString(), status, ms: Date.now() - t0, channel,
+		};
+		try {
+			await getStore().appendUsage(ev);
+			if (status === "ok") out.body.usage = {
+				event_id: ev.id, units: ev.units, eur: ev.eur, state: ev.state,
+				...(billed?.gated ? { settle: "call accept_export {usage_event_id, accepted} within 24 h; unresolved renders auto-accept", auto_accept_at: new Date(Date.now() + AUTO_ACCEPT_MS).toISOString() } : {}),
+			};
+		} catch (e) { console.error("usage event failed", e); }
+	}
 	return out;
 }
