@@ -9,6 +9,8 @@ import { SettingsView } from "./views/settings";
 import { SoundsView } from "@/sounds/components/assets-view";
 import { StickersView } from "@/stickers/components/assets-view";
 import { TextView } from "@/text/components/assets-view";
+import { ReframePanel } from "@/components/engine/reframe-panel";
+import { VoiceoverPanel } from "@/components/engine/voiceover-panel";
 import { EffectsView } from "@/effects/components/assets-view";
 
 export function AssetsPanel() {
@@ -31,6 +33,8 @@ export function AssetsPanel() {
 				Adjustment view coming soon...
 			</div>
 		),
+		reframe: <ReframePanel />,
+		voiceover: <VoiceoverPanel />,
 		settings: <SettingsView />,
 	};
 

@@ -24,6 +24,8 @@ export const TAB_KEYS = [
 	"transitions",
 	"captions",
 	"adjustment",
+	"reframe",
+	"voiceover",
 	"settings",
 ] as const;
 
@@ -67,6 +69,14 @@ export const tabs = {
 	adjustment: {
 		icon: createHugeiconsIcon({ icon: SlidersHorizontalIcon }),
 		label: "Adjustment",
+	},
+	reframe: {
+		icon: createHugeiconsIcon({ icon: Folder03Icon }),
+		label: "Reframe",
+	},
+	voiceover: {
+		icon: createHugeiconsIcon({ icon: HeadphonesIcon }),
+		label: "Voiceover",
 	},
 	settings: {
 		icon: createHugeiconsIcon({ icon: Settings01Icon }),
