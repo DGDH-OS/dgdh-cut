@@ -147,6 +147,15 @@ function transformFreesoundResult(
 	};
 }
 
+const FREESOUND_NOT_LINKED = {
+	error: "freesound_not_linked",
+	message: "Freesound niet gekoppeld",
+};
+
+function isFreesoundKeyUsable(key: string | undefined) {
+	return !!key && key.trim().length >= 20 && !/placeholder|changeme|todo|dummy/i.test(key);
+}
+
 export async function GET(request: NextRequest) {
 	try {
 		const { limited } = await checkRateLimit({ request });
@@ -196,6 +205,10 @@ export async function GET(request: NextRequest) {
 			);
 		}
 
+		if (!isFreesoundKeyUsable(webEnv.FREESOUND_API_KEY)) {
+			return NextResponse.json(FREESOUND_NOT_LINKED, { status: 503 });
+		}
+
 		const baseUrl = "https://freesound.org/apiv2/search/text/";
 
 		const sortParam = buildSortParameter({ query, sort });
@@ -220,6 +233,9 @@ export async function GET(request: NextRequest) {
 		if (!response.ok) {
 			const errorText = await response.text();
 			console.error("Freesound API error:", response.status, errorText);
+			if (response.status === 401 || response.status === 403) {
+				return NextResponse.json(FREESOUND_NOT_LINKED, { status: 503 });
+			}
 			return NextResponse.json(
 				{ error: "Failed to search sounds" },
 				{ status: response.status },

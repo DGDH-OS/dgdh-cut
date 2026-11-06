@@ -137,7 +137,7 @@ function SoundEffectsView() {
 
 				if (!shouldIgnore) {
 					if (!response.ok) {
-						throw new Error(`Failed to fetch: ${response.status}`);
+						throw new Error(response.status === 503 ? "Freesound niet gekoppeld" : `Failed to fetch: ${response.status}`);
 					}
 
 					const data = await response.json();
