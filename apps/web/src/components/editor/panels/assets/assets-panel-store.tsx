@@ -44,11 +44,11 @@ export const tabs = {
 	},
 	sounds: {
 		icon: createHugeiconsIcon({ icon: HeadphonesIcon }),
-		label: "Sounds",
+		label: "Geluiden",
 	},
 	text: {
 		icon: createHugeiconsIcon({ icon: TextIcon }),
-		label: "Text",
+		label: "Tekst",
 	},
 	stickers: {
 		icon: createHugeiconsIcon({ icon: Happy01Icon }),
@@ -56,31 +56,31 @@ export const tabs = {
 	},
 	effects: {
 		icon: createHugeiconsIcon({ icon: MagicWand05Icon }),
-		label: "Effects",
+		label: "Effecten",
 	},
 	transitions: {
 		icon: createHugeiconsIcon({ icon: ArrowRightDoubleIcon }),
-		label: "Transitions",
+		label: "Overgangen",
 	},
 	captions: {
 		icon: createHugeiconsIcon({ icon: ClosedCaptionIcon }),
-		label: "Captions",
+		label: "Ondertitels",
 	},
 	adjustment: {
 		icon: createHugeiconsIcon({ icon: SlidersHorizontalIcon }),
-		label: "Adjustment",
+		label: "Aanpassing",
 	},
 	reframe: {
 		icon: createHugeiconsIcon({ icon: Folder03Icon }),
-		label: "Reframe",
+		label: "Bijsnijden",
 	},
 	voiceover: {
 		icon: createHugeiconsIcon({ icon: HeadphonesIcon }),
-		label: "Voiceover",
+		label: "Voice-over",
 	},
 	settings: {
 		icon: createHugeiconsIcon({ icon: Settings01Icon }),
-		label: "Settings",
+		label: "Instellingen",
 	},
 } satisfies Record<
 	Tab,

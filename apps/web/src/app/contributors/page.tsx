@@ -7,13 +7,13 @@ import { EXTERNAL_TOOLS } from "@/site/external-tools";
 import { BasePage } from "../base-page";
 
 export const metadata: Metadata = {
-	title: "Contributors - DGDH CUT",
+	title: "Bijdragers - DGDH CUT",
 	description:
-		"Meet the amazing people who contribute to DGDH CUT, the browser-based video editor for short-form.",
+		"Maak kennis met de geweldige mensen die bijdragen aan DGDH CUT, de videobewerker in je browser voor korte video.",
 	openGraph: {
-		title: "Contributors - DGDH CUT",
+		title: "Bijdragers - DGDH CUT",
 		description:
-			"Meet the amazing people who contribute to DGDH CUT, the browser-based video editor for short-form.",
+			"Maak kennis met de geweldige mensen die bijdragen aan DGDH CUT, de videobewerker in je browser voor korte video.",
 		type: "website",
 	},
 };
@@ -69,12 +69,12 @@ export default async function ContributorsPage() {
 
 	return (
 		<BasePage
-			title="Contributors"
-			description="Meet the amazing people who contribute to DGDH CUT, the browser-based video editor for short-form."
+			title="Bijdragers"
+			description="Maak kennis met de geweldige mensen die bijdragen aan DGDH CUT, de videobewerker in je browser voor korte video."
 		>
 			<div className="-mt-4 flex items-center justify-center gap-8 text-sm">
-				<StatItem value={contributors.length} label="contributors" />
-				<StatItem value={totalContributions} label="contributions" />
+				<StatItem value={contributors.length} label="bijdragers" />
+				<StatItem value={totalContributions} label="bijdragen" />
 			</div>
 
 			<div className="mx-auto flex max-w-6xl flex-col gap-20">
@@ -86,8 +86,8 @@ export default async function ContributorsPage() {
 				)}
 				<ExternalToolsSection />
 				<GitHubContributeSection
-					title="Join the community"
-					description="DGDH CUT is built by developers like you. Every contribution, no matter how small, helps make video editing more accessible for everyone."
+					title="Word lid van de community"
+					description="DGDH CUT wordt gebouwd door ontwikkelaars zoals jij. Elke bijdrage, hoe klein ook, maakt videobewerking toegankelijker voor iedereen."
 				/>
 			</div>
 		</BasePage>
@@ -112,9 +112,9 @@ function TopContributorsSection({
 	return (
 		<div className="flex flex-col gap-10">
 			<div className="flex flex-col gap-2 text-center">
-				<h2 className="text-2xl font-semibold">Top contributors</h2>
+				<h2 className="text-2xl font-semibold">Topbijdragers</h2>
 				<p className="text-muted-foreground">
-					Leading the way in contributions
+					Voorop in het aantal bijdragen
 				</p>
 			</div>
 
@@ -140,7 +140,7 @@ function TopContributorCard({ contributor }: { contributor: Contributor }) {
 					<Avatar className="mx-auto size-28">
 						<AvatarImage
 							src={contributor.avatar_url}
-							alt={`${contributor.login}'s avatar`}
+							alt={`Avatar van ${contributor.login}`}
 						/>
 						<AvatarFallback className="text-lg font-semibold">
 							{contributor.login.charAt(0).toUpperCase()}
@@ -150,7 +150,7 @@ function TopContributorCard({ contributor }: { contributor: Contributor }) {
 						<h3 className="text-xl font-semibold">{contributor.login}</h3>
 						<div className="flex items-center justify-center gap-2">
 							<span className="font-medium">{contributor.contributions}</span>
-							<span className="text-muted-foreground">contributions</span>
+							<span className="text-muted-foreground">bijdragen</span>
 						</div>
 					</div>
 				</CardContent>
@@ -167,9 +167,9 @@ function AllContributorsSection({
 	return (
 		<div className="flex flex-col gap-12">
 			<div className="flex flex-col gap-2 text-center">
-				<h2 className="text-2xl font-semibold">All contributors</h2>
+				<h2 className="text-2xl font-semibold">Alle bijdragers</h2>
 				<p className="text-muted-foreground">
-					Everyone who makes DGDH CUT better
+					Iedereen die DGDH CUT beter maakt
 				</p>
 			</div>
 
@@ -186,7 +186,7 @@ function AllContributorsSection({
 							<Avatar className="size-16">
 								<AvatarImage
 									src={contributor.avatar_url}
-									alt={`${contributor.login}'s avatar`}
+									alt={`Avatar van ${contributor.login}`}
 								/>
 								<AvatarFallback>
 									{contributor.login.charAt(0).toUpperCase()}
@@ -210,8 +210,8 @@ function ExternalToolsSection() {
 	return (
 		<div className="flex flex-col gap-10">
 			<div className="flex flex-col gap-2 text-center">
-				<h2 className="text-2xl font-semibold">External tools</h2>
-				<p className="text-muted-foreground">Tools we use to build DGDH CUT</p>
+				<h2 className="text-2xl font-semibold">Externe tools</h2>
+				<p className="text-muted-foreground">Tools die we gebruiken om DGDH CUT te bouwen</p>
 			</div>
 
 			<div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 sm:grid-cols-2">

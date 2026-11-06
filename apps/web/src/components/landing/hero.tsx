@@ -9,20 +9,20 @@ export function Hero() {
 	return (
 		<div className="flex min-h-[calc(100svh-4.5rem)] flex-col items-center justify-between px-4 text-center">
 			<div className="mx-auto flex w-full max-w-3xl flex-1 flex-col justify-center">
-				<div className="inline-block text-4xl font-medium uppercase tracking-tight md:text-[4rem]">
+				<div className="inline-block text-[1.7rem] font-medium uppercase tracking-tight sm:text-4xl md:text-[4rem]">
 					<h1>DGDH CUT</h1>
-					<Handlebars>Video editor</Handlebars>
+					<Handlebars>Videobewerker</Handlebars>
 				</div>
 
 				<p className="text-muted-foreground mx-auto mt-10 max-w-xl text-base tracking-wide sm:text-xl">
-					The browser-based editor for short-form. Cut, grade, and export
-					reels fast.
+					De videobewerker in je browser voor korte video. Knip, kleur en
+					exporteer reels snel.
 				</p>
 
 				<div className="mt-8 flex justify-center gap-8">
 					<Link href="/projects">
 						<Button type="submit" size="lg" className="h-11 text-base">
-							Open projects
+							Projecten openen
 							<ArrowRight className="ml-0.5" />
 						</Button>
 					</Link>

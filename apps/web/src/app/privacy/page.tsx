@@ -10,13 +10,13 @@ import { Separator } from "@/components/ui/separator";
 import { SOCIAL_LINKS } from "@/site/social";
 
 export const metadata: Metadata = {
-	title: "Privacy Policy - DGDH CUT",
+	title: "Privacybeleid - DGDH CUT",
 	description:
-		"Learn how DGDH CUT handles your data and privacy. Our commitment to protecting your information while you edit videos.",
+		"Leer hoe DGDH CUT omgaat met je gegevens en privacy. Onze belofte: we beschermen je informatie terwijl je video's bewerkt.",
 	openGraph: {
-		title: "Privacy Policy - DGDH CUT",
+		title: "Privacybeleid - DGDH CUT",
 		description:
-			"Learn how DGDH CUT handles your data and privacy. Our commitment to protecting your information while you edit videos.",
+			"Leer hoe DGDH CUT omgaat met je gegevens en privacy. Onze belofte: we beschermen je informatie terwijl je video's bewerkt.",
 		type: "website",
 	},
 };
@@ -24,8 +24,8 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
 	return (
 		<BasePage
-			title="Privacy policy"
-			description="Learn how we handle your data and privacy. Contact us if you have any questions."
+			title="Privacybeleid"
+			description="Lees hoe we met je gegevens en privacy omgaan. Neem contact op als je vragen hebt."
 		>
 			<Accordion type="single" collapsible className="w-full">
 				<AccordionItem
@@ -33,37 +33,33 @@ export default function PrivacyPage() {
 					className="rounded-lg border px-5"
 				>
 					<AccordionTrigger className="no-underline!">
-						Quick summary
+						Kort samengevat
 					</AccordionTrigger>
 					<AccordionContent>
 						<h3 className="mb-3 text-lg font-medium">
-							Your content never leaves your device.
+							Je content verlaat je apparaat nooit.
 						</h3>
 						<ol className="list-decimal space-y-2 pl-6">
 							<li>
-								Basic editing happens locally in your browser - we never see
-								your files
+								Bewerken gebeurt lokaal in je browser: wij zien je bestanden nooit
 							</li>
 							<li>
-								AI features like auto captions run locally in your browser
-								too - nothing is uploaded
+								AI-functies zoals automatische ondertitels draaien ook lokaal in je browser: er wordt niets geüpload
 							</li>
 							<li>
-								DGDH CUT does not currently require an account or login
+								DGDH CUT vereist op dit moment geen account of login
 							</li>
-							<li>Project data stays on your device, not our servers</li>
+							<li>Projectgegevens blijven op je apparaat, niet op onze servers</li>
 							<li>
-								We use anonymized analytics to improve the app, but no personal video
-								content is tracked
+								We gebruiken geanonimiseerde analytics om de app te verbeteren, maar er wordt geen persoonlijke video-inhoud gevolgd
 							</li>
-							<li>You can clear local data from your browser at any time</li>
+							<li>Je kunt lokale gegevens op elk moment uit je browser wissen</li>
 							<li>
-								We don&apos;t sell or share your data with anyone (we don&apos;t
-								even have it)
+								We verkopen of delen je gegevens met niemand (we hebben ze niet eens)
 							</li>
 						</ol>
 						<p className="mt-4">
-							Questions? Email us at{" "}
+							Vragen? Mail ons via{" "}
 							<a
 								href="mailto:oss@opencut.app"
 								className="text-primary hover:underline"
@@ -76,39 +72,32 @@ export default function PrivacyPage() {
 			</Accordion>
 
 			<section className="flex flex-col gap-3">
-				<h2 className="text-2xl font-semibold">How We Handle Your Content</h2>
+				<h2 className="text-2xl font-semibold">Hoe we met je content omgaan</h2>
 				<p>
 					<strong>
-						All editing and processing happens locally on your device.
+						Alle bewerking en verwerking gebeurt lokaal op je apparaat.
 					</strong>{" "}
-					We never upload, store, or have access to your video or audio files.
-					Your content remains completely private and under your control.
-					AI-powered features like auto captions also run in your browser using
-					on-device models - no content ever leaves your device.
+					We uploaden, bewaren of benaderen je video- of audiobestanden nooit. Je content blijft volledig privé en onder jouw controle. AI-functies zoals automatische ondertitels draaien ook in je browser met modellen op je apparaat: geen enkele content verlaat je apparaat.
 				</p>
 			</section>
 
 			<section className="flex flex-col gap-3">
-				<h2 className="text-2xl font-semibold">Accounts & Authentication</h2>
+				<h2 className="text-2xl font-semibold">Accounts en inloggen</h2>
 				<p>
-					DGDH CUT does not currently offer user accounts, login, or Google
-					sign-in.
+					DGDH CUT biedt op dit moment geen gebruikersaccounts, login of inloggen met Google.
 				</p>
 				<p>
-					Because there is no account system today, we do not collect account
-					emails, profile information, or OAuth identity data.
+					Omdat er nu geen accountsysteem is, verzamelen we geen account-e-mailadressen, profielgegevens of OAuth-identiteitsgegevens.
 				</p>
 				<p>
-					Your projects are never stored on our servers. All project data,
-					including names, thumbnails, and creation dates, is stored locally
-					in your browser using IndexedDB.
+					Je projecten worden nooit op onze servers opgeslagen. Alle projectgegevens, inclusief namen, miniaturen en aanmaakdatums, worden lokaal in je browser opgeslagen met IndexedDB.
 				</p>
 			</section>
 
 			<section className="flex flex-col gap-3">
 				<h2 className="text-2xl font-semibold">Analytics</h2>
 				<p>
-					We use{" "}
+					We gebruiken{" "}
 					<a
 						href="https://www.databuddy.cc"
 						target="_blank"
@@ -117,61 +106,56 @@ export default function PrivacyPage() {
 					>
 						Databuddy
 					</a>{" "}
-					for basic, anonymized visitor counts. We do not track clicks,
-					interactions, or how you use the editor.
+					voor eenvoudige, geanonimiseerde bezoekersaantallen. We volgen geen klikken, interacties of hoe je de editor gebruikt.
 				</p>
 				<p>
-					No personal information is collected, no individual users are tracked,
-					and no data that could identify you is stored.
+					Er worden geen persoonsgegevens verzameld, individuele gebruikers worden niet gevolgd en er worden geen gegevens opgeslagen waarmee je geïdentificeerd kunt worden.
 				</p>
 			</section>
 
 			<section className="flex flex-col gap-3">
-				<h2 className="text-2xl font-semibold">Local Storage & Cookies</h2>
-				<p>We use browser local storage and IndexedDB to:</p>
+				<h2 className="text-2xl font-semibold">Lokale opslag en cookies</h2>
+				<p>We gebruiken lokale opslag van de browser en IndexedDB om:</p>
 				<ul className="list-disc space-y-2 pl-6">
-					<li>Save your projects locally on your device</li>
-					<li>Remember your editor preferences and settings</li>
-					<li>Store app state needed for the editor to work between sessions</li>
+					<li>je projecten lokaal op je apparaat op te slaan</li>
+					<li>je editorvoorkeuren en instellingen te onthouden</li>
+					<li>appstatus op te slaan die de editor tussen sessies nodig heeft</li>
 				</ul>
 				<p>
-					All data stays on your device and can be cleared at any time through
-					your browser settings.
+					Alle gegevens blijven op je apparaat en kun je op elk moment wissen via je browserinstellingen.
 				</p>
 			</section>
 
 			<section className="flex flex-col gap-3">
-				<h2 className="text-2xl font-semibold">Third-Party Services</h2>
-				<p>DGDH CUT integrates with these services:</p>
+				<h2 className="text-2xl font-semibold">Diensten van derden</h2>
+				<p>DGDH CUT werkt samen met deze diensten:</p>
 				<ul className="list-disc space-y-2 pl-6">
 					<li>
-						<strong>Vercel:</strong> For hosting and content delivery
+						<strong>Vercel:</strong> Voor hosting en contentlevering
 					</li>
 					<li>
-						<strong>Databuddy:</strong> For anonymized analytics
+						<strong>Databuddy:</strong> Voor geanonimiseerde analytics
 					</li>
 				</ul>
 			</section>
 
 			<section className="flex flex-col gap-3">
-				<h2 className="text-2xl font-semibold">Your Rights</h2>
-				<p>You have complete control over your data:</p>
+				<h2 className="text-2xl font-semibold">Jouw rechten</h2>
+				<p>Je hebt volledige controle over je gegevens:</p>
 				<ul className="list-disc space-y-2 pl-6">
-					<li>No account is required to use DGDH CUT today</li>
-					<li>Clear local storage to remove all saved projects</li>
-					<li>Contact us with any privacy concerns</li>
+					<li>Je hebt nu geen account nodig om DGDH CUT te gebruiken</li>
+					<li>Wis de lokale opslag om alle opgeslagen projecten te verwijderen</li>
+					<li>Neem contact met ons op bij privacyvragen</li>
 				</ul>
 			</section>
 
 			<section className="flex flex-col gap-3">
-				<h2 className="text-2xl font-semibold">Open Source Transparency</h2>
+				<h2 className="text-2xl font-semibold">Open-source transparantie</h2>
 				<p>
-					DGDH CUT is completely open source. You can review our code, see
-					exactly how we handle data, and even self-host the application if you
-					prefer.
+					DGDH CUT is volledig open source. Je kunt onze code bekijken, precies zien hoe we met gegevens omgaan en de applicatie desgewenst zelf hosten.
 				</p>
 				<p>
-					View our source code on{" "}
+					Bekijk onze broncode op{" "}
 					<a
 						href={SOCIAL_LINKS.github}
 						target="_blank"
@@ -185,26 +169,26 @@ export default function PrivacyPage() {
 			</section>
 
 			<section className="flex flex-col gap-3">
-				<h2 className="text-2xl font-semibold">Contact Us</h2>
-				<p>Questions about this privacy policy or how we handle your data?</p>
+				<h2 className="text-2xl font-semibold">Contact</h2>
+				<p>Vragen over dit privacybeleid of hoe we met je gegevens omgaan?</p>
 				<p>
-					Open an issue on our{" "}
+					Open een issue in onze{" "}
 					<a
 						href={`${SOCIAL_LINKS.github}/issues`}
 						target="_blank"
 						rel="noopener noreferrer"
 						className="text-primary hover:underline"
 					>
-						GitHub repository
+						GitHub-repository
 					</a>
-					, email us at{" "}
+					, mail ons via{" "}
 					<a
 						href="mailto:oss@opencut.app"
 						className="text-primary hover:underline"
 					>
 						oss@opencut.app
 					</a>
-					, or reach out on{" "}
+					, of neem contact op via{" "}
 					<a
 						href={SOCIAL_LINKS.x}
 						target="_blank"
@@ -220,7 +204,7 @@ export default function PrivacyPage() {
 			<Separator />
 
 			<p className="text-muted-foreground text-sm">
-				Last updated: March 15, 2026
+				Laatst bijgewerkt: 15 maart 2026
 			</p>
 		</BasePage>
 	);

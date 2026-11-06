@@ -135,12 +135,12 @@ export const useSoundsStore = create<SoundsStore>((set, get) => ({
 			});
 		} catch (error) {
 			const errorMessage =
-				error instanceof Error ? error.message : "Failed to load saved sounds";
+				error instanceof Error ? error.message : "Opgeslagen geluiden laden mislukt";
 			set({
 				savedSoundsError: errorMessage,
 				isLoadingSavedSounds: false,
 			});
-			console.error("Failed to load saved sounds:", error);
+			console.error("Opgeslagen geluiden laden mislukt:", error);
 		}
 	},
 
@@ -152,10 +152,10 @@ export const useSoundsStore = create<SoundsStore>((set, get) => ({
 			set({ savedSounds: savedSoundsData.sounds });
 		} catch (error) {
 			const errorMessage =
-				error instanceof Error ? error.message : "Failed to save sound";
+				error instanceof Error ? error.message : "Geluid opslaan mislukt";
 			set({ savedSoundsError: errorMessage });
-			toast.error("Failed to save sound");
-			console.error("Failed to save sound:", error);
+			toast.error("Geluid opslaan mislukt");
+			console.error("Geluid opslaan mislukt:", error);
 		}
 	},
 
@@ -168,10 +168,10 @@ export const useSoundsStore = create<SoundsStore>((set, get) => ({
 			}));
 		} catch (error) {
 			const errorMessage =
-				error instanceof Error ? error.message : "Failed to remove sound";
+				error instanceof Error ? error.message : "Geluid verwijderen mislukt";
 			set({ savedSoundsError: errorMessage });
-			toast.error("Failed to remove sound");
-			console.error("Failed to remove sound:", error);
+			toast.error("Geluid verwijderen mislukt");
+			console.error("Geluid verwijderen mislukt:", error);
 		}
 	},
 
@@ -199,17 +199,17 @@ export const useSoundsStore = create<SoundsStore>((set, get) => ({
 			});
 		} catch (error) {
 			const errorMessage =
-				error instanceof Error ? error.message : "Failed to clear saved sounds";
+				error instanceof Error ? error.message : "Opgeslagen geluiden wissen mislukt";
 			set({ savedSoundsError: errorMessage });
-			toast.error("Failed to clear saved sounds");
-			console.error("Failed to clear saved sounds:", error);
+			toast.error("Opgeslagen geluiden wissen mislukt");
+			console.error("Opgeslagen geluiden wissen mislukt:", error);
 		}
 	},
 
 	addSoundToTimeline: async ({ sound }) => {
 		const audioUrl = sound.previewUrl;
 		if (!audioUrl) {
-			toast.error("Sound file not available");
+			toast.error("Geluidsbestand niet beschikbaar");
 			return false;
 		}
 
@@ -239,11 +239,11 @@ export const useSoundsStore = create<SoundsStore>((set, get) => ({
 			});
 			return true;
 		} catch (error) {
-			console.error("Failed to add sound to timeline:", error);
+			console.error("Geluid toevoegen aan tijdlijn mislukt:", error);
 			toast.error(
 				error instanceof Error
 					? error.message
-					: "Failed to add sound to timeline",
+					: "Geluid toevoegen aan tijdlijn mislukt",
 				{ id: `sound-${sound.id}` },
 			);
 			return false;

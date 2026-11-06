@@ -72,7 +72,7 @@ export function MediaPicker({
 		<Select value={value ?? ""} onValueChange={onValueChange} disabled={loading}>
 			<SelectTrigger>
 				<SelectValue
-					placeholder={error ? "Engine unreachable" : placeholder}
+					placeholder={error ? "Engine niet bereikbaar" : placeholder}
 				/>
 			</SelectTrigger>
 			<SelectContent>

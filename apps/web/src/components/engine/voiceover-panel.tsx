@@ -76,7 +76,7 @@ export function VoiceoverPanel() {
 			});
 			setResult(res);
 		} catch (e) {
-			setError(e instanceof Error ? e.message : "Voiceover failed");
+			setError(e instanceof Error ? e.message : "Voice-over mislukt");
 		} finally {
 			setGenerating(false);
 		}

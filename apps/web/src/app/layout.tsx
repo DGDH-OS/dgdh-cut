@@ -36,7 +36,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" className={`dark ${albertSans.variable} ${plexMono.variable}`} suppressHydrationWarning>
+		<html lang="nl" className={`dark ${albertSans.variable} ${plexMono.variable}`} suppressHydrationWarning>
 			<head>
 				<BotIdClient protect={protectedRoutes} />
 				{process.env.NODE_ENV === "development" && (

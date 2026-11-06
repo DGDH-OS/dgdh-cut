@@ -53,7 +53,7 @@ export class RendererManager {
 		if (typeof ClipboardItem === "undefined" || !navigator.clipboard?.write) {
 			return {
 				success: false,
-				error: "Clipboard image copy is not supported in this browser",
+				error: "Afbeelding kopiëren naar het klembord wordt niet ondersteund in deze browser",
 			};
 		}
 
@@ -73,7 +73,7 @@ export class RendererManager {
 			console.error("Copy snapshot failed:", error);
 			return {
 				success: false,
-				error: error instanceof Error ? error.message : "Unknown error",
+				error: error instanceof Error ? error.message : "Onbekende fout",
 			};
 		}
 	}
@@ -84,12 +84,12 @@ export class RendererManager {
 			const activeProject = this.editor.project.getActive();
 
 			if (!renderTree || !activeProject) {
-				return { success: false, error: "No project or scene to capture" };
+				return { success: false, error: "Geen project of scene om vast te leggen" };
 			}
 
 			const duration = this.editor.timeline.getTotalDuration();
 			if (duration === 0) {
-				return { success: false, error: "Project is empty" };
+				return { success: false, error: "Project is leeg" };
 			}
 
 			const { canvasSize, fps } = activeProject.settings;
@@ -119,7 +119,7 @@ export class RendererManager {
 			});
 
 			if (!blob) {
-				return { success: false, error: "Failed to create image" };
+				return { success: false, error: "Afbeelding maken mislukt" };
 			}
 
 			const timecode = formatTimecode({ time: renderTime, rate: fps })!.replace(/:/g, "-");
@@ -133,7 +133,7 @@ export class RendererManager {
 			console.error("Snapshot capture failed:", error);
 			return {
 				success: false,
-				error: error instanceof Error ? error.message : "Unknown error",
+				error: error instanceof Error ? error.message : "Onbekende fout",
 			};
 		}
 	}
@@ -160,7 +160,7 @@ export class RendererManager {
 
 			const duration = this.editor.timeline.getTotalDuration();
 			if (duration === 0) {
-				return { success: false, error: "Project is empty" };
+				return { success: false, error: "Project is leeg" };
 			}
 
 			const exportFps = fps ?? activeProject.settings.fps;
@@ -220,7 +220,7 @@ export class RendererManager {
 				}
 
 				if (!buffer) {
-					return { success: false, error: "Export failed to produce buffer" };
+					return { success: false, error: "Exporteren leverde geen bestand op" };
 				}
 
 				return {
@@ -234,7 +234,7 @@ export class RendererManager {
 			console.error("Export failed:", error);
 			return {
 				success: false,
-				error: error instanceof Error ? error.message : "Unknown export error",
+				error: error instanceof Error ? error.message : "Onbekende exportfout",
 			};
 		}
 	}

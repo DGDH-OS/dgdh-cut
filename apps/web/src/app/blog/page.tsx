@@ -8,23 +8,23 @@ import type { Post } from "@/blog/types";
 export const metadata: Metadata = {
 	title: "Blog - DGDH CUT",
 	description:
-		"Read the latest news and updates about DGDH CUT, the browser-based video editor for short-form.",
+		"Lees het laatste nieuws en de updates over DGDH CUT, de videobewerker in je browser voor korte video.",
 	openGraph: {
 		title: "Blog - DGDH CUT",
 		description:
-			"Read the latest news and updates about DGDH CUT, the browser-based video editor for short-form.",
+			"Lees het laatste nieuws en de updates over DGDH CUT, de videobewerker in je browser voor korte video.",
 		type: "website",
 	},
 };
 
 export default async function BlogPage() {
 	const data = await getPosts().catch(() => null);
-	if (!data || !data.posts) return <div>No posts yet</div>;
+	if (!data || !data.posts) return <div>Nog geen berichten</div>;
 
 	return (
 		<BasePage
 			title="Blog"
-			description="Read the latest news and updates about DGDH CUT, the browser-based video editor for short-form."
+			description="Lees het laatste nieuws en de updates over DGDH CUT, de videobewerker in je browser voor korte video."
 		>
 			<div className="flex flex-col">
 				{data.posts.map((post) => (

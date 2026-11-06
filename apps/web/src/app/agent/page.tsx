@@ -26,12 +26,12 @@ export default function AgentInboxPage() {
 			const res = await fetch("/api/agent/projects", { cache: "no-store" });
 			setItems(((await res.json()) as { items: Item[] }).items ?? []);
 		} catch (e) {
-			setError(e instanceof Error ? e.message : "inbox failed");
+			setError(e instanceof Error ? e.message : "Inbox laden mislukt");
 		}
 	}, []);
 
 	const doImport = useCallback(async (id: string) => {
-		setStatus((s) => ({ ...s, [id]: "importing…" }));
+		setStatus((s) => ({ ...s, [id]: "importeren…" }));
 		try {
 			const res = await fetch(`/api/agent/projects?id=${id}`, {
 				cache: "no-store",
@@ -40,14 +40,14 @@ export default function AgentInboxPage() {
 			const payload = (await res.json()) as AgentPayload;
 			await importAgentProject({
 				payload,
-				onProgress: (m) => setStatus((s) => ({ ...s, [id]: `importing ${m}` })),
+				onProgress: (m) => setStatus((s) => ({ ...s, [id]: `importeren ${m}` })),
 			});
 			setImported((s) => ({ ...s, [id]: id }));
-			setStatus((s) => ({ ...s, [id]: "imported" }));
+			setStatus((s) => ({ ...s, [id]: "geïmporteerd" }));
 		} catch (e) {
 			setStatus((s) => ({
 				...s,
-				[id]: `failed: ${e instanceof Error ? e.message : e}`,
+				[id]: `mislukt: ${e instanceof Error ? e.message : e}`,
 			}));
 		}
 	}, []);
@@ -60,13 +60,13 @@ export default function AgentInboxPage() {
 
 	return (
 		<main className="mx-auto max-w-2xl space-y-4 p-8">
-			<h1 className="text-2xl font-semibold">Agent inbox</h1>
+			<h1 className="text-2xl font-semibold">Agent-inbox</h1>
 			<p className="text-muted-foreground text-sm">
-				Projects built headlessly by agents (scripts/agent/build-reel.ts).
+				Projecten die headless door agents zijn gebouwd (scripts/agent/build-reel.ts).
 			</p>
 			{error && <p className="text-destructive text-sm">{error}</p>}
 			<ul className="space-y-2" data-testid="agent-inbox">
-				{items.length === 0 && <li className="text-sm">Inbox is empty.</li>}
+				{items.length === 0 && <li className="text-sm">Inbox is leeg.</li>}
 				{items.map((it) => (
 					<li
 						key={it.id}
@@ -87,7 +87,7 @@ export default function AgentInboxPage() {
 									className="rounded bg-primary px-3 py-1 text-primary-foreground"
 									data-testid="agent-open"
 								>
-									Open in editor
+									Openen in editor
 								</Link>
 							) : (
 								<button
@@ -96,7 +96,7 @@ export default function AgentInboxPage() {
 									onClick={() => void doImport(it.id)}
 									data-testid="agent-import"
 								>
-									Import
+									Importeren
 								</button>
 							)}
 						</div>

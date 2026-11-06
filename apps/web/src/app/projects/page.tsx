@@ -82,8 +82,8 @@ const formatProjectDuration = ({
 };
 
 const VIEW_MODE_OPTIONS = [
-	{ mode: "grid" as const, icon: GridViewIcon, label: "Grid view" },
-	{ mode: "list" as const, icon: LeftToRightListDashIcon, label: "List view" },
+	{ mode: "grid" as const, icon: GridViewIcon, label: "Rasterweergave" },
+	{ mode: "list" as const, icon: LeftToRightListDashIcon, label: "Lijstweergave" },
 ];
 
 export default function ProjectsPage() {
@@ -148,7 +148,7 @@ function ProjectsHeader() {
 						<BreadcrumbList>
 							<BreadcrumbItem>
 								<BreadcrumbLink asChild>
-									<Link href="/" className="text-sm sm:text-base">
+									<Link href="/" className="inline-flex items-center text-sm sm:text-base max-md:min-h-11 max-md:min-w-11">
 										Home
 									</Link>
 								</BreadcrumbLink>
@@ -156,7 +156,7 @@ function ProjectsHeader() {
 							<BreadcrumbSeparator />
 							<BreadcrumbItem>
 								<BreadcrumbPage className="text-sm sm:text-base font-medium">
-									All projects
+									Alle projecten
 								</BreadcrumbPage>
 							</BreadcrumbItem>
 						</BreadcrumbList>
@@ -193,10 +193,10 @@ function ProjectsHeader() {
 }
 
 const SORT_LABELS: Record<TProjectSortKey, string> = {
-	createdAt: "Created",
-	updatedAt: "Modified",
-	name: "Name",
-	duration: "Duration",
+	createdAt: "Aangemaakt",
+	updatedAt: "Gewijzigd",
+	name: "Naam",
+	duration: "Duur",
 };
 
 function ProjectsToolbar({ projectIds }: { projectIds: string[] }) {
@@ -229,7 +229,7 @@ function ProjectsToolbar({ projectIds }: { projectIds: string[] }) {
 		<div className="sticky top-16 z-10 flex items-center justify-between px-6 h-14 pt-2 bg-background">
 			<div className="flex items-center gap-2">
 				<Label
-					className="flex items-center gap-3 cursor-pointer px-2"
+					className="flex items-center gap-3 cursor-pointer px-2 max-md:min-h-11"
 					htmlFor="select-all-projects"
 				>
 					<Checkbox
@@ -243,7 +243,7 @@ function ProjectsToolbar({ projectIds }: { projectIds: string[] }) {
 						}
 					/>
 					<span className="text-muted-foreground hidden md:block">
-						Select all
+						Alles selecteren
 					</span>
 				</Label>
 
@@ -269,7 +269,7 @@ function ProjectsToolbar({ projectIds }: { projectIds: string[] }) {
 							});
 						}
 					}}
-					aria-label={`Sort ${sortOrder === "asc" ? "ascending" : "descending"}`}
+					aria-label={`Sorteer ${sortOrder === "asc" ? "oplopend" : "aflopend"}`}
 				>
 					<HugeiconsIcon
 						icon={ArrowDown02Icon}
@@ -331,7 +331,7 @@ function SearchBar({
 						aria-hidden="true"
 					/>
 					<Input
-						placeholder="Search..."
+						placeholder="Zoeken..."
 						value={searchQuery}
 						onChange={(event) => setSearchQuery({ query: event.target.value })}
 						size="lg"
@@ -346,13 +346,13 @@ function SearchBar({
 const PROJECT_ACTIONS = [
 	{
 		id: "duplicate",
-		label: "Duplicate",
+		label: "Dupliceren",
 		icon: Copy01Icon,
 		variant: "outline" as const,
 	},
 	{
 		id: "delete",
-		label: "Delete",
+		label: "Verwijderen",
 		icon: Delete02Icon,
 		variant: "destructive-foreground" as const,
 	},
@@ -439,7 +439,7 @@ function ProjectActions() {
 
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild className="sm:hidden">
-						<Button size="icon" variant="outline" className="size-9">
+						<Button size="icon" variant="outline" className="size-9 max-md:size-11">
 							<HugeiconsIcon icon={MoreHorizontalIcon} />
 						</Button>
 					</DropdownMenuTrigger>
@@ -479,25 +479,25 @@ function SortDropdown({ children }: { children: React.ReactNode }) {
 					checked={sortKey === "createdAt"}
 					onCheckedChange={() => setSortKey({ sortKey: "createdAt" })}
 				>
-					Created
+					Aangemaakt
 				</DropdownMenuCheckboxItem>
 				<DropdownMenuCheckboxItem
 					checked={sortKey === "updatedAt"}
 					onCheckedChange={() => setSortKey({ sortKey: "updatedAt" })}
 				>
-					Modified
+					Gewijzigd
 				</DropdownMenuCheckboxItem>
 				<DropdownMenuCheckboxItem
 					checked={sortKey === "name"}
 					onCheckedChange={() => setSortKey({ sortKey: "name" })}
 				>
-					Name
+					Naam
 				</DropdownMenuCheckboxItem>
 				<DropdownMenuCheckboxItem
 					checked={sortKey === "duration"}
 					onCheckedChange={() => setSortKey({ sortKey: "duration" })}
 				>
-					Duration
+					Duur
 				</DropdownMenuCheckboxItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
@@ -510,7 +510,7 @@ function NewProjectButton() {
 
 	const handleCreateProject = async () => {
 		const projectId = await editor.project.createNewProject({
-			name: "New project",
+			name: "Nieuw project",
 		});
 		router.push(`/editor/${projectId}`);
 	};
@@ -521,8 +521,8 @@ function NewProjectButton() {
 			className="flex px-5 md:px-6"
 			onClick={handleCreateProject}
 		>
-			<span className="text-sm font-medium hidden md:block">New project</span>
-			<span className="text-sm font-medium block md:hidden">New</span>
+			<span className="text-sm font-medium hidden md:block">Nieuw project</span>
+			<span className="text-sm font-medium block md:hidden">Nieuw</span>
 		</Button>
 	);
 }
@@ -584,7 +584,7 @@ function ProjectItem({
 					{project.thumbnail ? (
 						<Image
 							src={project.thumbnail}
-							alt="Project thumbnail"
+							alt="Projectminiatuur"
 							fill
 							className="object-cover"
 						/>
@@ -620,7 +620,7 @@ function ProjectItem({
 				{project.thumbnail ? (
 					<Image
 						src={project.thumbnail}
-						alt="Project thumbnail"
+						alt="Projectminiatuur"
 						fill
 						className="object-cover"
 					/>
@@ -777,13 +777,13 @@ function ProjectContextMenuContent({
 				icon={<HugeiconsIcon icon={Edit03Icon} />}
 				onClick={onRenameClick}
 			>
-				Rename
+				Naam wijzigen
 			</ContextMenuItem>
 			<ContextMenuItem
 				icon={<HugeiconsIcon icon={Copy01Icon} />}
 				onClick={onDuplicateClick}
 			>
-				Duplicate
+				Dupliceren
 			</ContextMenuItem>
 			<ContextMenuItem
 				icon={<HugeiconsIcon icon={InformationCircleIcon} />}
@@ -797,7 +797,7 @@ function ProjectContextMenuContent({
 				icon={<HugeiconsIcon icon={Delete02Icon} />}
 				onClick={onDeleteClick}
 			>
-				Delete
+				Verwijderen
 			</ContextMenuItem>
 		</ContextMenuContent>
 	);
@@ -874,7 +874,7 @@ function ProjectMenu({
 							: "!bg-transparent !shadow-none"
 					}
 					size="icon"
-					aria-label="Project menu"
+					aria-label="Projectmenu"
 					onClick={(event) =>
 						handleMenuClick({
 							event: event as unknown as MouseEvent<HTMLButtonElement>,
@@ -897,11 +897,11 @@ function ProjectMenu({
 			<DropdownMenuContent className="w-48" align="end">
 				<DropdownMenuItem onClick={handleRename}>
 					<HugeiconsIcon icon={Edit03Icon} />
-					Rename
+					Naam wijzigen
 				</DropdownMenuItem>
 				<DropdownMenuItem onClick={handleDuplicate}>
 					<HugeiconsIcon icon={Copy01Icon} />
-					Duplicate
+					Dupliceren
 				</DropdownMenuItem>
 				<DropdownMenuItem onClick={handleInfoClick}>
 					<HugeiconsIcon icon={InformationCircleIcon} />
@@ -909,7 +909,7 @@ function ProjectMenu({
 				</DropdownMenuItem>
 				<DropdownMenuItem variant="destructive" onClick={handleDeleteClick}>
 					<HugeiconsIcon icon={Delete02Icon} />
-					Delete
+					Verwijderen
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
@@ -956,13 +956,13 @@ function EmptyState() {
 	const handleCreateProject = async () => {
 		try {
 			const projectId = await editor.project.createNewProject({
-				name: "New project",
+				name: "Nieuw project",
 			});
 			router.push(`/editor/${projectId}`);
 		} catch (error) {
-			toast.error("Failed to create project", {
+			toast.error("Project aanmaken mislukt", {
 				description:
-					error instanceof Error ? error.message : "Please try again",
+					error instanceof Error ? error.message : "Probeer het opnieuw",
 			});
 		}
 	};
@@ -976,9 +976,9 @@ function EmptyState() {
 						className="text-muted-foreground size-16 bg-accent/35 border rounded-md p-4"
 					/>
 					<div className="flex flex-col items-center gap-3">
-						<h3 className="text-lg font-medium">No results found</h3>
+						<h3 className="text-lg font-medium">Geen resultaten gevonden</h3>
 						<p className="text-muted-foreground max-w-md">
-							Your search for "{searchQuery}" did not return any results.
+							Je zoekopdracht naar "{searchQuery}" gaf geen resultaten.
 						</p>
 					</div>
 				</div>
@@ -987,7 +987,7 @@ function EmptyState() {
 					variant="outline"
 					size="lg"
 				>
-					Clear search
+					Zoekopdracht wissen
 				</Button>
 			</div>
 		);
@@ -999,18 +999,18 @@ function EmptyState() {
 				<div className="bg-muted/30 flex size-16 items-center justify-center rounded-full">
 					<HugeiconsIcon
 						icon={Video01Icon}
-						className="text-muted-foreground size-8"
+						className="text-muted-foreground size-8 max-md:size-11"
 					/>
 				</div>
-				<h3 className="text-lg font-medium">No projects yet</h3>
+				<h3 className="text-lg font-medium">Nog geen projecten</h3>
 				<p className="text-muted-foreground max-w-md">
-					Start creating your first project. Import media, edit, and export your
-					videos. All privately.
+					Maak je eerste project. Importeer media, bewerk en exporteer je
+					video's. Allemaal privé.
 				</p>
 			</div>
 			<Button size="lg" className="gap-2" onClick={handleCreateProject}>
 				<HugeiconsIcon icon={PlusSignIcon} />
-				Create your first project
+				Maak je eerste project
 			</Button>
 		</div>
 	);

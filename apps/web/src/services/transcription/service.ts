@@ -45,7 +45,7 @@ class TranscriptionService {
 						onProgress?.({
 							status: "transcribing",
 							progress: response.progress,
-							message: "Transcribing audio...",
+							message: "Audio transcriberen...",
 						});
 						break;
 
@@ -65,7 +65,7 @@ class TranscriptionService {
 
 					case "cancelled":
 						this.worker?.removeEventListener("message", handleMessage);
-						reject(new Error("Transcription cancelled"));
+						reject(new Error("Transcriptie geannuleerd"));
 						break;
 				}
 			};
@@ -117,7 +117,7 @@ class TranscriptionService {
 
 		return new Promise((resolve, reject) => {
 			if (!this.worker) {
-				reject(new Error("Failed to create worker"));
+				reject(new Error("Worker aanmaken mislukt"));
 				return;
 			}
 
@@ -129,7 +129,7 @@ class TranscriptionService {
 						onProgress?.({
 							status: "loading-model",
 							progress: response.progress,
-							message: `Loading ${model.name} model...`,
+							message: `Model ${model.name} laden...`,
 						});
 						break;
 

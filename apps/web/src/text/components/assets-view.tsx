@@ -24,19 +24,19 @@ export function TextView() {
 	};
 
 	return (
-		<PanelView title="Text">
+		<PanelView title="Tekst">
 			<DraggableItem
-				name="Default text"
+				name="Standaardtekst"
 				preview={
 					<div className="bg-accent flex size-full items-center justify-center rounded">
-						<span className="text-xs select-none">Default text</span>
+						<span className="text-xs select-none">Standaardtekst</span>
 					</div>
 				}
 				dragData={{
 					id: "temp-text-id",
 					type: DEFAULTS.text.element.type,
 					name: DEFAULTS.text.element.name,
-					content: "Default text",
+					content: "Standaardtekst",
 				}}
 				aspectRatio={1}
 				onAddToTimeline={handleAddToTimeline}

@@ -97,7 +97,7 @@ export function DgdhSfxView() {
 				if (videos.length > 0) setTargetFile(videos[0].file);
 			} catch (e) {
 				if (!cancelled) {
-					setError(e instanceof Error ? e.message : "Failed to load SFX library");
+					setError(e instanceof Error ? e.message : "SFX-bibliotheek laden mislukt");
 				}
 			} finally {
 				if (!cancelled) setLoading(false);
@@ -146,7 +146,7 @@ export function DgdhSfxView() {
 			});
 			setResult(res);
 		} catch (e) {
-			setResultError(e instanceof Error ? e.message : "SFX mix failed");
+			setResultError(e instanceof Error ? e.message : "SFX mixen mislukt");
 		} finally {
 			setApplying(false);
 		}
@@ -167,7 +167,7 @@ export function DgdhSfxView() {
 			});
 			setResult(res);
 		} catch (e) {
-			setResultError(e instanceof Error ? e.message : "SFX mix failed");
+			setResultError(e instanceof Error ? e.message : "SFX mixen mislukt");
 		} finally {
 			setApplying(false);
 		}

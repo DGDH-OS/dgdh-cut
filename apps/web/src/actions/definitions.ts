@@ -23,128 +23,128 @@ export interface TActionDefinition extends TActionBaseDefinition {
 
 export const ACTIONS = {
 	"toggle-play": {
-		description: "Play/Pause",
+		description: "Afspelen/pauzeren",
 		category: "playback",
 	},
 	"stop-playback": {
-		description: "Stop playback",
+		description: "Afspelen stoppen",
 		category: "playback",
 	},
 	"seek-forward": {
-		description: "Seek forward 1 second",
+		description: "1 seconde vooruit",
 		category: "playback",
 		args: { seconds: "number" },
 	},
 	"seek-backward": {
-		description: "Seek backward 1 second",
+		description: "1 seconde terug",
 		category: "playback",
 		args: { seconds: "number" },
 	},
 	"frame-step-forward": {
-		description: "Frame step forward",
+		description: "Eén frame vooruit",
 		category: "navigation",
 	},
 	"frame-step-backward": {
-		description: "Frame step backward",
+		description: "Eén frame terug",
 		category: "navigation",
 	},
 	"jump-forward": {
-		description: "Jump forward 5 seconds",
+		description: "5 seconden vooruit springen",
 		category: "navigation",
 		args: { seconds: "number" },
 	},
 	"jump-backward": {
-		description: "Jump backward 5 seconds",
+		description: "5 seconden terug springen",
 		category: "navigation",
 		args: { seconds: "number" },
 	},
 	"goto-start": {
-		description: "Go to timeline start",
+		description: "Naar begin van de tijdlijn",
 		category: "navigation",
 	},
 	"goto-end": {
-		description: "Go to timeline end",
+		description: "Naar einde van de tijdlijn",
 		category: "navigation",
 	},
 	split: {
-		description: "Split elements at playhead",
+		description: "Elementen splitsen bij de afspeelkop",
 		category: "editing",
 	},
 	"split-left": {
-		description: "Split and remove left",
+		description: "Splitsen en links verwijderen",
 		category: "editing",
 	},
 	"split-right": {
-		description: "Split and remove right",
+		description: "Splitsen en rechts verwijderen",
 		category: "editing",
 	},
 	"delete-selected": {
-		description: "Delete current selection",
+		description: "Selectie verwijderen",
 		category: "editing",
 	},
 	"copy-selected": {
-		description: "Copy selected elements",
+		description: "Geselecteerde elementen kopiëren",
 		category: "editing",
 	},
 	"paste-copied": {
-		description: "Paste elements at playhead",
+		description: "Elementen plakken bij de afspeelkop",
 		category: "editing",
 	},
 	"toggle-snapping": {
-		description: "Toggle snapping",
+		description: "Uitlijnen aan/uit",
 		category: "editing",
 	},
 	"toggle-ripple-editing": {
-		description: "Toggle ripple editing",
+		description: "Ripple-bewerking aan/uit",
 		category: "editing",
 	},
 	"toggle-source-audio": {
-		description: "Extract or recover source audio",
+		description: "Bronaudio extraheren of herstellen",
 		category: "editing",
 	},
 	"select-all": {
-		description: "Select all elements",
+		description: "Alle elementen selecteren",
 		category: "selection",
 	},
 	"cancel-interaction": {
-		description: "Cancel current interaction",
+		description: "Huidige actie annuleren",
 		category: "controls",
 	},
 	"deselect-all": {
-		description: "Deselect all elements",
+		description: "Selectie van alle elementen opheffen",
 		category: "selection",
 	},
 	"duplicate-selected": {
-		description: "Duplicate selected element",
+		description: "Geselecteerd element dupliceren",
 		category: "selection",
 	},
 	"toggle-elements-muted-selected": {
-		description: "Mute/unmute selected elements",
+		description: "Geselecteerde elementen dempen/dempen opheffen",
 		category: "selection",
 	},
 	"toggle-elements-visibility-selected": {
-		description: "Show/hide selected elements",
+		description: "Geselecteerde elementen tonen/verbergen",
 		category: "selection",
 	},
 	"toggle-bookmark": {
-		description: "Toggle bookmark at playhead",
+		description: "Bladwijzer bij afspeelkop aan/uit",
 		category: "timeline",
 	},
 	undo: {
-		description: "Undo",
+		description: "Ongedaan maken",
 		category: "history",
 	},
 	redo: {
-		description: "Redo",
+		description: "Opnieuw",
 		category: "history",
 	},
 	"remove-media-asset": {
-		description: "Remove media asset",
+		description: "Mediabestand verwijderen",
 		category: "assets",
 		args: { projectId: "string", assetId: "string" },
 	},
 	"remove-media-assets": {
-		description: "Remove media assets",
+		description: "Mediabestanden verwijderen",
 		category: "assets",
 		args: { projectId: "string", assetIds: "string[]" },
 	},

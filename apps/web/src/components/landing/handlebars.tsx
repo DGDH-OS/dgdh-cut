@@ -138,7 +138,7 @@ export function Handlebars({ children }: HandlebarsProps) {
 		: undefined;
 
 	return (
-		<div className="flex justify-center gap-4 leading-16">
+		<div className="mt-5 flex justify-center gap-4 py-2 leading-tight">
 			<div
 				ref={containerRef}
 				className="relative mt-0.5"
@@ -189,7 +189,7 @@ export function Handlebars({ children }: HandlebarsProps) {
 				</div>
 
 				<span
-					className="relative z-0 inline-flex size-full items-center justify-center rounded-lg px-9 will-change-auto"
+					className="relative z-0 inline-flex size-full items-center justify-center rounded-lg px-12 py-3 will-change-auto"
 					style={{
 						mask: textMask,
 						WebkitMask: textMask,

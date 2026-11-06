@@ -49,7 +49,7 @@ export function StorageProvider({ children }: StorageProviderProps) {
 
 				if (!hasSupport) {
 					toast.warning(
-						"Storage not fully supported. Some features may not work.",
+						"Opslag wordt niet volledig ondersteund. Sommige functies werken mogelijk niet.",
 					);
 				}
 

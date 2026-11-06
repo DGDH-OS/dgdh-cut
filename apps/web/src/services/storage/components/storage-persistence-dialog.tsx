@@ -18,22 +18,22 @@ export function StoragePersistenceDialog() {
 		<Dialog open={showDialog} onOpenChange={(open) => !open && onDismiss()}>
 			<DialogContent className="sm:max-w-md">
 				<DialogHeader>
-					<DialogTitle>Don't lose your projects</DialogTitle>
+					<DialogTitle>Verlies je projecten niet</DialogTitle>
 				</DialogHeader>
 				<DialogBody>
 					<p className="text-base text-muted-foreground">
-						Your browser can automatically delete your projects when storage
-						runs low.
+						Je browser kan je projecten automatisch verwijderen als de opslag
+						bijna vol is.
 					</p>
 					<p className="text-base text-muted-foreground">
-						Allow DGDH CUT to protect them?
+						DGDH CUT toestaan ze te beschermen?
 					</p>
 				</DialogBody>
 				<DialogFooter>
 					<Button variant="outline" onClick={onDismiss}>
-						Not now
+						Niet nu
 					</Button>
-					<Button onClick={onConfirm}>Allow</Button>
+					<Button onClick={onConfirm}>Toestaan</Button>
 				</DialogFooter>
 			</DialogContent>
 		</Dialog>

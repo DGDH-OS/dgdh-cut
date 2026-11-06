@@ -46,31 +46,31 @@ interface AssetSection {
 
 const ASSET_SECTIONS: AssetSection[] = [
 	{
-		title: "Symbol",
+		title: "Symbool",
 		description:
-			"Use the symbol on its own when the DGDH CUT name is already present nearby or space is limited.",
+			"Gebruik het symbool los wanneer de naam DGDH CUT al in de buurt staat of er weinig ruimte is.",
 		cols: "2",
 		assets: [
 			{
 				src: "/logos/dgdh-cut/symbol.svg",
 				theme: "dark",
-				label: "Symbol",
+				label: "Symbool",
 				width: 400,
 				height: 400,
 			},
 			{
 				src: "/logos/dgdh-cut/symbol-light.svg",
 				theme: "light",
-				label: "Symbol",
+				label: "Symbool",
 				width: 400,
 				height: 400,
 			},
 		],
 	},
 	{
-		title: "Lockup",
+		title: "Combinatie",
 		description:
-			"The full lockup combines the symbol and wordmark. Prefer this in most contexts where you have enough horizontal space.",
+			"De volledige combinatie bestaat uit symbool en woordmerk. Gebruik deze in de meeste situaties waar je genoeg horizontale ruimte hebt.",
 		cols: "2",
 		assets: [
 			{
@@ -90,14 +90,14 @@ const ASSET_SECTIONS: AssetSection[] = [
 			{
 				src: "/logos/dgdh-cut/text.svg",
 				theme: "dark",
-				label: "Text",
+				label: "Tekst",
 				width: 1760,
 				height: 400,
 			},
 			{
 				src: "/logos/dgdh-cut/text-light.svg",
 				theme: "light",
-				label: "Text",
+				label: "Tekst",
 				width: 1760,
 				height: 400,
 			},
@@ -109,10 +109,10 @@ export default function BrandPage() {
 	return (
 		<BasePage
 			maxWidth="6xl"
-			title="Brand"
+			title="Merk"
 			description={
 				<>
-					Download DGDH CUT brand assets for use in your projects.{" "}
+					Download merkmateriaal van DGDH CUT voor gebruik in je projecten.{" "}
 					<Link
 						href="#guidelines"
 						className="underline underline-offset-4"
@@ -122,7 +122,7 @@ export default function BrandPage() {
 								?.scrollIntoView({ behavior: "smooth" })
 						}
 					>
-						Read the brand guidelines.
+						Lees de merkrichtlijnen.
 					</Link>
 				</>
 			}
@@ -138,7 +138,7 @@ export default function BrandPage() {
 					}}
 				>
 					<Download />
-					Download all
+					Alles downloaden
 				</Button>
 			}
 		>
@@ -171,14 +171,9 @@ export default function BrandPage() {
 
 			<div id="guidelines" className="flex flex-col gap-8 text-sm">
 				<div className="flex flex-col gap-3">
-					<h2 className="font-semibold text-lg">Usage</h2>
+					<h2 className="font-semibold text-lg">Gebruik</h2>
 					<p className="text-muted-foreground text-base leading-relaxed">
-						DGDH CUT is open source — the code is free to use under its license.
-						That license does not cover the name or logo. You can say you use
-						DGDH CUT, that your project integrates with DGDH CUT, or that it was
-						built on top of DGDH CUT. You cannot name your product DGDH CUT, imply
-						we made or endorse your product, or use the marks commercially
-						without asking first. For anything unclear, reach out at{" "}
+						DGDH CUT is open source: de code is vrij te gebruiken onder de licentie. Die licentie geldt niet voor de naam of het logo. Je mag zeggen dat je DGDH CUT gebruikt, dat je project met DGDH CUT integreert of dat het op DGDH CUT is gebouwd. Je mag je product niet DGDH CUT noemen, niet suggereren dat wij je product hebben gemaakt of goedkeuren en de merken niet commercieel gebruiken zonder eerst te vragen. Is iets onduidelijk? Neem contact op via{" "}
 						<Link
 							href="mailto:brand@opencut.app"
 							className="underline underline-offset-4"
@@ -190,13 +185,13 @@ export default function BrandPage() {
 				</div>
 
 				<div className="flex flex-col gap-3">
-					<h2 className="font-semibold text-lg">What&apos;s not allowed</h2>
+					<h2 className="font-semibold text-lg">Wat niet mag</h2>
 					<ul className="text-muted-foreground text-base flex flex-col gap-2 leading-relaxed">
 						{[
-							"Using DGDH CUT in the name of your product, service, or domain.",
-							"Implying that DGDH CUT made, sponsors, or endorses your work.",
-							"Using the logo or name on merchandise or commercial marketing.",
-							"Modifying the marks.",
+							"DGDH CUT gebruiken in de naam van je product, dienst of domein.",
+							"Suggereren dat DGDH CUT je werk heeft gemaakt, gesponsord of goedgekeurd.",
+							"Het logo of de naam gebruiken op merchandise of in commerciële marketing.",
+							"De merken aanpassen.",
 						].map((item) => (
 							<li key={item} className="flex gap-2">
 								<span className="mt-0.5 shrink-0">-</span>

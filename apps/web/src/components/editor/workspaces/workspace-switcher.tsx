@@ -11,7 +11,7 @@ export function WorkspaceSwitcher() {
 	return (
 		<div
 			role="tablist"
-			aria-label="Workspaces"
+			aria-label="Werkruimtes"
 			className="scrollbar-hidden flex min-w-0 items-center gap-0.5 overflow-x-auto rounded-sm border p-0.5"
 		>
 			{WORKSPACE_PRESETS.map((preset) => {
@@ -26,9 +26,9 @@ export function WorkspaceSwitcher() {
 						title={preset.description}
 						onClick={() => setActive(preset.id)}
 						className={cn(
-							"h-7 shrink-0 cursor-pointer rounded-sm px-2.5 text-xs font-medium focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring",
+							"h-7 max-md:h-11 shrink-0 cursor-pointer rounded-sm px-3 text-xs font-medium focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring",
 							selected
-								? "bg-brand text-foreground"
+								? "bg-bronze text-primary-foreground"
 								: "text-foreground hover:bg-accent",
 						)}
 					>

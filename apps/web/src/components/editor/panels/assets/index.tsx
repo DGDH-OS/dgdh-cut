@@ -25,7 +25,7 @@ export function AssetsPanel() {
 		effects: <EffectsView />,
 		transitions: (
 			<div className="text-muted-foreground p-4">
-				Transitions view coming soon...
+				Overgangen komen binnenkort
 			</div>
 		),
 		captions: <Captions />,

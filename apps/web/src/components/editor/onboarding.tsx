@@ -27,13 +27,13 @@ export function Onboarding() {
 	const getStepTitle = () => {
 		switch (step) {
 			case 0:
-				return "Welcome to DGDH CUT";
+				return "Welkom bij DGDH CUT";
 			case 1:
-				return "Early beta";
+				return "Vroege bèta";
 			case 2:
-				return "Give feedback";
+				return "Geef feedback";
 			default:
-				return "DGDH CUT Onboarding";
+				return "DGDH CUT introductie";
 		}
 	};
 
@@ -43,10 +43,10 @@ export function Onboarding() {
 				return (
 					<div className="space-y-5">
 						<div className="space-y-3">
-							<Title title="Welcome to DGDH CUT" />
-							<Description description="You're among the first to try DGDH CUT - the fast browser-based video editor for short-form." />
+							<Title title="Welkom bij DGDH CUT" />
+							<Description description="Je bent een van de eersten die DGDH CUT probeert: de snelle videobewerker in je browser voor korte video." />
 						</div>
-						<NextButton onClick={handleNext}>Next</NextButton>
+						<NextButton onClick={handleNext}>Volgende</NextButton>
 					</div>
 				);
 			case 1:
@@ -54,11 +54,11 @@ export function Onboarding() {
 					<div className="space-y-5">
 						<div className="space-y-3">
 							<Title title={getStepTitle()} />
-							<Description description="There's still a ton of things to do to make this editor amazing." />
-							<Description description="A lot of features are still missing. We're working hard to build them out!" />
-							<Description description="If you're curious, check out our roadmap [here](/roadmap)" />
+							<Description description="Er is nog veel te doen om deze editor geweldig te maken." />
+							<Description description="Veel functies ontbreken nog. We werken hard om ze te bouwen." />
+							<Description description="Ben je nieuwsgierig? Bekijk onze roadmap [hier](/roadmap)" />
 						</div>
-						<NextButton onClick={handleNext}>Next</NextButton>
+						<NextButton onClick={handleNext}>Volgende</NextButton>
 					</div>
 				);
 			case 2:
@@ -67,10 +67,10 @@ export function Onboarding() {
 						<div className="space-y-3">
 							<Title title={getStepTitle()} />
 							<Description
-								description={`Share feedback with the DGDH team to help make DGDH CUT the best short-form editor.`}
+								description={`Deel feedback met het DGDH-team om van DGDH CUT de beste editor voor korte video te maken.`}
 							/>
 						</div>
-						<NextButton onClick={handleClose}>Finish</NextButton>
+						<NextButton onClick={handleClose}>Klaar</NextButton>
 					</div>
 				);
 			default:

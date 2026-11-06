@@ -53,9 +53,9 @@ const SLIDERS: Array<{
 	max: number;
 	step: number;
 }> = [
-	{ key: "brightness", label: "Brightness", min: -1, max: 1, step: 0.01 },
+	{ key: "brightness", label: "Helderheid", min: -1, max: 1, step: 0.01 },
 	{ key: "contrast", label: "Contrast", min: 0, max: 4, step: 0.01 },
-	{ key: "saturation", label: "Saturation", min: 0, max: 4, step: 0.01 },
+	{ key: "saturation", label: "Verzadiging", min: 0, max: 4, step: 0.01 },
 	{ key: "gamma", label: "Gamma", min: 0.1, max: 10, step: 0.01 },
 ];
 
@@ -105,7 +105,7 @@ export function GradePanel() {
 
 	const handleGrade = async () => {
 		if (!file) {
-			setError("Select a video first");
+			setError("Kies eerst een video");
 			return;
 		}
 		setBusy(true);
@@ -144,11 +144,11 @@ export function GradePanel() {
 							<Select value={lut} onValueChange={setLut}>
 								<SelectTrigger>
 									<SelectValue
-										placeholder={lutsError ? "Engine unreachable" : "None"}
+										placeholder={lutsError ? "Engine niet bereikbaar" : "Geen"}
 									/>
 								</SelectTrigger>
 								<SelectContent>
-									<SelectItem value={NO_LUT}>None</SelectItem>
+									<SelectItem value={NO_LUT}>Geen</SelectItem>
 									{luts.map((entry) => (
 										<SelectItem key={entry.id} value={entry.id}>
 											{entry.name}
@@ -187,7 +187,7 @@ export function GradePanel() {
 						disabled={busy || !file}
 					>
 						{busy && <Spinner className="mr-1" />}
-						{busy ? "Grading..." : "Apply grade"}
+						{busy ? "Bezig met kleurcorrectie..." : "Kleurcorrectie toepassen"}
 					</Button>
 
 					{error && (
@@ -199,13 +199,13 @@ export function GradePanel() {
 					{selectedItem && (
 						<VideoPreview
 							src={engineUrl(selectedItem.url)}
-							label="Before"
+							label="Voor"
 						/>
 					)}
 					{result && (
 						<VideoPreview
 							src={engineUrl(result.preview)}
-							label={`After (${Math.round(result.bytes / 1024)} KB)`}
+							label={`Na (${Math.round(result.bytes / 1024)} KB)`}
 						/>
 					)}
 				</SectionContent>

@@ -44,7 +44,7 @@ export function ReframePanel() {
 
 	const handleReframe = async () => {
 		if (!file) {
-			setError("Select a video first");
+			setError("Kies eerst een video");
 			return;
 		}
 		setBusy(true);
@@ -72,7 +72,7 @@ export function ReframePanel() {
 						<SectionField label="Video">
 							<MediaPicker value={file} onValueChange={setFile} />
 						</SectionField>
-						<SectionField label="Output format">
+						<SectionField label="Uitvoerformaat">
 							<Select value={outputSize} onValueChange={setOutputSize}>
 								<SelectTrigger>
 									<SelectValue />
@@ -95,7 +95,7 @@ export function ReframePanel() {
 						disabled={busy || !file}
 					>
 						{busy && <Spinner className="mr-1" />}
-						{busy ? "Reframing..." : "Reframe"}
+						{busy ? "Bezig met bijsnijden..." : "Bijsnijden"}
 					</Button>
 
 					{error && (

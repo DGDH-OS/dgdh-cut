@@ -47,7 +47,7 @@ function buildDiamondPath({
 
 export const diamondMaskDefinition: MaskDefinition<"diamond"> = {
 	type: "diamond",
-	name: "Diamond",
+	name: "Ruit",
 	features: {
 		hasPosition: true,
 		hasRotation: true,

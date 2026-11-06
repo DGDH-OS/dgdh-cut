@@ -37,7 +37,7 @@ export async function readVideoFile({
 		const videoTrack = await input.getPrimaryVideoTrack();
 
 		if (!videoTrack) {
-			throw new Error("No video track found in the file");
+			throw new Error("Geen videospoor gevonden in het bestand");
 		}
 
 		const canDecode = await videoTrack.canDecode();

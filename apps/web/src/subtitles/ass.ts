@@ -228,31 +228,31 @@ export function parseAss({ input }: { input: string }): ParseSubtitleResult {
 
 	if (strippedInlineTagCueCount > 0) {
 		warnings.add(
-			`Stripped unsupported ASS inline override tags from ${strippedInlineTagCueCount} subtitle cue(s).`,
+			`Niet-ondersteunde ASS-inlinetags verwijderd uit ${strippedInlineTagCueCount} ondertitelregel(s).`,
 		);
 	}
 
 	if (ignoredEffectCount > 0) {
 		warnings.add(
-			`Ignored ASS event effects in ${ignoredEffectCount} subtitle cue(s).`,
+			`ASS-eventeffecten genegeerd in ${ignoredEffectCount} ondertitelregel(s).`,
 		);
 	}
 
 	if (missingStyleCueCount > 0) {
 		warnings.add(
-			`Fell back to default subtitle styling for ${missingStyleCueCount} cue(s) that referenced missing ASS styles.`,
+			`Standaardstijl gebruikt voor ${missingStyleCueCount} regel(s) die naar ontbrekende ASS-stijlen verwezen.`,
 		);
 	}
 
 	if (skippedNonDialogueEventCount > 0) {
 		warnings.add(
-			`Ignored ${skippedNonDialogueEventCount} non-dialogue ASS event(s).`,
+			`${skippedNonDialogueEventCount} ASS-event(s) zonder dialoog genegeerd.`,
 		);
 	}
 
 	if (usesHeavilyUnsupportedStyles) {
 		warnings.add(
-			"Ignored unsupported ASS style features such as outline, shadow, rotation, or scaling.",
+			"Niet-ondersteunde ASS-stijlfuncties genegeerd, zoals omlijning, schaduw, rotatie of schaling.",
 		);
 	}
 

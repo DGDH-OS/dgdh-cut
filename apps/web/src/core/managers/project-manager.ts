@@ -80,7 +80,7 @@ export class ProjectManager {
 	}
 
 	async createNewProject({ name }: { name: string }): Promise<string> {
-		const mainScene = buildDefaultScene({ name: "Main scene", isMain: true });
+		const mainScene = buildDefaultScene({ name: "Hoofdscène", isMain: true });
 		const newProject: TProject = {
 			metadata: {
 				id: generateUUID(),
@@ -120,7 +120,7 @@ export class ProjectManager {
 
 			return newProject.metadata.id;
 		} catch (error) {
-			toast.error("Failed to save new project");
+			toast.error("Nieuw project opslaan mislukt");
 			throw error;
 		}
 	}
@@ -325,8 +325,8 @@ export class ProjectManager {
 		try {
 			const result = await storageService.loadProject({ id });
 			if (!result) {
-				toast.error("Project not found", {
-					description: "Please try again",
+				toast.error("Project niet gevonden", {
+					description: "Probeer het opnieuw",
 				});
 				return;
 			}
@@ -349,10 +349,10 @@ export class ProjectManager {
 
 			this.updateMetadata(updatedProject);
 		} catch (error) {
-			console.error("Failed to rename project:", error);
-			toast.error("Failed to rename project", {
+			console.error("Project hernoemen mislukt:", error);
+			toast.error("Project hernoemen mislukt", {
 				description:
-					error instanceof Error ? error.message : "Please try again",
+					error instanceof Error ? error.message : "Probeer het opnieuw",
 			});
 		}
 	}
@@ -383,13 +383,13 @@ export class ProjectManager {
 			if (missingProjectIds.length > 0) {
 				toast.error(
 					missingProjectIds.length === 1
-						? "Project not found"
-						: "Projects not found",
+						? "Project niet gevonden"
+						: "Projecten niet gevonden",
 					{
 						description:
 							missingProjectIds.length === 1
-								? "Please try again"
-								: "Some projects could not be found",
+								? "Probeer het opnieuw"
+								: "Sommige projecten zijn niet gevonden",
 					},
 				);
 				throw new Error(`Projects not found: ${missingProjectIds.join(", ")}`);
@@ -474,10 +474,10 @@ export class ProjectManager {
 
 			return duplicationPlans.map((plan) => plan.newProjectId);
 		} catch (error) {
-			console.error("Failed to duplicate projects:", error);
-			toast.error("Failed to duplicate projects", {
+			console.error("Projecten dupliceren mislukt:", error);
+			toast.error("Projecten dupliceren mislukt", {
 				description:
-					error instanceof Error ? error.message : "Please try again",
+					error instanceof Error ? error.message : "Probeer het opnieuw",
 			});
 			throw error;
 		}

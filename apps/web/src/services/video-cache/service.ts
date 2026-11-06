@@ -270,12 +270,12 @@ export class VideoCache {
 		try {
 			const videoTrack = await input.getPrimaryVideoTrack();
 			if (!videoTrack) {
-				throw new Error("No video track found");
+				throw new Error("Geen videospoor gevonden");
 			}
 
 			const canDecode = await videoTrack.canDecode();
 			if (!canDecode) {
-				throw new Error("Video codec not supported for decoding");
+				throw new Error("Videocodec wordt niet ondersteund voor decoderen");
 			}
 
 			const sink = new CanvasSink(videoTrack, {

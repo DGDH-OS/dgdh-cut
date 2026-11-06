@@ -11,13 +11,13 @@ export const EXTERNAL_TOOLS: ExternalTool[] = [
 	{
 		name: "Marble",
 		description:
-			"Modern headless CMS for content management and the blog for DGDH CUT",
+			"Modern headless CMS voor contentbeheer en de blog van DGDH CUT",
 		url: "https://marblecms.com?utm_source=opencut",
 		icon: OcMarbleIcon,
 	},
 	{
 		name: "Databuddy",
-		description: "GDPR compliant analytics and user insights for DGDH CUT",
+		description: "AVG-conforme analytics en gebruikersinzichten voor DGDH CUT",
 		url: "https://databuddy.cc?utm_source=opencut",
 		icon: OcDataBuddyIcon,
 	},

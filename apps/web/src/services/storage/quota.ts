@@ -118,7 +118,7 @@ export class StorageQuotaExceededError extends Error {
 
 	constructor({ requiredBytes }: { requiredBytes: number }) {
 		super(
-			`Not enough browser storage to save a ${formatStorageBytes({ bytes: requiredBytes })} file.`,
+			`Te weinig browseropslag om een bestand van ${formatStorageBytes({ bytes: requiredBytes })} op te slaan.`,
 		);
 
 		this.name = "StorageQuotaExceededError";

@@ -45,22 +45,22 @@ export function DeleteProjectDialog({
 								{"'?"}
 							</>
 						) : (
-							`Delete ${count} projects?`
+							`${count} projecten verwijderen?`
 						)}
 					</DialogTitle>
 				</DialogHeader>
 				<DialogBody>
 					<Alert variant="destructive">
-						<AlertTitle>Warning</AlertTitle>
+						<AlertTitle>Let op</AlertTitle>
 						<AlertDescription>
-							This will permanently delete{" "}
-							{singleName ? `"${singleName}"` : `${count} projects`} and all
-							associated files.
+							Dit verwijdert definitief{" "}
+							{singleName ? `"${singleName}"` : `${count} projecten`} en alle
+							bijbehorende bestanden.
 						</AlertDescription>
 					</Alert>
 					<div className="flex flex-col gap-3">
 						<Label className="text-xs font-semibold text-muted-foreground">
-							Type "DELETE" to confirm
+							Typ "DELETE" om te bevestigen
 						</Label>
 						<Input
 							type="text"
@@ -72,10 +72,10 @@ export function DeleteProjectDialog({
 				</DialogBody>
 				<DialogFooter>
 					<Button variant="outline" onClick={() => onOpenChange(false)}>
-						Cancel
+						Annuleren
 					</Button>
 					<Button variant="destructive" onClick={onConfirm}>
-						Delete project
+						Project verwijderen
 					</Button>
 				</DialogFooter>
 			</DialogContent>

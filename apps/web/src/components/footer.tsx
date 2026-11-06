@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { DEFAULT_LOGO_URL } from "@/site/brand";
-import { capitalizeFirstLetter } from "@/utils/string";
 
 type Category = "resources" | "company";
 
@@ -15,13 +14,18 @@ type CategoryLinks = Record<Category, FooterLink[]>;
 const links: CategoryLinks = {
 	resources: [
 		{ label: "Roadmap", href: "/roadmap" },
-		{ label: "Changelog", href: "/changelog" },
+		{ label: "Wijzigingslog", href: "/changelog" },
 	],
 	company: [
 		{ label: "Privacy", href: "/privacy" },
-		{ label: "Terms of use", href: "/terms" },
-		{ label: "Brand", href: "/brand" },
+		{ label: "Gebruiksvoorwaarden", href: "/terms" },
+		{ label: "Merk", href: "/brand" },
 	],
+};
+
+const CATEGORY_LABELS: Record<Category, string> = {
+	resources: "Bronnen",
+	company: "Bedrijf",
 };
 
 export function Footer() {
@@ -34,7 +38,7 @@ export function Footer() {
 						<div className="mb-4 flex items-center justify-start gap-2">
 							<Image
 								src={DEFAULT_LOGO_URL}
-								alt="DGDH CUT"
+								alt=""
 								width={24}
 								height={24}
 								
@@ -42,7 +46,7 @@ export function Footer() {
 							<span className="text-lg font-medium uppercase tracking-wide">DGDH CUT</span>
 						</div>
 						<p className="text-muted-foreground mb-5 text-sm md:text-left">
-							The browser-based video editor for short-form.
+							De videobewerker in je browser voor korte video.
 						</p>
 					</div>
 
@@ -50,7 +54,7 @@ export function Footer() {
 						{(Object.keys(links) as Category[]).map((category) => (
 							<div key={category} className="flex flex-col gap-2">
 								<h3 className="eyebrow">
-									{capitalizeFirstLetter({ string: category })}
+									{CATEGORY_LABELS[category]}
 								</h3>
 								<ul className="space-y-2 text-sm">
 									{links[category].map((link) => (
@@ -81,7 +85,7 @@ export function Footer() {
 				<div className="flex flex-col items-start justify-between gap-4 pt-2 md:flex-row">
 					<div className="text-muted-foreground flex items-center gap-4 text-sm">
 						<span>
-							© {new Date().getFullYear()} DGDH CUT, All Rights Reserved
+							© {new Date().getFullYear()} DGDH CUT, Alle rechten voorbehouden
 						</span>
 					</div>
 				</div>

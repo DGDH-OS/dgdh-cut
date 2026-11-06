@@ -102,7 +102,7 @@ export function KaraokePanel() {
 
 	const handleGenerate = async () => {
 		if (!file) {
-			setError("Select a video first");
+			setError("Kies eerst een video");
 			return;
 		}
 		setBusy(true);
@@ -133,12 +133,12 @@ export function KaraokePanel() {
 				<SectionField label="Video">
 					<MediaPicker value={file} onValueChange={setFile} />
 				</SectionField>
-				<SectionField label="Style">
+				<SectionField label="Stijl">
 					<Select value={style} onValueChange={handleStyleChange}>
 						<SelectTrigger>
 							<SelectValue
 								placeholder={
-									stylesError ? "Engine unreachable" : "Select a style"
+									stylesError ? "Engine niet bereikbaar" : "Kies een stijl"
 								}
 							/>
 						</SelectTrigger>
@@ -161,7 +161,7 @@ export function KaraokePanel() {
 						className="bg-background aspect-video w-full rounded-md border object-cover"
 					/>
 				)}
-				<SectionField label={`Font size (${fontSize})`}>
+				<SectionField label={`Lettergrootte (${fontSize})`}>
 					<Slider
 						value={[fontSize]}
 						min={10}
@@ -170,14 +170,14 @@ export function KaraokePanel() {
 						onValueChange={([value]) => setFontSize(value)}
 					/>
 				</SectionField>
-				<SectionField label="Highlight color">
+				<SectionField label="Markeerkleur">
 					<div className="flex items-center gap-3">
 						<input
 							type="color"
 							value={highlightColor}
 							onChange={(event) => setHighlightColor(event.target.value)}
 							className="border-border bg-accent h-7 w-10 cursor-pointer rounded-md border"
-							aria-label="Highlight color"
+							aria-label="Markeerkleur"
 						/>
 						<span className="text-muted-foreground text-xs tabular-nums">
 							{highlightColor}
@@ -207,7 +207,7 @@ export function KaraokePanel() {
 				disabled={busy || !file}
 			>
 				{busy && <Spinner className="mr-1" />}
-				{busy ? "Burning captions..." : "Generate karaoke captions"}
+				{busy ? "Ondertitels worden ingebrand..." : "Karaoke-ondertitels maken"}
 			</Button>
 
 			{error && (

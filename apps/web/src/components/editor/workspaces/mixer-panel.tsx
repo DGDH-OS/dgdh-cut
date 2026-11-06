@@ -72,7 +72,7 @@ export function MixerPanel() {
 			data-testid="audio-mixer"
 		>
 			<div className="flex h-11 shrink-0 items-center justify-between border-b px-3">
-				<h2 className="text-foreground text-sm font-medium">Audio mixer</h2>
+				<h2 className="text-foreground text-sm font-medium">Audiomixer</h2>
 				<span className="text-foreground text-xs">
 					{tracks?.length ?? 0} {tracks?.length === 1 ? "track" : "tracks"}
 				</span>
@@ -80,8 +80,8 @@ export function MixerPanel() {
 			<div className="min-h-0 flex-1 overflow-y-auto p-3">
 				{!tracks || tracks.length === 0 ? (
 					<p className="text-foreground text-sm">
-						No audio tracks yet. Add a sound or voiceover from the Sounds tab
-						and its channel appears here.
+						Nog geen audiosporen. Voeg een geluid of voice-over toe via het tabblad Geluiden
+						en het kanaal verschijnt hier.
 					</p>
 				) : (
 					<ul className="flex flex-col gap-3">
@@ -133,16 +133,16 @@ function ChannelStrip({
 		>
 			<div className="flex items-center justify-between gap-2">
 				<span className="text-foreground min-w-0 truncate text-sm font-medium">
-					{track.name || "Audio track"}
+					{track.name || "Audiospoor"}
 				</span>
 				<div className="flex shrink-0 items-center gap-1">
 					<button
 						type="button"
 						aria-pressed={track.muted}
-						aria-label={`Mute ${track.name || "audio track"}`}
+						aria-label={`Dempen ${track.name || "audiospoor"}`}
 						data-testid="mixer-mute"
 						disabled={soloActive}
-						title={soloActive ? "Clear solo to change mute" : "Mute"}
+						title={soloActive ? "Zet solo uit om te dempen" : "Dempen"}
 						onClick={onMute}
 						className={cn(
 							"h-7 w-7 cursor-pointer rounded-sm border text-xs font-semibold focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed",
@@ -156,7 +156,7 @@ function ChannelStrip({
 					<button
 						type="button"
 						aria-pressed={soloed}
-						aria-label={`Solo ${track.name || "audio track"}`}
+						aria-label={`Solo ${track.name || "audiospoor"}`}
 						data-testid="mixer-solo"
 						title="Solo"
 						onClick={onSolo}
@@ -173,7 +173,7 @@ function ChannelStrip({
 			</div>
 			<div className="flex items-center gap-3">
 				<Slider
-					aria-label={`Volume ${track.name || "audio track"}`}
+					aria-label={`Volume ${track.name || "audiospoor"}`}
 					data-testid="mixer-volume"
 					min={VOLUME_DB_MIN}
 					max={VOLUME_DB_MAX}

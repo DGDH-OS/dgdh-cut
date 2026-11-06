@@ -119,7 +119,7 @@ export function ExportButton() {
 				>
 					<div className="flex items-center gap-1.5 px-4 py-1.5">
 						<HugeiconsIcon icon={TransitionTopIcon} className="size-3.5" />
-						<span className="text-[0.875rem] font-medium">Export</span>
+						<span className="text-[0.875rem] font-medium">Exporteren</span>
 					</div>
 				</button>
 			</PopoverTrigger>
@@ -252,7 +252,7 @@ function ExportPopover({
 			});
 			onOpenChange(false);
 		} catch (error) {
-			setServerError(`Could not reach render server: ${String(error)}`);
+			setServerError(`Renderserver niet bereikbaar: ${String(error)}`);
 		} finally {
 			setServerExporting(false);
 		}
@@ -262,14 +262,14 @@ function ExportPopover({
 		<PopoverContent className="bg-background mr-4 flex w-80 flex-col p-0">
 			{exportResult && !exportResult.success ? (
 				<ExportError
-					error={exportResult.error || "Unknown error occurred"}
+					error={exportResult.error || "Onbekende fout opgetreden"}
 					onRetry={handleExport}
 				/>
 			) : (
 				<>
 					<div className="flex items-center justify-between p-3 border-b">
 						<h3 className="font-medium text-sm">
-							{isExporting ? "Exporting project" : "Export project"}
+							{isExporting ? "Project wordt geëxporteerd" : "Project exporteren"}
 						</h3>
 					</div>
 
@@ -283,7 +283,7 @@ function ExportPopover({
 										showTopBorder={false}
 									>
 										<SectionHeader>
-											<SectionTitle>Format</SectionTitle>
+											<SectionTitle>Formaat</SectionTitle>
 										</SectionHeader>
 										<SectionContent>
 											<RadioGroup
@@ -297,13 +297,13 @@ function ExportPopover({
 												<div className="flex items-center space-x-2">
 													<RadioGroupItem value="mp4" id="mp4" />
 													<Label htmlFor="mp4">
-														MP4 (H.264) - Better compatibility
+														MP4 (H.264) - Beste compatibiliteit
 													</Label>
 												</div>
 												<div className="flex items-center space-x-2">
 													<RadioGroupItem value="webm" id="webm" />
 													<Label htmlFor="webm">
-														WebM (VP9) - Smaller file size
+														WebM (VP9) - Kleiner bestand
 													</Label>
 												</div>
 											</RadioGroup>
@@ -312,7 +312,7 @@ function ExportPopover({
 
 									<Section collapsible defaultOpen={false}>
 										<SectionHeader>
-											<SectionTitle>Quality</SectionTitle>
+											<SectionTitle>Kwaliteit</SectionTitle>
 										</SectionHeader>
 										<SectionContent>
 											<RadioGroup
@@ -325,20 +325,20 @@ function ExportPopover({
 											>
 												<div className="flex items-center space-x-2">
 													<RadioGroupItem value="low" id="low" />
-													<Label htmlFor="low">Low - Smallest file size</Label>
+													<Label htmlFor="low">Laag: kleinste bestand</Label>
 												</div>
 												<div className="flex items-center space-x-2">
 													<RadioGroupItem value="medium" id="medium" />
-													<Label htmlFor="medium">Medium - Balanced</Label>
+													<Label htmlFor="medium">Gemiddeld: gebalanceerd</Label>
 												</div>
 												<div className="flex items-center space-x-2">
 													<RadioGroupItem value="high" id="high" />
-													<Label htmlFor="high">High - Recommended</Label>
+													<Label htmlFor="high">Hoog: aanbevolen</Label>
 												</div>
 												<div className="flex items-center space-x-2">
 													<RadioGroupItem value="very_high" id="very_high" />
 													<Label htmlFor="very_high">
-														Very high - Largest file size
+														Zeer hoog: grootste bestand
 													</Label>
 												</div>
 											</RadioGroup>
@@ -359,7 +359,7 @@ function ExportPopover({
 													}
 												/>
 												<Label htmlFor="include-audio">
-													Include audio in export
+													Audio meenemen in export
 												</Label>
 											</div>
 										</SectionContent>
@@ -369,7 +369,7 @@ function ExportPopover({
 								<div className="flex flex-col gap-2 p-3 pt-0">
 									<Button onClick={handleExport} className="w-full gap-2">
 										<Download className="size-4" />
-										Export
+										Exporteren
 									</Button>
 									<Button
 										variant="outline"
@@ -378,7 +378,7 @@ function ExportPopover({
 										className="w-full gap-2"
 									>
 										<Server className="size-4" />
-										{serverExporting ? "Rendering…" : "Render (server)"}
+										{serverExporting ? "Renderen…" : "Renderen (server)"}
 									</Button>
 									{serverError && (
 										<p className="text-destructive text-xs">{serverError}</p>
@@ -404,7 +404,7 @@ function ExportPopover({
 									className="w-full rounded-md"
 									onClick={handleCancel}
 								>
-									Cancel
+									Annuleren
 								</Button>
 							</div>
 						)}
@@ -433,7 +433,7 @@ function ExportError({
 	return (
 		<div className="space-y-4 p-3">
 			<div className="flex flex-col gap-1.5">
-				<p className="text-destructive text-sm font-medium">Export failed</p>
+				<p className="text-destructive text-sm font-medium">Exporteren mislukt</p>
 				<p className="text-muted-foreground text-xs">{error}</p>
 			</div>
 
@@ -445,7 +445,7 @@ function ExportError({
 					onClick={handleCopy}
 				>
 					{copied ? <Check className="text-constructive" /> : <Copy />}
-					Copy
+					Kopiëren
 				</Button>
 				<Button
 					variant="outline"
@@ -454,7 +454,7 @@ function ExportError({
 					onClick={onRetry}
 				>
 					<RotateCcw />
-					Retry
+					Opnieuw proberen
 				</Button>
 			</div>
 		</div>

@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { ReactMarkdownWrapper } from "@/components/ui/react-markdown-wrapper";
 import { cn } from "@/utils/ui";
 
-const LAST_UPDATED = "February 25, 2026";
+const LAST_UPDATED = "25 februari 2026";
 
 type StatusType = "complete" | "pending" | "default" | "info";
 
@@ -24,36 +24,36 @@ const roadmapItems: RoadmapItem[] = [
 	{
 		title: "Start",
 		description:
-			"This is where it all started. Repository created, initial project structure, and the vision for a free, open-source video editor. [Check out the first tweet](https://x.com/mazeincoding/status/1936706642512388188) to see where it started.",
+			"Hier begon het allemaal. Repository aangemaakt, eerste projectstructuur en de visie voor een gratis, open-source videobewerker. [Bekijk de eerste tweet](https://x.com/mazeincoding/status/1936706642512388188) om te zien waar het begon.",
 		status: {
-			text: "Completed",
+			text: "Voltooid",
 			type: "complete",
 		},
 	},
 	{
-		title: "Core UI",
+		title: "Basis-UI",
 		description:
-			"Build the foundation - main layout, header, sidebar, timeline container, and basic component structure. Not all functionality yet, but the UI framework that everything else builds on.",
+			"De basis bouwen: hoofdlayout, header, zijbalk, tijdlijncontainer en basiscomponenten. Nog niet alle functionaliteit, maar het UI-raamwerk waar al het andere op voortbouwt.",
 		status: {
-			text: "Completed",
+			text: "Voltooid",
 			type: "complete",
 		},
 	},
 	{
-		title: "Essential functionality",
+		title: "Essentiële functionaliteit",
 		description:
-			"Everything that makes a video editor **useful**. Timeline interactivity, storage, effects, transitions, etc.",
+			"Alles wat een videobewerker **bruikbaar** maakt. Interactiviteit van de tijdlijn, opslag, effecten, overgangen, enzovoort.",
 		status: {
-			text: "In progress",
+			text: "Bezig",
 			type: "pending",
 		},
 	},
 	{
-		title: "Native app (mobile/desktop)",
+		title: "Native app (mobiel/desktop)",
 		description:
-			"Native DGDH CUT apps for Mac, Windows, Linux, and iOS/Android.",
+			"Native DGDH CUT-apps voor Mac, Windows, Linux en iOS/Android.",
 		status: {
-			text: "Not started",
+			text: "Niet gestart",
 			type: "default",
 		},
 	},
@@ -62,26 +62,26 @@ const roadmapItems: RoadmapItem[] = [
 export const metadata: Metadata = {
 	title: "Roadmap - DGDH CUT",
 	description:
-		"See what's coming next for DGDH CUT - the browser-based video editor for short-form.",
+		"Bekijk wat er straks komt voor DGDH CUT, de videobewerker in je browser voor korte video.",
 	openGraph: {
-		title: "DGDH CUT Roadmap - What's Coming Next",
+		title: "DGDH CUT roadmap: wat er straks komt",
 		description:
-			"See what's coming next for DGDH CUT - the browser-based video editor for short-form.",
+			"Bekijk wat er straks komt voor DGDH CUT, de videobewerker in je browser voor korte video.",
 		type: "website",
 		images: [
 			{
 				url: "/open-graph/roadmap.jpg",
 				width: 1200,
 				height: 630,
-				alt: "DGDH CUT Roadmap",
+				alt: "DGDH CUT roadmap",
 			},
 		],
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "DGDH CUT Roadmap - What's Coming Next",
+		title: "DGDH CUT roadmap: wat er straks komt",
 		description:
-			"See what's coming next for DGDH CUT - the browser-based video editor for short-form.",
+			"Bekijk wat er straks komt voor DGDH CUT, de videobewerker in je browser voor korte video.",
 		images: ["/open-graph/roadmap.jpg"],
 	},
 };
@@ -90,7 +90,7 @@ export default function RoadmapPage() {
 	return (
 		<BasePage
 			title="Roadmap"
-			description={`What's coming next for DGDH CUT (last updated: ${LAST_UPDATED})`}
+			description={`Wat er straks komt voor DGDH CUT (laatst bijgewerkt: ${LAST_UPDATED})`}
 		>
 			<div className="mx-auto flex max-w-4xl flex-col gap-16">
 				<div className="flex flex-col gap-6">
@@ -99,10 +99,8 @@ export default function RoadmapPage() {
 					))}
 				</div>
 				<GitHubContributeSection
-					title="Want to help?"
-					description="DGDH CUT is open source and built by the community. Every contribution,
-          no matter how small, helps us build the best free video editor
-          possible."
+					title="Wil je helpen?"
+					description="DGDH CUT is open source en wordt door de community gebouwd. Elke bijdrage, hoe klein ook, helpt ons de best mogelijke gratis videobewerker te bouwen."
 				/>
 			</div>
 		</BasePage>

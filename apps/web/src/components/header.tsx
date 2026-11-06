@@ -27,25 +27,29 @@ export function Header() {
 	const closeMenu = () => setIsMenuOpen(false);
 
 	const links = [
-		{ label: "Projects", href: "/projects" },
-		{ label: "Changelog", href: "/changelog" },
+		{ label: "Projecten", href: "/projects" },
+		{ label: "Wijzigingslog", href: "/changelog" },
 		{ label: "Roadmap", href: "/roadmap" },
 	];
 
 	return (
 		<header className="glass sticky top-0 z-10 border-x-0 border-t-0">
-			<div className="relative flex w-full items-center justify-between px-6 pt-4">
+			<div className="relative flex w-full items-center justify-between px-6 py-3">
 				<div className="relative z-10 flex items-center gap-6">
 					<ContextMenu>
 						<ContextMenuTrigger asChild>
-							<Link href="/" className="flex items-center gap-3">
+							<Link href="/" className="flex items-center gap-3 max-md:min-h-11">
 								<Image
 									src={DEFAULT_LOGO_URL}
-									alt="DGDH CUT Logo"
+									alt=""
+									aria-hidden="true"
 									
 									width={32}
 									height={32}
 								/>
+								<span className="text-base font-medium tracking-wide uppercase">
+									DGDH CUT
+								</span>
 							</Link>
 						</ContextMenuTrigger>
 						<ContextMenuContent>
@@ -57,7 +61,7 @@ export function Header() {
 								}}
 							>
 								<HugeiconsIcon icon={Copy01Icon} />
-								Copy SVG
+								SVG kopiëren
 							</ContextMenuItem>
 							<ContextMenuItem
 								onClick={() => {
@@ -68,12 +72,12 @@ export function Header() {
 								}}
 							>
 								<HugeiconsIcon icon={Download01Icon} />
-								Download SVG
+								SVG downloaden
 							</ContextMenuItem>
 							<Link href="/brand">
 								<ContextMenuItem>
 									<HugeiconsIcon icon={LinkSquare02Icon} />
-									Brand assets
+									Merkmateriaal
 								</ContextMenuItem>
 							</Link>
 						</ContextMenuContent>
@@ -95,6 +99,7 @@ export function Header() {
 						<Button
 							variant="text"
 							size="icon"
+							aria-label="Menu openen"
 							className="flex items-center justify-center p-0"
 							onClick={() => setIsMenuOpen(!isMenuOpen)}
 						>
@@ -104,7 +109,7 @@ export function Header() {
 					<div className="hidden items-center gap-3 md:flex">
 						<Link href="/projects">
 							<Button className="text-sm">
-								Projects
+								Projecten
 								<ArrowRight className="size-4" />
 							</Button>
 						</Link>
@@ -120,7 +125,7 @@ export function Header() {
 					<div className="relative h-full">
 						<button
 							type="button"
-							aria-label="Close menu"
+							aria-label="Menu sluiten"
 							className="absolute inset-0"
 							onClick={closeMenu}
 							onKeyDown={(event) => {
@@ -151,7 +156,7 @@ export function Header() {
 								>
 									<Link
 										href={link.href}
-										className="text-2xl font-medium uppercase tracking-wide"
+										className="inline-flex min-h-12 items-center text-2xl font-medium uppercase tracking-wide"
 										onClick={() => setIsMenuOpen(false)}
 									>
 										{link.label}

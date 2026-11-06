@@ -16,7 +16,7 @@
    Contrast (gemeten, WCAG 2.2):
      ink #f8f7f4 op canvas #121212        17,0:1  AAA
      muted #a7a9ae op canvas              8,0:1   AAA
-     primary-knop #161a11 op #f8f7f4      16,0:1  AAA
+     primary-knop #16130e op #f8f7f4      16,0:1  AAA
      brons #b58c67 op canvas              6,2:1   AA (alleen eyebrows/accent)
      groen #00665e met tekst #f8f7f4      6,4:1   AA (merkvlak, niet voor UI-randen)
      danger #e0584f op canvas             5,4:1   AA
@@ -26,20 +26,20 @@
 :root.dark {
   color-scheme: dark;
 
-  --canvas: #121212;
-  --surface: #161a21;
-  --surface-raised: #1e232c;
+  --canvas: #14120f;
+  --surface: #1b1815;
+  --surface-raised: #26221d;
   --ink: #f8f7f4;
-  --ink-dark: #161a11;
-  --muted-ink: #a7a9ae;
-  --brand: #00665e; /* racing green, het enige merkaccent */
-  --brand-hover: #1b6157;
+  --ink-dark: #16130e;
+  --muted-ink: #b3ada4;
+  --brand: #8a5f3a; /* diep brons: merkvlak, tooltip */
+  --brand-hover: #9a6b43;
   --bronze: #b58c67; /* eer: eyebrows, badges. Nooit vlakken. */
-  --line: #2a303b;
-  --line-strong: #707379;
+  --line: #3a352f;
+  --line-strong: #7f7970;
 
-  --glass-fill: rgba(18, 18, 18, 0.48);
-  --glass-fill-solid: rgba(18, 18, 18, 0.88);
+  --glass-fill: rgba(20, 18, 15, 0.48);
+  --glass-fill-solid: rgba(20, 18, 15, 0.9);
   --glass-stroke: rgba(248, 247, 244, 0.14);
   --glass-blur: 28px;
   --glass-sat: 1.35;
@@ -55,7 +55,7 @@
   --popover-hover: var(--surface-raised);
   --popover-foreground: var(--ink);
   --primary: #f8f7f4;
-  --primary-foreground: #161a11;
+  --primary-foreground: #16130e;
   --secondary: var(--surface-raised);
   --secondary-border: var(--line);
   --secondary-foreground: var(--ink);
@@ -64,11 +64,11 @@
   --accent: var(--surface-raised);
   --accent-foreground: var(--ink);
   --destructive: #e0584f;
-  --destructive-foreground: #161a11;
+  --destructive-foreground: #16130e;
   --constructive: #3fa37a;
-  --constructive-foreground: #161a11;
+  --constructive-foreground: #16130e;
   --caution: var(--bronze);
-  --caution-foreground: #161a11;
+  --caution-foreground: #16130e;
   --border: var(--line);
   --input: var(--surface);
   --ring: #f8f7f4;
@@ -112,24 +112,22 @@
     @apply border-border outline-ring/50;
   }
   html {
-    background: #0a0c0e;
+    background: #0e0c0a;
   }
   /* Canvas: de enige gradient in het ontwerp. Vast, scrolt niet mee. */
   body {
     @apply text-foreground;
     font-family: var(--font-ui), "Helvetica Neue", Arial, sans-serif;
-    background-color: #0a0c0e;
+    background-color: #0e0c0a;
     background-image:
-      radial-gradient(90% 70% at 8% -10%, rgba(0, 102, 94, 0.38), transparent 58%),
-      radial-gradient(70% 50% at 108% 12%, rgba(181, 140, 103, 0.16), transparent 52%),
-      radial-gradient(80% 60% at 50% 120%, rgba(0, 102, 94, 0.22), transparent 60%),
-      linear-gradient(180deg, #0c1014 0%, #121212 42%, #0a0c0e 100%);
+      radial-gradient(80% 60% at 10% -10%, rgba(181, 140, 103, 0.14), transparent 60%),
+      linear-gradient(180deg, #16130f 0%, #14120f 45%, #0e0c0a 100%);
     background-attachment: fixed;
     /* Prevent back/forward swipe */
     overscroll-behavior-x: contain;
   }
   ::selection {
-    background: rgba(0, 102, 94, 0.7);
+    background: rgba(181, 140, 103, 0.45);
     color: #f8f7f4;
   }
   h1,
@@ -156,7 +154,7 @@
   :focus-visible {
     outline: 2px solid #f8f7f4;
     outline-offset: 2px;
-    box-shadow: 0 0 0 4px rgba(0, 102, 94, 0.9);
+    box-shadow: 0 0 0 4px rgba(181, 140, 103, 0.75);
   }
   @media (prefers-reduced-motion: reduce) {
     *,

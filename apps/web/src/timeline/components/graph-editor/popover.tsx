@@ -126,10 +126,10 @@ export function GraphEditorPopover({
 				<Tabs variant="underline" defaultValue="presets" className="flex flex-col gap-2">
 					<TabsList className="px-3">
 						<TabsTrigger value="presets" className="text-xs">
-							Presets
+							Voorinstellingen
 						</TabsTrigger>
 						<TabsTrigger value="saved" className="text-xs">
-							Saved
+							Opgeslagen
 						</TabsTrigger>
 					</TabsList>
 					<TabsContent value="presets" className="px-3 pb-0">
@@ -321,7 +321,7 @@ function CurveThumb({ value }: { value: NormalizedCubicBezier }) {
 			height={THUMB_HEIGHT}
 			viewBox={`0 0 ${THUMB_WIDTH} ${THUMB_HEIGHT}`}
 		>
-			<title>Curve preset preview</title>
+			<title>Voorbeeld curve-voorinstelling</title>
 			<path
 				d={`M${points.join("L")}`}
 				fill="none"

@@ -14,25 +14,25 @@ import {
 } from "@/changelog/components/release";
 
 export const metadata: Metadata = {
-	title: "Changelog - DGDH CUT",
-	description: "What's new in DGDH CUT",
+	title: "Wijzigingslog - DGDH CUT",
+	description: "Wat is er nieuw in DGDH CUT",
 	openGraph: {
-		title: "Changelog - DGDH CUT",
-		description: "Every update, improvement, and fix to DGDH CUT — documented.",
+		title: "Wijzigingslog - DGDH CUT",
+		description: "Elke update, verbetering en fix van DGDH CUT, gedocumenteerd.",
 		type: "website",
 		images: [
 			{
 				url: "/open-graph/changlog.jpg",
 				width: 1200,
 				height: 630,
-				alt: "DGDH CUT Changelog",
+				alt: "DGDH CUT wijzigingslog",
 			},
 		],
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Changelog - DGDH CUT",
-		description: "What's new in DGDH CUT",
+		title: "Wijzigingslog - DGDH CUT",
+		description: "Wat is er nieuw in DGDH CUT",
 		images: ["/open-graph/changlog.jpg"],
 	},
 };
@@ -41,7 +41,7 @@ export default function ChangelogPage() {
 	const releases = getSortedReleases();
 
 	return (
-		<BasePage title="Changelog" description="See what's new in DGDH CUT">
+		<BasePage title="Wijzigingslog" description="Bekijk wat er nieuw is in DGDH CUT">
 			<div className="mx-auto w-full max-w-3xl">
 				<div className="relative">
 					<div

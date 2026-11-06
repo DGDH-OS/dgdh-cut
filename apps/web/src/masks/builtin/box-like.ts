@@ -49,7 +49,7 @@ export const BOX_LIKE_MASK_PARAMS: ParamDefinition<
 	},
 	{
 		key: "width",
-		label: "Width",
+		label: "Breedte",
 		type: "number",
 		default: 0.6,
 		min: 1,
@@ -57,7 +57,7 @@ export const BOX_LIKE_MASK_PARAMS: ParamDefinition<
 	},
 	{
 		key: "height",
-		label: "Height",
+		label: "Hoogte",
 		type: "number",
 		default: 0.6,
 		min: 1,
@@ -65,7 +65,7 @@ export const BOX_LIKE_MASK_PARAMS: ParamDefinition<
 	},
 	{
 		key: "rotation",
-		label: "Rotation",
+		label: "Rotatie",
 		type: "number",
 		default: 0,
 		min: 0,
@@ -74,7 +74,7 @@ export const BOX_LIKE_MASK_PARAMS: ParamDefinition<
 	},
 	{
 		key: "scale",
-		label: "Scale",
+		label: "Schaal",
 		type: "number",
 		default: 1,
 		min: 1,
@@ -83,13 +83,13 @@ export const BOX_LIKE_MASK_PARAMS: ParamDefinition<
 	},
 	{
 		key: "strokeAlign",
-		label: "Stroke Align",
+		label: "Omlijning uitlijnen",
 		type: "select",
 		default: "center",
 		options: [
-			{ value: "inside", label: "Inside" },
-			{ value: "center", label: "Center" },
-			{ value: "outside", label: "Outside" },
+			{ value: "inside", label: "Binnen" },
+			{ value: "center", label: "Midden" },
+			{ value: "outside", label: "Buiten" },
 		],
 	},
 ];

@@ -161,7 +161,7 @@ export class SceneExporter extends EventEmitter<SceneExporterEvents> {
 
 		const buffer = output.target.buffer;
 		if (!buffer) {
-			this.emit("error", new Error("Failed to export video"));
+			this.emit("error", new Error("Video exporteren mislukt"));
 			return null;
 		}
 

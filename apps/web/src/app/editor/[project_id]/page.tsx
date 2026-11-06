@@ -43,13 +43,13 @@ function DegradedRendererBanner() {
 
 	return (
 		<div className="bg-accent border-b h-9 flex items-center justify-center gap-2 text-xs text-muted-foreground">
-			<span>For the best experience, open DGDH CUT in Chrome.</span>
+			<span>Open DGDH CUT in Chrome voor de beste ervaring.</span>
 			<Button
 				variant="text"
 				size="icon"
 				className="p-0 w-auto [&_svg]:size-3.5"
 				onClick={() => setDismissed(true)}
-				aria-label="Dismiss"
+				aria-label="Sluiten"
 			>
 				<HugeiconsIcon icon={Cancel01Icon} />
 			</Button>

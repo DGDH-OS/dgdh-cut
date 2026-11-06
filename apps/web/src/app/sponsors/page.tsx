@@ -11,11 +11,11 @@ import { cn } from "@/utils/ui";
 export const metadata: Metadata = {
 	title: "Sponsors - DGDH CUT",
 	description:
-		"Support DGDH CUT and help us build the future of free and open-source video editing.",
+		"Steun DGDH CUT en help ons de toekomst van gratis en open-source videobewerking bouwen.",
 	openGraph: {
 		title: "Sponsors - DGDH CUT",
 		description:
-			"Support DGDH CUT and help us build the future of free and open-source video editing.",
+			"Steun DGDH CUT en help ons de toekomst van gratis en open-source videobewerking bouwen.",
 		type: "website",
 	},
 };
@@ -28,8 +28,8 @@ export default function SponsorsPage() {
 					Sponsors
 				</h1>
 				<p className="text-muted-foreground mx-auto max-w-2xl text-xl leading-relaxed text-pretty">
-					Support DGDH CUT and help us build the future of privacy-first video
-					editing.
+					Steun DGDH CUT en help ons de toekomst van privacyvriendelijke
+					videobewerking bouwen.
 				</p>
 			</div>
 			<SponsorsGrid />
@@ -59,7 +59,7 @@ function SponsorCard({ sponsor }: { sponsor: Sponsor }) {
 				<CardContent className="flex h-full flex-col justify-center gap-8 p-8">
 					<Image
 						src={sponsor.logo}
-						alt={`${sponsor.name} logo`}
+						alt={`Logo van ${sponsor.name}`}
 						width={50}
 						height={50}
 						className={cn(

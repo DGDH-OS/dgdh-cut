@@ -67,12 +67,12 @@ function parseIntensity(effectParams: Record<string, unknown>): number {
 
 export const blurEffectDefinition: EffectDefinition = {
 	type: "blur",
-	name: "Blur",
+	name: "Vervagen",
 	keywords: ["blur", "soft", "defocus"],
 	params: [
 		{
 			key: "intensity",
-			label: "Intensity",
+			label: "Intensiteit",
 			type: "number",
 			default: 15,
 			min: 0,

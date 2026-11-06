@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const release = getReleaseByVersion({ version });
 	if (!release) return {};
 	return {
-		title: `${release.title} (${release.version}) - DGDH CUT Changelog`,
+		title: `${release.title} (${release.version}) - DGDH CUT wijzigingslog`,
 		description: release.description,
 	};
 }
@@ -46,7 +46,7 @@ export default async function ReleaseDetailPage({ params }: Props) {
 					className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1 w-fit"
 				>
 					<ChevronLeftIcon className="size-4" />
-					All releases
+					Alle releases
 				</Link>
 
 				<ReleaseArticle variant="detail">
@@ -74,7 +74,7 @@ export default async function ReleaseDetailPage({ params }: Props) {
 						>
 							<ChevronLeftIcon className="size-4" />
 							<div className="flex flex-col">
-								<span className="text-xs text-muted-foreground">Older</span>
+								<span className="text-xs text-muted-foreground">Ouder</span>
 								<span className="font-medium">{older.title}</span>
 							</div>
 						</Link>
@@ -87,7 +87,7 @@ export default async function ReleaseDetailPage({ params }: Props) {
 							className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground group text-right"
 						>
 							<div className="flex flex-col">
-								<span className="text-xs text-muted-foreground">Newer</span>
+								<span className="text-xs text-muted-foreground">Nieuwer</span>
 								<span className="font-medium">{newer.title}</span>
 							</div>
 							<ChevronRightIcon className="size-4" />

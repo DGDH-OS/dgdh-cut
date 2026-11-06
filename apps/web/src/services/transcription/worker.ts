@@ -111,7 +111,7 @@ async function handleInit({ modelId }: { modelId: string }) {
 	} catch (error) {
 		self.postMessage({
 			type: "init-error",
-			error: error instanceof Error ? error.message : "Failed to load model",
+			error: error instanceof Error ? error.message : "Model laden mislukt",
 		} satisfies WorkerResponse);
 	}
 }
@@ -170,7 +170,7 @@ async function handleTranscribe({
 		if (cancelled) return;
 		self.postMessage({
 			type: "transcribe-error",
-			error: error instanceof Error ? error.message : "Transcription failed",
+			error: error instanceof Error ? error.message : "Transcriptie mislukt",
 		} satisfies WorkerResponse);
 	}
 }

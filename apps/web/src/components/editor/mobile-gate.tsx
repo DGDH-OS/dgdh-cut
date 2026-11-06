@@ -43,22 +43,22 @@ export function MobileGate({ children }: MobileGateProps) {
 				onClick={handleGoBack}
 			>
 				<HugeiconsIcon icon={ArrowLeft01Icon} className="size-4" />
-				<span className=" text-sm">Go back</span>
+				<span className=" text-sm">Terug</span>
 			</Button>
 
 			<div className="flex flex-1 flex-col justify-center gap-5 px-7">
 				<div className="flex flex-col gap-3">
 					<h1 className="text-foreground text-3xl font-bold tracking-tight">
-						Desktop only (for now)
+						Voorlopig alleen op desktop
 					</h1>
 					<p className="text-muted-foreground text-sm leading-relaxed">
-						DGDH CUT isn't optimized for mobile or iPad yet. Things will break
-						and the layout will be a mess. Come back on a desktop for the real
-						experience.
+						DGDH CUT is nog niet geoptimaliseerd voor mobiel of iPad. Dingen
+						gaan stuk en de layout wordt een rommeltje. Kom terug op een desktop
+						voor de echte ervaring.
 					</p>
 				</div>
 				<div className="flex items-center gap-3">
-					<Button onClick={handleContinue}>Take a look anyway</Button>
+					<Button onClick={handleContinue}>Toch even kijken</Button>
 					<Button variant="ghost" asChild>
 						<Link href="/roadmap" className="flex items-center gap-1">
 							Roadmap
