@@ -12,6 +12,7 @@ import { TextView } from "@/text/components/assets-view";
 import { ReframePanel } from "@/components/engine/reframe-panel";
 import { GradePanel } from "@/components/engine/grade-panel";
 import { VoiceoverPanel } from "@/components/engine/voiceover-panel";
+import { TranscriptPanel } from "@/components/editor/transcript/transcript-panel";
 import { EffectsView } from "@/effects/components/assets-view";
 
 export function AssetsPanel() {
@@ -32,6 +33,7 @@ export function AssetsPanel() {
 		adjustment: <GradePanel />,
 		reframe: <ReframePanel />,
 		voiceover: <VoiceoverPanel />,
+		transcript: <TranscriptPanel />,
 		settings: <SettingsView />,
 	};
 
