@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 		type: "website",
 		images: [
 			{
-				url: "/open-graph/changlog.jpg",
+				url: "/open-graph/changelog.jpg",
 				width: 1200,
 				height: 630,
 				alt: "DGDH CUT wijzigingslog",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 		card: "summary_large_image",
 		title: "Wijzigingslog - DGDH CUT",
 		description: "Wat is er nieuw in DGDH CUT",
-		images: ["/open-graph/changlog.jpg"],
+		images: ["/open-graph/changelog.jpg"],
 	},
 };
 
