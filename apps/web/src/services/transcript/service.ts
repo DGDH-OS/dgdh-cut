@@ -21,6 +21,9 @@ export async function transcribeWords({
 }): Promise<TranscriptWord[]> {
 	const model = TRANSCRIPTION_MODELS.find((m) => m.id === modelId);
 	if (!model) throw new Error(`Onbekend model: ${modelId}`);
+	// Woord-timestamps vragen om een export met cross-attentions: de
+	// `_timestamped`-variant van hetzelfde Whisper-model.
+	const wordModelId = `${model.huggingFaceId}_timestamped`;
 	const worker = new Worker(new URL("./worker.ts", import.meta.url), {
 		type: "module",
 	});
@@ -39,7 +42,7 @@ export async function transcribeWords({
 			};
 			worker.postMessage({
 				type: "init",
-				modelId: model.huggingFaceId,
+				modelId: wordModelId,
 			} satisfies TranscriptWorkerMessage);
 		});
 		onProgress?.({ status: "transcribing", progress: 0, message: "Transcriberen..." });
