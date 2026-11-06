@@ -327,8 +327,8 @@ export function Captions() {
 						</div>
 					)}
 					{warnings.length > 0 && (
-						<div className="rounded-md border border-amber-500/20 bg-amber-500/10 p-3">
-							<ul className="space-y-1 text-sm text-amber-700">
+						<div className="rounded-md border border-caution/30 bg-caution/10 p-3">
+							<ul className="space-y-1 text-sm text-caution">
 								{warnings.map((warning) => (
 									<li key={warning}>{warning}</li>
 								))}

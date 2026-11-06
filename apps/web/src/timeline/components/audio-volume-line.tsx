@@ -234,8 +234,8 @@ export function AudioVolumeLine({
 					className={cn(
 						"pointer-events-none absolute inset-x-0 -translate-y-1/2 border-t transition-colors",
 						isDragging
-							? "border-white"
-							: "border-white/50 group-hover/audio:border-white/80",
+							? "border-foreground"
+							: "border-foreground/50 group-hover/audio:border-foreground/80",
 					)}
 					style={{ top: lineTop }}
 				/>
@@ -256,7 +256,7 @@ export function AudioVolumeLine({
 					tooltipClientPos &&
 					createPortal(
 						<div
-							className="pointer-events-none fixed left-0 top-0 z-50 -translate-y-full rounded bg-black/75 px-1.5 py-0.5 text-[10px] font-medium text-white whitespace-nowrap"
+							className="pointer-events-none fixed left-0 top-0 z-50 -translate-y-full rounded bg-background/75 px-1.5 py-0.5 text-[10px] font-medium text-foreground whitespace-nowrap"
 							style={{
 								transform: `translate(${tooltipClientPos.x}px, ${tooltipClientPos.y}px)`,
 							}}

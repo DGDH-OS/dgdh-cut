@@ -7,150 +7,185 @@
 @plugin "@tailwindcss/typography";
 @plugin "tailwindcss-animate";
 
-:root {
-  --background: #090807;
-  --foreground: #e8dcc8;
-  --card: #11100e;
-  --card-foreground: #e8dcc8;
-  --popover: #11100e;
-  --popover-hover: #161310;
-  --popover-foreground: #e8dcc8;
-  --primary: #c4a574;
-  --primary-foreground: #0e0c0a;
-  --secondary: #161310;
-  --secondary-border: #1a1510;
-  --secondary-foreground: #e0c28a;
-  --muted: #1a1510;
-  --muted-foreground: #8a8073;
-  --accent: #161310;
-  --accent-foreground: #e8dcc8;
-  --destructive: #c45c3e;
-  --destructive-foreground: #e8dcc8;
-  --constructive: #8aa876;
-  --constructive-foreground: #0e0c0a;
-  --caution: #e0c28a;
-  --caution-foreground: #0e0c0a;
-  --border: rgba(232, 220, 200, 0.1);
-  --input: #161310;
-  --ring: rgba(196, 165, 116, 0.5);
-  --chart-1: #c4a574;
-  --chart-2: #e0c28a;
-  --chart-3: #8aa876;
-  --chart-4: #8a8073;
-  --chart-5: #c45c3e;
-  --sidebar-background: #11100e;
-  --sidebar-foreground: #e8dcc8;
-  --sidebar-primary: #c4a574;
-  --sidebar-primary-foreground: #0e0c0a;
-  --sidebar-accent: #161310;
-  --sidebar-accent-foreground: #e8dcc8;
-  --sidebar-border: rgba(232, 220, 200, 0.1);
-  --sidebar-ring: rgba(196, 165, 116, 0.5);
-  --sidebar: #11100e;
+/* ══════════════════════════════════════════════════════════════════════════
+   DGDH CUT — DGDH Atelier v3 (dark Apple glass)
+   Bron: 1. OPS/one-stack/design-system (DESIGN.md, dgdh-atelier.css) en
+   1. OWN WEBSITE atelier.css. Atelier is DONKER-ONLY: elke scope (:root,
+   .dark, .panel) krijgt dezelfde tokens. Eén bestand, geen hex in components.
+
+   Contrast (gemeten, WCAG 2.2):
+     ink #f8f7f4 op canvas #121212        17,0:1  AAA
+     muted #a7a9ae op canvas              8,0:1   AAA
+     primary-knop #161a11 op #f8f7f4      16,0:1  AAA
+     brons #b58c67 op canvas              6,2:1   AA (alleen eyebrows/accent)
+     groen #00665e met tekst #f8f7f4      6,4:1   AA (merkvlak, niet voor UI-randen)
+     danger #e0584f op canvas             5,4:1   AA
+   ══════════════════════════════════════════════════════════════════════════ */
+:root,
+.dark,
+:root.dark {
+  color-scheme: dark;
+
+  --canvas: #121212;
+  --surface: #161a21;
+  --surface-raised: #1e232c;
+  --ink: #f8f7f4;
+  --ink-dark: #161a11;
+  --muted-ink: #a7a9ae;
+  --brand: #00665e; /* racing green, het enige merkaccent */
+  --brand-hover: #1b6157;
+  --bronze: #b58c67; /* eer: eyebrows, badges. Nooit vlakken. */
+  --line: #2a303b;
+  --line-strong: #707379;
+
+  --glass-fill: rgba(18, 18, 18, 0.48);
+  --glass-fill-solid: rgba(18, 18, 18, 0.88);
+  --glass-stroke: rgba(248, 247, 244, 0.14);
+  --glass-blur: 28px;
+  --glass-sat: 1.35;
+
+  --font-ui: var(--font-albert-sans);
+
+  /* shadcn-semantiek -> Atelier */
+  --background: var(--canvas);
+  --foreground: var(--ink);
+  --card: var(--surface);
+  --card-foreground: var(--ink);
+  --popover: var(--surface);
+  --popover-hover: var(--surface-raised);
+  --popover-foreground: var(--ink);
+  --primary: #f8f7f4;
+  --primary-foreground: #161a11;
+  --secondary: var(--surface-raised);
+  --secondary-border: var(--line);
+  --secondary-foreground: var(--ink);
+  --muted: var(--surface-raised);
+  --muted-foreground: var(--muted-ink);
+  --accent: var(--surface-raised);
+  --accent-foreground: var(--ink);
+  --destructive: #e0584f;
+  --destructive-foreground: #161a11;
+  --constructive: #3fa37a;
+  --constructive-foreground: #161a11;
+  --caution: var(--bronze);
+  --caution-foreground: #161a11;
+  --border: var(--line);
+  --input: var(--surface);
+  --ring: #f8f7f4;
+  --chart-1: #f8f7f4;
+  --chart-2: #b58c67;
+  --chart-3: #3fa37a;
+  --chart-4: #a7a9ae;
+  --chart-5: #e0584f;
+  --sidebar-background: var(--surface);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--ink);
+  --sidebar-primary-foreground: var(--ink-dark);
+  --sidebar-accent: var(--surface-raised);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--line);
+  --sidebar-ring: #f8f7f4;
+  --sidebar: var(--surface);
 }
 
-.panel {
-  --background: #11100e;
-  --foreground: #e8dcc8;
-  --card: #11100e;
-  --card-foreground: #e8dcc8;
-  --primary-foreground: #0e0c0a;
-  --secondary: #161310;
-  --secondary-border: #1a1510;
-  --secondary-foreground: #e0c28a;
-  --muted: #1a1510;
-  --muted-foreground: #8a8073;
-  --accent: #1a1510;
-  --accent-foreground: #e8dcc8;
-  --destructive-foreground: #e8dcc8;
-  --constructive-foreground: #0e0c0a;
-  --border: rgba(232, 220, 200, 0.1);
-  --input: #161310;
-  --ring: rgba(196, 165, 116, 0.5);
-}
-
-.dark {
-  --background: #090807;
-  --foreground: #e8dcc8;
-  --card: #11100e;
-  --card-foreground: #e8dcc8;
-  --popover: #11100e;
-  --popover-hover: #161310;
-  --popover-foreground: #e8dcc8;
-  --secondary: #161310;
-  --secondary-border: #1a1510;
-  --secondary-foreground: #e0c28a;
-  --muted: #1a1510;
-  --accent: #161310;
-  --accent-foreground: #e8dcc8;
-  --border: rgba(232, 220, 200, 0.1);
-  --input: #161310;
-  --ring: rgba(196, 165, 116, 0.5);
-  --caution: #e0c28a;
-  --caution-foreground: #0e0c0a;
-  --sidebar-background: #11100e;
-  --sidebar-foreground: #e8dcc8;
-  --sidebar-primary: #c4a574;
-  --sidebar-primary-foreground: #0e0c0a;
-  --sidebar-accent: #161310;
-  --sidebar-accent-foreground: #e8dcc8;
-  --sidebar-border: rgba(232, 220, 200, 0.1);
-  --sidebar-ring: rgba(196, 165, 116, 0.5);
-  --sidebar: #11100e;
-}
-
+/* Editor-panelen: een trede lichter dan het canvas (laag 2). */
+.panel,
 .dark .panel {
-  --background: #11100e;
-  --foreground: #e8dcc8;
-  --card: #11100e;
-  --card-foreground: #e8dcc8;
-  --secondary: #161310;
-  --secondary-border: #1a1510;
-  --secondary-foreground: #e0c28a;
-  --muted: #1a1510;
-  --accent: #1a1510;
-  --accent-foreground: #e8dcc8;
-  --border: rgba(232, 220, 200, 0.1);
-  --input: #161310;
-  --ring: rgba(196, 165, 116, 0.5);
+  --background: var(--surface);
+  --card: var(--surface);
+  --input: var(--canvas);
+  --secondary: var(--surface-raised);
+  --muted: var(--surface-raised);
+  --accent: var(--surface-raised);
+  --border: var(--line);
 }
 
 @layer base {
-  /*
-    The default border color has changed to `currentcolor` in Tailwind CSS v4,
-    so we've added these compatibility styles to make sure everything still
-    looks the same as it did with Tailwind CSS v3.
-
-    If we ever want to remove these styles, we need to add an explicit border
-    color utility to any element that depends on these defaults.
-  */
   *,
   ::after,
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
+    border-color: var(--border);
   }
-  /* Other default base styles */
   * {
-    @apply border-border;
+    @apply border-border outline-ring/50;
   }
+  html {
+    background: #0a0c0e;
+  }
+  /* Canvas: de enige gradient in het ontwerp. Vast, scrolt niet mee. */
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    font-family: var(--font-ui), "Helvetica Neue", Arial, sans-serif;
+    background-color: #0a0c0e;
+    background-image:
+      radial-gradient(90% 70% at 8% -10%, rgba(0, 102, 94, 0.38), transparent 58%),
+      radial-gradient(70% 50% at 108% 12%, rgba(181, 140, 103, 0.16), transparent 52%),
+      radial-gradient(80% 60% at 50% 120%, rgba(0, 102, 94, 0.22), transparent 60%),
+      linear-gradient(180deg, #0c1014 0%, #121212 42%, #0a0c0e 100%);
+    background-attachment: fixed;
     /* Prevent back/forward swipe */
     overscroll-behavior-x: contain;
   }
   ::selection {
-    @apply bg-primary/35 selection:text-primary-foreground;
+    background: rgba(0, 102, 94, 0.7);
+    color: #f8f7f4;
   }
   h1,
   h2,
-  h3,
+  h3 {
+    font-family: var(--font-ui), "Helvetica Neue", Arial, sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
   h4,
   h5,
   h6 {
-    font-family: var(--font-fraunces), serif;
+    font-family: var(--font-ui), "Helvetica Neue", Arial, sans-serif;
+    font-weight: 500;
   }
+  /* Tijd en codes: tabulaire cijfers. */
+  code,
+  kbd,
+  samp,
+  .font-mono {
+    font-variant-numeric: tabular-nums;
+  }
+  :focus-visible {
+    outline: 2px solid #f8f7f4;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(0, 102, 94, 0.9);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Glass: elk zwevend oppervlak (dialoog, menu, toast, popover, sheet). */
+@utility glass {
+  border: 1px solid var(--glass-stroke);
+  background: var(--glass-fill-solid);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  box-shadow:
+    inset 0 1px 0 rgba(248, 247, 244, 0.12),
+    0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+/* Eyebrow-label: brons, klein, gespatieerd. */
+@utility eyebrow {
+  color: var(--bronze);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }
 
 @theme inline {
@@ -158,21 +193,25 @@
   --breakpoint-xs: 30rem;
 
   /* Typography */
-  --font-sans: var(--font-plex-sans), sans-serif;
-  --font-serif: var(--font-fraunces), serif;
-  --font-mono: var(--font-plex-mono), monospace;
+  --font-sans: var(--font-ui), "Helvetica Neue", Arial, sans-serif;
+  --font-serif: var(--font-ui), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 
   /* Font sizes */
-  --text-xs: 0.72rem;
-  --text-sm: 0.79rem;
-  --text-base: 0.92rem;
-  --text-base--line-height: calc(1.5 / 0.95);
-  --text-xs--line-height: calc(1 / 0.8);
+  /* Editor is dense: floor 0.75rem (12px) so labels stay legible. */
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-base--line-height: 1.5;
+  --text-xs--line-height: 1.4;
 
   /* Border radius */
-  --radius-lg: 0.82rem;
-  --radius-md: 0.65rem;
-  --radius-sm: 0.35rem;
+  /* Atelier v3: cards/dialogs 24px, buttons/menus 14px. Dense controls 10px. */
+  --radius-xl: 32px;
+  --radius-2xl: 24px;
+  --radius-lg: 24px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
 
   /* Palette mapped to root design tokens */
   --color-background: var(--background);
@@ -217,6 +256,11 @@
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
 
+  --color-brand: var(--brand);
+  --color-bronze: var(--bronze);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+
   /* Sidebar */
   --color-sidebar: var(--sidebar-background);
   --color-sidebar-foreground: var(--sidebar-foreground);
@@ -226,6 +270,14 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Atelier: no drop shadows; depth = glass + hairline */
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-xl: none;
+  --shadow-2xl: none;
+  --shadow-xs: none;
 
   /* Animations */
   --animate-accordion-down: accordion-down 0.2s ease-out;
@@ -288,14 +340,5 @@
   }
   &::-webkit-scrollbar-thumb:hover {
     background: var(--muted-foreground);
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }

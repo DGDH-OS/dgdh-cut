@@ -68,7 +68,7 @@ function VideoPreview({ src, label }: { src: string; label: string }) {
 				controls
 				muted
 				preload="metadata"
-				className="bg-black aspect-video w-full rounded-md border"
+				className="bg-background aspect-video w-full rounded-md border"
 			/>
 		</div>
 	);

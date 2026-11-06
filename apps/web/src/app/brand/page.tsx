@@ -48,18 +48,18 @@ const ASSET_SECTIONS: AssetSection[] = [
 	{
 		title: "Symbol",
 		description:
-			"Use the symbol on its own when the OpenCut name is already present nearby or space is limited.",
+			"Use the symbol on its own when the DGDH CUT name is already present nearby or space is limited.",
 		cols: "2",
 		assets: [
 			{
-				src: "/logos/opencut/symbol.svg",
+				src: "/logos/dgdh-cut/symbol.svg",
 				theme: "dark",
 				label: "Symbol",
 				width: 400,
 				height: 400,
 			},
 			{
-				src: "/logos/opencut/symbol-light.svg",
+				src: "/logos/dgdh-cut/symbol-light.svg",
 				theme: "light",
 				label: "Symbol",
 				width: 400,
@@ -74,28 +74,28 @@ const ASSET_SECTIONS: AssetSection[] = [
 		cols: "2",
 		assets: [
 			{
-				src: "/logos/opencut/logo.svg",
+				src: "/logos/dgdh-cut/logo.svg",
 				theme: "dark",
 				label: "Logo",
 				width: 1809,
 				height: 400,
 			},
 			{
-				src: "/logos/opencut/logo-light.svg",
+				src: "/logos/dgdh-cut/logo-light.svg",
 				theme: "light",
 				label: "Logo",
 				width: 1809,
 				height: 400,
 			},
 			{
-				src: "/logos/opencut/text.svg",
+				src: "/logos/dgdh-cut/text.svg",
 				theme: "dark",
 				label: "Text",
 				width: 1760,
 				height: 400,
 			},
 			{
-				src: "/logos/opencut/text-light.svg",
+				src: "/logos/dgdh-cut/text-light.svg",
 				theme: "light",
 				label: "Text",
 				width: 1760,
@@ -112,7 +112,7 @@ export default function BrandPage() {
 			title="Brand"
 			description={
 				<>
-					Download OpenCut brand assets for use in your projects.{" "}
+					Download DGDH CUT brand assets for use in your projects.{" "}
 					<Link
 						href="#guidelines"
 						className="underline underline-offset-4"
@@ -173,10 +173,10 @@ export default function BrandPage() {
 				<div className="flex flex-col gap-3">
 					<h2 className="font-semibold text-lg">Usage</h2>
 					<p className="text-muted-foreground text-base leading-relaxed">
-						OpenCut is open source — the code is free to use under its license.
+						DGDH CUT is open source — the code is free to use under its license.
 						That license does not cover the name or logo. You can say you use
-						OpenCut, that your project integrates with OpenCut, or that it was
-						built on top of OpenCut. You cannot name your product OpenCut, imply
+						DGDH CUT, that your project integrates with DGDH CUT, or that it was
+						built on top of DGDH CUT. You cannot name your product DGDH CUT, imply
 						we made or endorse your product, or use the marks commercially
 						without asking first. For anything unclear, reach out at{" "}
 						<Link
@@ -193,8 +193,8 @@ export default function BrandPage() {
 					<h2 className="font-semibold text-lg">What&apos;s not allowed</h2>
 					<ul className="text-muted-foreground text-base flex flex-col gap-2 leading-relaxed">
 						{[
-							"Using OpenCut in the name of your product, service, or domain.",
-							"Implying that OpenCut made, sponsors, or endorses your work.",
+							"Using DGDH CUT in the name of your product, service, or domain.",
+							"Implying that DGDH CUT made, sponsors, or endorses your work.",
 							"Using the logo or name on merchandise or commercial marketing.",
 							"Modifying the marks.",
 						].map((item) => (
@@ -213,17 +213,17 @@ export default function BrandPage() {
 const CHECKER_STYLES: Record<"dark" | "light", CSSProperties> = {
 	light: {
 		backgroundImage:
-			"linear-gradient(45deg, #292929 25%, transparent 25%), linear-gradient(-45deg, #292929 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #292929 75%), linear-gradient(-45deg, transparent 75%, #292929 75%)",
+			"linear-gradient(45deg, #1e232c 25%, transparent 25%), linear-gradient(-45deg, #1e232c 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #1e232c 75%), linear-gradient(-45deg, transparent 75%, #1e232c 75%)",
 		backgroundSize: "18px 18px",
 		backgroundPosition: "0 0, 0 9px, 9px -9px, -9px 0px",
-		backgroundColor: "#000",
+		backgroundColor: "#121212",
 	},
 	dark: {
 		backgroundImage:
-			"linear-gradient(45deg, #e0e0e0 25%, transparent 25%), linear-gradient(-45deg, #e0e0e0 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #e0e0e0 75%), linear-gradient(-45deg, transparent 75%, #e0e0e0 75%)",
+			"linear-gradient(45deg, #e6e5e1 25%, transparent 25%), linear-gradient(-45deg, #e6e5e1 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #e6e5e1 75%), linear-gradient(-45deg, transparent 75%, #e6e5e1 75%)",
 		backgroundSize: "18px 18px",
 		backgroundPosition: "0 0, 0 9px, 9px -9px, -9px 0px",
-		backgroundColor: "#f5f5f5",
+		backgroundColor: "#f8f7f4",
 	},
 };
 

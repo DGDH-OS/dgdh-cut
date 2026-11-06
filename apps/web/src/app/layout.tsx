@@ -7,23 +7,18 @@ import { TooltipProvider } from "../components/ui/tooltip";
 import { baseMetaData } from "./metadata";
 import { BotIdClient } from "botid/client";
 import { webEnv } from "@/env/web";
-import { Fraunces, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
+import { Albert_Sans, IBM_Plex_Mono } from "next/font/google";
 
-const fraunces = Fraunces({
+const albertSans = Albert_Sans({
 	subsets: ["latin"],
-	variable: "--font-fraunces",
+	weight: ["400", "500", "600"],
+	variable: "--font-albert-sans",
 });
 
 const plexMono = IBM_Plex_Mono({
 	subsets: ["latin"],
 	weight: ["400", "500", "600"],
 	variable: "--font-plex-mono",
-});
-
-const plexSans = IBM_Plex_Sans({
-	subsets: ["latin"],
-	weight: ["400", "500", "600", "700"],
-	variable: "--font-plex-sans",
 });
 
 export const metadata = baseMetaData;
@@ -41,7 +36,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" suppressHydrationWarning>
+		<html lang="en" className={`dark ${albertSans.variable} ${plexMono.variable}`} suppressHydrationWarning>
 			<head>
 				<BotIdClient protect={protectedRoutes} />
 				{process.env.NODE_ENV === "development" && (
@@ -55,11 +50,13 @@ export default function RootLayout({
 				)}
 			</head>
 			<body
-				className={`${plexSans.variable} ${plexMono.variable} ${fraunces.variable} font-sans antialiased`}
+				className={`font-sans antialiased`}
 			>
 				<ThemeProvider
 					attribute="class"
-					defaultTheme="system"
+					defaultTheme="dark"
+					forcedTheme="dark"
+					enableSystem={false}
 					disableTransitionOnChange={true}
 				>
 					<TooltipProvider>

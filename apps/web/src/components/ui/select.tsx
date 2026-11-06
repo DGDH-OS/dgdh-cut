@@ -137,7 +137,7 @@ const SelectContent = React.forwardRef<
 		<SelectPrimitive.Content
 			ref={ref}
 			className={cn(
-				"bg-popover text-popover-foreground z-50 max-h-(--radix-select-content-available-height) min-w-32 overflow-hidden rounded-md border p-1 shadow-lg",
+				"glass text-popover-foreground z-50 max-h-(--radix-select-content-available-height) min-w-32 overflow-hidden rounded-md border p-1",
 				className,
 			)}
 			position={position}
@@ -169,7 +169,7 @@ const SelectLabel = React.forwardRef<
 	<SelectPrimitive.Label
 		ref={ref}
 		className={cn(
-			"px-2 pb-1 pt-0.5 text-[11px] font-bold uppercase tracking-wider text-muted-foreground",
+			"px-2 pb-1 pt-0.5 text-xs font-medium uppercase tracking-wider text-muted-foreground",
 			className,
 		)}
 		{...props}

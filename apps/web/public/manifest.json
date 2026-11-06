@@ -1,7 +1,9 @@
 {
-	"name": "OpenCut",
-	"description": "A simple but powerful video editor that gets the job done. In your browser.",
+	"name": "DGDH CUT",
+	"description": "The browser-based video editor for short-form.",
 	"display": "standalone",
+	"theme_color": "#121212",
+	"background_color": "#121212",
 	"start_url": "/",
 	"icons": [
 		{

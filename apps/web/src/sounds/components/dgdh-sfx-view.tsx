@@ -267,7 +267,7 @@ export function DgdhSfxView() {
 					<video
 						src={engineUrl(result.preview)}
 						controls
-						className="max-h-40 w-full rounded-sm bg-black"
+						className="max-h-40 w-full rounded-sm bg-background"
 					/>
 				</div>
 			)}

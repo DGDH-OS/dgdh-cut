@@ -727,7 +727,7 @@ function KeyframeIndicators({
 				<HugeiconsIcon
 					icon={KeyframeIcon}
 					className={cn(
-						"size-3.5 text-black",
+						"size-3.5 text-primary-foreground",
 						isIndicatorSelected ? "fill-primary" : "fill-white",
 					)}
 					strokeWidth={1.5}
@@ -880,7 +880,7 @@ function ExpandedKeyframeLanes({
 									<HugeiconsIcon
 										icon={KeyframeIcon}
 										className={cn(
-											"size-3.5 text-black mr-1",
+											"size-3.5 text-primary-foreground mr-1",
 											isSelected ? "fill-primary" : "fill-white",
 										)}
 										strokeWidth={1.5}
@@ -908,7 +908,7 @@ function TextElementContent({
 }) {
 	return (
 		<div className="flex size-full items-center justify-start pl-2">
-			<span className="truncate text-xs text-white">
+			<span className="truncate text-xs text-foreground">
 				{typeof element.params.content === "string" ? element.params.content : ""}
 			</span>
 		</div>
@@ -924,9 +924,9 @@ function EffectElementContent({
 		<div className="flex size-full items-center justify-start gap-1 pl-2">
 			<HugeiconsIcon
 				icon={MagicWand05Icon}
-				className="size-4 shrink-0 text-white"
+				className="size-4 shrink-0 text-foreground"
 			/>
-			<span className="truncate text-xs text-white">{element.name}</span>
+			<span className="truncate text-xs text-foreground">{element.name}</span>
 		</div>
 	);
 }
@@ -949,7 +949,7 @@ function StickerElementContent({
 				height={20}
 				unoptimized
 			/>
-			<span className="truncate text-xs text-white">{element.name}</span>
+			<span className="truncate text-xs text-foreground">{element.name}</span>
 		</div>
 	);
 }
@@ -973,7 +973,7 @@ function GraphicElementContent({
 				height={20}
 				unoptimized
 			/>
-			<span className="truncate text-xs text-white">{element.name}</span>
+			<span className="truncate text-xs text-foreground">{element.name}</span>
 		</div>
 	);
 }
@@ -1072,7 +1072,7 @@ function EffectsButton({
 	return (
 		<button
 			type="button"
-			className="flex shrink-0 justify-center text-white cursor-pointer"
+			className="flex shrink-0 justify-center text-foreground cursor-pointer"
 			onMouseDown={(event) => event.stopPropagation()}
 			onClick={handleClick}
 		>
@@ -1150,12 +1150,12 @@ function MediaElementHeader({
 		<div
 			className={cn(
 				"absolute top-0 left-0 flex h-5 w-full bg-linear-to-b pt-1",
-				hasFade && "from-black/30 to-transparent",
+				hasFade && "from-background/30 to-transparent",
 			)}
 		>
 			{leading && <div className="pl-1">{leading}</div>}
 			{name && (
-				<span className="truncate px-1.5 text-[0.6rem] leading-tight text-white/75">
+				<span className="truncate px-1.5 text-xs leading-tight text-foreground">
 					{name}
 				</span>
 			)}

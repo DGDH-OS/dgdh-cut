@@ -79,7 +79,7 @@ const ContextMenuSubTrigger = React.forwardRef<
 			{children}
 			<HugeiconsIcon
 				icon={ArrowRightIcon}
-				className="ml-auto text-muted-foreground/80"
+				className="ml-auto text-muted-foreground"
 			/>
 		</ContextMenuPrimitive.SubTrigger>
 	),
@@ -93,7 +93,7 @@ const ContextMenuSubContent = React.forwardRef<
 	<ContextMenuPrimitive.SubContent
 		ref={ref}
 		className={cn(
-			"bg-popover text-popover-foreground z-50 min-w-48 overflow-hidden rounded-md border shadow-xl p-1",
+			"glass text-popover-foreground z-50 min-w-48 overflow-hidden rounded-md border p-1",
 			className,
 		)}
 		{...props}
@@ -111,7 +111,7 @@ const ContextMenuContent = React.forwardRef<
 		<ContextMenuPrimitive.Content
 			ref={ref}
 			className={cn(
-				"bg-popover text-popover-foreground z-50 min-w-48 overflow-hidden rounded-md border shadow-xl p-1",
+				"glass text-popover-foreground z-50 min-w-48 overflow-hidden rounded-md border p-1",
 				className,
 			)}
 			{...props}
@@ -160,7 +160,7 @@ const ContextMenuItem = React.forwardRef<
 				)}
 				{children}
 				{textRight && (
-					<span className="ml-auto text-[0.60rem] tracking-widest text-muted-foreground/80 mb-0.5">
+					<span className="ml-auto text-xs tracking-widest text-muted-foreground mb-0.5">
 						{textRight}
 					</span>
 				)}

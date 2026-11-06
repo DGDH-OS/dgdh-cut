@@ -16,7 +16,6 @@ import { useRouter } from "next/navigation";
 import { FaDiscord } from "react-icons/fa6";
 import { ExportButton } from "./export-button";
 import { FeedbackPopover } from "@/feedback/components/feedback-popover";
-import { ThemeToggle } from "../theme-toggle";
 import { DEFAULT_LOGO_URL } from "@/site/brand";
 import { SOCIAL_LINKS } from "@/site/social";
 import { toast } from "sonner";
@@ -47,7 +46,6 @@ export function EditorHeader() {
 						<FeedbackPopover />
 					</div>
 					<ExportButton />
-					<ThemeToggle />
 				</nav>
 			</header>
 			<div className="bg-background flex justify-center px-3 pb-1 md:hidden">

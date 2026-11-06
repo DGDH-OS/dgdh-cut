@@ -28,7 +28,7 @@ export function WorkspaceSwitcher() {
 						className={cn(
 							"h-7 shrink-0 cursor-pointer rounded-sm px-2.5 text-xs font-medium focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring",
 							selected
-								? "bg-primary text-primary-foreground"
+								? "bg-brand text-foreground"
 								: "text-foreground hover:bg-accent",
 						)}
 					>

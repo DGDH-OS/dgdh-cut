@@ -74,7 +74,7 @@ const BlurPreview = memo(
 					className="absolute inset-0 h-full w-full object-cover"
 				/>
 				<div className="absolute right-1 bottom-1 left-1 text-center">
-					<span className="rounded bg-black/50 px-1 text-xs text-white">
+					<span className="rounded bg-background/50 px-1 text-xs text-foreground">
 						{blur.label}
 					</span>
 				</div>
@@ -165,7 +165,7 @@ function CustomColorPreview({
 						style={{ background: CUSTOM_COLOR_SWATCH_BACKGROUND }}
 					/>
 					<span
-						className="absolute right-1 bottom-1 size-5 rounded-sm border border-white/70 shadow-sm"
+						className="absolute right-1 bottom-1 size-5 rounded-sm border border-foreground/70"
 						style={{ backgroundColor: currentBackgroundColor }}
 					/>
 				</button>
