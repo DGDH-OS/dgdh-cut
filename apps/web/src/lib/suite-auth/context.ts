@@ -78,10 +78,10 @@ export async function orgContextFromRequest(request: NextRequest): Promise<OrgCo
 
 /** Voor server components (layouts/pagina's). Alleen lezen: de proxy ververst de sessiecookies. */
 export async function orgContextFromCookies(): Promise<OrgContext | null> {
+	const jar = await cookies(); // eerst: markeert de render als dynamisch (nooit statisch prerenderen zonder sessie)
 	const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
 	const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 	if (!url || !key) return null;
-	const jar = await cookies();
 	const client = createServerClient(url, key, { cookies: { getAll: () => jar.getAll(), setAll() {} } });
 	const { data, error } = await client.auth.getUser();
 	if (error || !data.user || data.user.is_anonymous) return null;
