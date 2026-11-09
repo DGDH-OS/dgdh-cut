@@ -1,21 +1,7 @@
-import { Hero } from "@/components/landing/hero";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
-import type { Metadata } from "next";
-import { SITE_URL } from "@/site/brand";
+import { redirect } from "next/navigation";
 
-export const metadata: Metadata = {
-	alternates: {
-		canonical: SITE_URL,
-	},
-};
-
-export default async function Home() {
-	return (
-		<div>
-			<Header />
-			<Hero />
-			<Footer />
-		</div>
-	);
+// Geen landing als poort (Suite-contract): de proxy stuurt anoniem naar de Suite-login en ingelogd met recht
+// direct door; dit is de vangnet-redirect.
+export default function Home() {
+	redirect("/projects");
 }

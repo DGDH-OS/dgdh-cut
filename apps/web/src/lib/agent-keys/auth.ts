@@ -6,7 +6,6 @@ import { budgetState, checkBudget, monthStartIso, AUTO_ACCEPT_MS } from "./billi
 import { getStore, type UsageEvent } from "./store";
 import { computePrice, priceHelpers, toolByName, ToolError, type ToolCtx } from "./tools";
 import { devAuthEnabled } from "@/lib/suite-auth/config";
-import { getSuiteSession } from "@/lib/suite-auth/session";
 
 export type AuthResult =
 	| { ok: true; key: AgentKeyRecord }
@@ -48,9 +47,12 @@ export async function authenticateAgentAccess(request: Request, scope: Scope): P
 		return { ok: true, org: a.key.org, via: "key" };
 	}
 	if (devAuthEnabled()) return { ok: true, org: "dev-user", via: "session" };
-	const s = await getSuiteSession(request as never, () => {}).catch(() => null);
-	if (!s?.userId) return deny(401, "missing or invalid API key or session");
-	return { ok: true, org: s.userId, via: "session" };
+	const { orgContextFromRequest, activeWorkspaceOrg } = await import("@/lib/suite-auth/context");
+	const ctx = await orgContextFromRequest(request as never).catch(() => null);
+	if (!ctx) return deny(401, "missing or invalid API key or session");
+	const org = await activeWorkspaceOrg(ctx).catch(() => null);
+	if (!org) return deny(403, "no access to CUT for this company");
+	return { ok: true, org: org.organization_id, via: "session" };
 }
 
 /** Run one tool for an authenticated key: scope, validation, price estimate, budget gate, execution, usage event. */

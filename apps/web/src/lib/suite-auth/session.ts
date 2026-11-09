@@ -1,7 +1,9 @@
 import { createServerClient } from "@supabase/ssr";
 import type { NextRequest, NextResponse } from "next/server";
 
-export type SuiteSession = { userId: string; email: string | null };
+import type { SupabaseClient } from "@supabase/supabase-js";
+
+export type SuiteSession = { userId: string; email: string | null; client: SupabaseClient };
 
 /**
  * Validates the shared Suite session (cookie on .dgdh-os.com) with Supabase.
@@ -37,5 +39,5 @@ export async function getSuiteSession(
 	if (error || !data.user || data.user.is_anonymous) return null;
 	const aal = await client.auth.mfa.getAuthenticatorAssuranceLevel();
 	if (aal.data?.currentLevel !== "aal2") return null;
-	return { userId: data.user.id, email: data.user.email ?? null };
+	return { userId: data.user.id, email: data.user.email ?? null, client };
 }

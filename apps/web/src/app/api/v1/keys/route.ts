@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { z } from "zod";
 import { devAuthEnabled } from "@/lib/suite-auth/config";
-import { getSuiteSession } from "@/lib/suite-auth/session";
+import { activeWorkspaceOrg, orgContextFromRequest } from "@/lib/suite-auth/context";
 import { ALL_SCOPES, generateKey } from "@/lib/agent-keys/keys";
 import { getStore } from "@/lib/agent-keys/store";
 
@@ -11,8 +11,9 @@ export const dynamic = "force-dynamic";
 // Key management is for signed-in Suite users (browser session), NOT for API keys.
 async function owner(request: NextRequest): Promise<string | null> {
 	if (devAuthEnabled()) return "dev-user";
-	const s = await getSuiteSession(request, () => {});
-	return s?.userId ?? null;
+	const ctx = await orgContextFromRequest(request).catch(() => null);
+	const org = await activeWorkspaceOrg(ctx).catch(() => null);
+	return org?.organization_id ?? null; // tenant = Suite-organisatie (niet meer de gebruiker)
 }
 const unauth = () => Response.json({ ok: false, error: "unauthorized" }, { status: 401 });
 const pub = ({ key_hash: _h, ...r }: Record<string, unknown>) => r;

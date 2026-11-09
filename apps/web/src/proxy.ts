@@ -6,6 +6,8 @@ import {
 	suiteLoginUrl,
 } from "@/lib/suite-auth/config";
 import { getSuiteSession } from "@/lib/suite-auth/session";
+import { activeWorkspaceOrg, contextFor } from "@/lib/suite-auth/context";
+import { SUITE_ORG_COOKIE } from "@/lib/suite-auth/org";
 
 const isAgentApiPath = (p: string) =>
 	p === "/api/mcp" || p.startsWith("/api/agent/") || (p.startsWith("/api/v1/") && !p.startsWith("/api/v1/keys"));
@@ -38,6 +40,29 @@ export async function proxy(request: NextRequest) {
 		);
 	}
 	response.headers.set("Cache-Control", "private, no-store");
+
+	// Autorisatie (contract par. 2): lidmaatschap + recht op app `cut`. De cookie suite-organization is alleen een voorkeur.
+	if (pathname === "/geen-toegang") return response;
+	let ctx: Awaited<ReturnType<typeof contextFor>>;
+	try {
+		ctx = await contextFor(session.client, session.userId, session.email, request.cookies.get(SUITE_ORG_COOKIE)?.value);
+		if (ctx.choice.kind === "ok") await activeWorkspaceOrg(ctx); // idempotente auto-onboarding van de tenant
+	} catch {
+		// Fail closed: nooit doorlaten zonder gecontroleerd recht.
+		if (pathname.startsWith("/api/")) return Response.json({ error: "controle tijdelijk niet beschikbaar" }, { status: 503, headers: { "retry-after": "15" } });
+		return new Response("Controle tijdelijk niet beschikbaar. Probeer het zo opnieuw.", { status: 503, headers: { "retry-after": "15", "content-type": "text/plain; charset=utf-8" } });
+	}
+	if (ctx.choice.kind !== "ok") {
+		if (pathname.startsWith("/api/")) return Response.json({ error: "geen toegang tot CUT voor dit bedrijf" }, { status: 403 });
+		return NextResponse.redirect(`${appUrl()}/geen-toegang`);
+	}
+	// Geen landing als poort: ingelogd met recht = direct het projectenoverzicht.
+	if (pathname === "/") {
+		const redirect = NextResponse.redirect(`${appUrl()}/projects`);
+		for (const c of response.cookies.getAll()) redirect.cookies.set(c);
+		redirect.headers.set("Cache-Control", "private, no-store");
+		return redirect;
+	}
 	return response;
 }
 
