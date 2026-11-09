@@ -20,3 +20,5 @@ Laatst bijgewerkt: 2026-11-09
 - Suite-tegel verwijst nog naar cut.dgdh-os.com (werkt via redirect); mooier is tegel-URL studio.dgdh-os.com.
 - Engine (cut.dgdh-os.com) blijft alleen voor org-type dgdh, zonder eigen auth.
 - Hetzner-schijf zat op 93-99% tijdens deploy.
+
+- 2026-11-09, Hermes-subagent, agent-surface-gaten (branch agent-gaps-20261109, niet gepusht/gedeployed): upload_media_from_url SSRF-veilig (safe-fetch.ts, 20 bun-tests), tenant_slug weg uit publish_to_social. Open: media-bin per org (A2). Zie 1. OPS/AGENT-SURFACE-GAPS-20261109.md.
