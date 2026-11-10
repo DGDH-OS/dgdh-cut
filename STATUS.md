@@ -34,3 +34,5 @@ Laatst bijgewerkt: 2026-11-09
 - 2026-11-10 lockup: DG/DH-tegel lockup (dgdh-lockup.css, GALERIE-norm) live, ingelogd gemeten 1440/390 licht/donker ok. Rapport 1. OPS/REBRAND-20261110/UITROL-LOCKUP-L3-RAPPORT.md
 
 - 2026-11-10 22:25 — Hermes — UITROL-MCP-DEPLOY: OAuth + PRM + openapi.json LIVE (image mcp-502e6a59, daarna overgenomen door navfix2-dfa2340f met dezelfde code). Proxy laat PRM publiek (anders 307). MCP-client 23/23: key+OAuth, write (project), 403, org-isolatie, revoke=401. Rollback container dgdh-cut-web-web-20261110T201512 (lockup-e0493c99). Rapport 1. OPS/REBRAND-20261110/UITROL-MCP-DEPLOY-RAPPORT.md
+
+- 2026-11-10 — NAVFIX2: gebruikersmenu (thema/uitloggen in één menu), bedrijfswisselaar pills/select, donkere lockup-tegel (Vanilla Silk #EEE2D4 + Cherry-letters), EEN actieve markering (alleen onderlijn). Live.
