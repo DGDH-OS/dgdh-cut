@@ -66,7 +66,7 @@
   --shadow-sm: light-dark(0 1px 2px rgb(22 25 29 / 0.08), 0 1px 2px rgb(0 0 0 / 0.4));
   --shadow-md: light-dark(0 8px 24px rgb(22 25 29 / 0.1), 0 12px 32px rgb(0 0 0 / 0.45));
   --glass-fill: light-dark(rgb(251 250 247 / 0.78), rgb(18 18 18 / 0.48));
-  --glass-stroke: light-dark(rgb(22 25 29 / 0.16), rgb(248 247 244 / 0.14));
+  --glass-stroke: light-dark(rgb(22 25 29 / 0.26), rgb(248 247 244 / 0.24));
   --canvas-glow-a: light-dark(rgb(0 102 94 / 0.1), rgb(0 102 94 / 0.38));
   --canvas-glow-b: light-dark(rgb(181 140 103 / 0.14), rgb(181 140 103 / 0.16));
   --canvas-glow-c: light-dark(rgb(0 102 94 / 0.06), rgb(0 102 94 / 0.22));

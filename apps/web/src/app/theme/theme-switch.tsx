@@ -56,7 +56,7 @@ export function ThemeSwitch({ className = "" }: { className?: string }) {
             e.preventDefault();
             const n = (i + step + OPTIONS.length) % OPTIONS.length;
             refs.current[n]?.focus();
-            choose(OPTIONS[n].value);
+            choose(OPTIONS[n]?.value ?? "system");
           }}
         >
           <Icon aria-hidden="true" />
