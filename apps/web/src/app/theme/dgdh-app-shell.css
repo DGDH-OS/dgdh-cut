@@ -24,8 +24,8 @@
   position:sticky;top:0;z-index:40;
   -webkit-backdrop-filter:none;backdrop-filter:none;
 }
-/* logo-lockup: bestaand dgdh-nav-brand (mark 32 / 28 op <=390 + productnaam 17px Cormorant) */
-.dgdh-shell-top .dgdh-nav-brand{flex:0 0 auto}
+/* logo-lockup: DG/DH-tegel + productnaam (dgdh-lockup.css) */
+.dgdh-shell-top .dgdh-lockup{flex:0 0 auto}
 
 /* 2. Primaire navigatie (tabs/links) */
 .dgdh-shell-nav.dgdh-shell-nav{display:flex;align-items:center;gap:4px;margin:0 0 0 12px;padding:0;min-width:0;flex:1 1 auto;overflow:hidden}

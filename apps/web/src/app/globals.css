@@ -2,7 +2,7 @@
 /* DGDH: licht + donker + Systeem uit de gedeelde bron; de brug zet de shadcn-tokens en de Tailwind `dark:`-variant. */
 @import "./theme/dgdh-theme.css";
 @import "./theme/dgdh-theme-shadcn.css";
-@import "./theme/dgdh-nav-brand.css";
+@import "./theme/dgdh-lockup.css";
 @import "./theme/dgdh-app-shell.css";
 
 /* Plugins */
@@ -307,7 +307,7 @@
 :is(.dgdh-shell-end, .cut-toolbar) .dgdh-theme-switch svg { width: 16px; height: 16px; }
 @media (max-width: 640px) {
   .cut-org.dgdh-shell-top.dgdh-shell-top { flex-wrap: wrap; height: auto; max-height: none; padding: 0 16px; row-gap: 0; }
-  .cut-org > .dgdh-nav-brand, .cut-org > .dgdh-shell-end { height: 55px; }
+  .cut-org > .dgdh-lockup, .cut-org > .dgdh-shell-end { height: 55px; }
   .cut-org .dgdh-shell-end select { max-width: 150px; }
   .cut-org > .cut-org__actief {
     order: 3; display: flex; align-items: center; gap: 4px; flex: 0 0 calc(100% + 32px); margin: 0 -16px; padding: 0 16px; height: 44px;

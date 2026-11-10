@@ -5,7 +5,6 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { Button } from "./ui/button";
 import { ArrowRight } from "lucide-react";
-import Image from "next/image";
 import {
 	Copy01Icon,
 	Download01Icon,
@@ -39,24 +38,13 @@ export function Header() {
 				<div className="relative z-10 flex items-center gap-6">
 					<ContextMenu>
 						<ContextMenuTrigger asChild>
-							<Link href="/" className="flex items-center gap-3 max-md:min-h-11">
-								<Image
-									src={DEFAULT_LOGO_URL_LIGHT}
-									alt=""
-									aria-hidden="true"
-									
-									width={32}
-									height={32}
-								className="dgdh-logo-light" />
-<Image
-									src={DEFAULT_LOGO_URL}
-									alt=""
-									aria-hidden="true"
-									
-									width={32}
-									height={32}
-								className="dgdh-logo-dark" />
-								<span className="text-base font-medium tracking-[0.02em]">
+							<Link href="/" className="dgdh-lockup flex items-center gap-2.5 max-md:min-h-11">
+								<svg className="dgdh-lockup__mark" viewBox="0 0 1000 1000" aria-hidden="true" focusable="false">
+<rect width="1000" height="1000" fill="#4A1D20" />
+<text x="509" y="434" textAnchor="middle" fontFamily="'Cormorant Garamond', Georgia, serif" fontWeight="500" fontSize="330" letterSpacing="18" fill="#FBF9F6">DG</text>
+<text x="509" y="774" textAnchor="middle" fontFamily="'Cormorant Garamond', Georgia, serif" fontWeight="500" fontSize="330" letterSpacing="18" fill="#FBF9F6">DH</text>
+</svg>
+								<span className="dgdh-lockup__name">
 									CUT
 								</span>
 							</Link>

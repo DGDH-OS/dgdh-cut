@@ -14,9 +14,13 @@ export async function BedrijfBalk() {
 			data-testid="bedrijf-balk"
 			className="cut-org dgdh-shell-top border-border bg-background text-muted-foreground flex min-h-10 items-center justify-between gap-4 border-b px-8 py-1 text-sm"
 		>
-			<span className="dgdh-nav-brand">
-				<img className="dgdh-nav-brand__mark" src="/brand/mark.png" alt="" width={32} height={32} />
-				<span className="dgdh-nav-brand__name">CUT</span>
+			<span className="dgdh-lockup">
+				<svg className="dgdh-lockup__mark" viewBox="0 0 1000 1000" aria-hidden="true" focusable="false">
+					<rect width="1000" height="1000" fill="#4A1D20" />
+					<text x="509" y="434" textAnchor="middle" fontFamily="'Cormorant Garamond', Georgia, serif" fontWeight="500" fontSize="330" letterSpacing="18" fill="#FBF9F6">DG</text>
+					<text x="509" y="774" textAnchor="middle" fontFamily="'Cormorant Garamond', Georgia, serif" fontWeight="500" fontSize="330" letterSpacing="18" fill="#FBF9F6">DH</text>
+				</svg>
+				<span className="dgdh-lockup__name">CUT</span>
 			</span>
 			<span className="cut-org__actief">
 				<span className="text-bronze-text uppercase tracking-wide text-xs">Bedrijf</span>{" "}

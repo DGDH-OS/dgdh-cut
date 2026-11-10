@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { DEFAULT_LOGO_URL_LIGHT, DEFAULT_LOGO_URL } from "@/site/brand";
 
 type Category = "resources" | "company";
@@ -36,21 +35,12 @@ export function Footer() {
 					{/* Brand Section */}
 					<div className="max-w-sm md:col-span-1">
 						<div className="mb-4 flex items-center justify-start gap-2.5">
-							<Image
-								src={DEFAULT_LOGO_URL_LIGHT}
-								alt=""
-								width={32}
-								height={32}
-								
-							className="dgdh-logo-light" />
-<Image
-								src={DEFAULT_LOGO_URL}
-								alt=""
-								width={32}
-								height={32}
-								
-							className="dgdh-logo-dark" />
-							<span className="text-base font-medium tracking-[0.02em]">CUT</span>
+							<svg className="dgdh-lockup__mark" viewBox="0 0 1000 1000" aria-hidden="true" focusable="false">
+<rect width="1000" height="1000" fill="#4A1D20" />
+<text x="509" y="434" textAnchor="middle" fontFamily="'Cormorant Garamond', Georgia, serif" fontWeight="500" fontSize="330" letterSpacing="18" fill="#FBF9F6">DG</text>
+<text x="509" y="774" textAnchor="middle" fontFamily="'Cormorant Garamond', Georgia, serif" fontWeight="500" fontSize="330" letterSpacing="18" fill="#FBF9F6">DH</text>
+</svg>
+							<span className="dgdh-lockup__name">CUT</span>
 						</div>
 						<p className="text-muted-foreground mb-5 text-sm md:text-left">
 							De videobewerker in je browser voor korte video.

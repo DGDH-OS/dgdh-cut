@@ -35,7 +35,7 @@ export function EditorHeader() {
 				<div className="flex min-w-0 items-center gap-1">
 					<ProjectDropdown />
 					<span className="ml-1 hidden select-none text-[0.8rem] font-semibold tracking-wide text-primary sm:inline">
-						DGDH CUT
+						CUT
 					</span>
 					<EditableProjectName />
 				</div>

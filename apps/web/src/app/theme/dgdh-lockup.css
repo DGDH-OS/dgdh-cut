@@ -1,0 +1,47 @@
+/* DGDH lockup — EÉN norm voor alle apps. Vervangt dgdh-nav-brand.
+   Bron: GALERIE-lockup (galerie.dgdh-os.com, 2. APPS/dgdh-lens commit 56a0d00) +
+   definitief/tokens-claire.css. Gemeten uit REFERENTIE-GALERIE-LOCKUP.png (2x, ICC→sRGB):
+   tegel 32×32, radius 6px (--radius-md), vulling Cherry Velvet #4A1D20 (vast, volgt NIET thema),
+   wit "DG" boven "DH" in Cormorant Garamond 500; rechts de productnaam in serif 16px/500,
+   kleur = --ink (licht #32191F, donker #EEE2D4), letter-spacing 0.02em, gap 10px.
+   Mobiel (<420px) mag kleiner: tegel 28px, naam 14px, gap 9px, radius 5px — zelfde verhoudingen.
+
+   Gebruik: zie dgdh-lockup.html. Mark = inline SVG (page-font Cormorant Garamond),
+   NIET als <img> (dan verliest de SVG de geladen webfont). Vervang de productnaam alleen.
+*/
+.dgdh-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  line-height: 1;
+  text-decoration: none;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+}
+.dgdh-lockup__mark {
+  display: block;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.dgdh-lockup__name {
+  font-family: var(--font-display, "Cormorant Garamond", Georgia, "Times New Roman", serif);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--ink, #32191F);
+}
+@media (max-width: 419px) {
+  .dgdh-lockup { gap: 9px; }
+  .dgdh-lockup__mark { width: 28px; height: 28px; border-radius: 5px; }
+  .dgdh-lockup__name { font-size: 14px; }
+}
