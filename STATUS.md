@@ -26,3 +26,5 @@ Laatst bijgewerkt: 2026-11-09
 
 - 2026-11-10 — Hermes — Maison Claire live: main 7027cfdd, image dgdh-cut-web:claire-7027cfdd container dgdh-cut-web-web-20261110T150637. /api/health 200, SSO 307, MCP 401. Docker-build slaagde (bestaande typefouten blokkeerden niet). Rollback: start dgdh-cut-web-web-1 (image 20261110a-5a2f0b69) en stop de nieuwe.
 - 2026-11-10 — Grok — logo variant 01 live: main 535e26e2 image dgdh-cut-web:logo-535e26e2 container dgdh-cut-web-web-20261110T161221. Favicon/icon.svg/OG/icon-192 200 hash=bron ≠ oud. SSO 307, MCP 401, others/fal.svg ongewijzigd. Rollback: start dgdh-cut-web-web-20261110T150637 (claire-7027cfdd) en stop de nieuwe.
+
+- 2026-11-10 18:40 — Hermes — Header+footer-lockup (mark 32px + alleen "CUT") LIVE: code 05ba0d30+66e982ca (branch brand-claire-20261110, lokaal), image dgdh-cut-web:header2-66e982ca container dgdh-cut-web-web-20261110T173737. Rollback: container ...T172429 (header-05ba0d30), ...T161221 (logo-535e26e2, oude lockup). Verified: /api/health 200, / 307, MCP 401, bundel bevat geen "DGDH CUT"-lockup meer. Header zelf achter Suite-login: niet ingelogd gemeten.
