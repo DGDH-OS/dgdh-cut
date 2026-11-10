@@ -22,10 +22,12 @@ export async function BedrijfBalk() {
 				</svg>
 				<span className="dgdh-lockup__name">CUT</span>
 			</span>
-			<span className="cut-org__actief">
-				<span className="text-bronze-text uppercase tracking-wide text-xs">Bedrijf</span>{" "}
-				<span className="text-foreground" data-testid="bedrijf-actief">{active.name}</span>
-			</span>
+			{options.length <= 1 && (
+				<span className="cut-org__actief">
+					<span className="text-bronze-text uppercase tracking-wide text-xs">Bedrijf</span>{" "}
+					<span className="text-foreground" data-testid="bedrijf-actief">{active.name}</span>
+				</span>
+			)}
 			{options.length > 1 && (
 				<div className="dgdh-shell-end">
 					<BedrijfWisselen

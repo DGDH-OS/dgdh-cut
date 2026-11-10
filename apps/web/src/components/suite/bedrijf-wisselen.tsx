@@ -5,8 +5,9 @@ import { usePathname } from "next/navigation";
 export type BedrijfOptie = { id: string; name: string };
 
 /**
- * Bedrijfswisselaar (contract par. 2): gewone form-POST naar de Suite, de enige schrijver van de
- * cookie suite-organization. Werkt zonder JavaScript; `next` is de huidige pagina op deze host.
+ * Bedrijfswisselaar (NAVFIX2): EEN mechanisme. Pills als <=5 bedrijven, anders een <select>.
+ * Gewone form-POST naar de Suite (enige schrijver van de cookie suite-organization). Geen
+ * apart 'Wissel'-knop en geen dubbel 'Bedrijf'-label.
  */
 export function BedrijfWisselen({ opties, actief, postUrl, origin }: {
 	opties: BedrijfOptie[];
@@ -16,24 +17,39 @@ export function BedrijfWisselen({ opties, actief, postUrl, origin }: {
 }) {
 	const pathname = usePathname();
 	const next = `${origin.replace(/\/$/, "")}${pathname}`;
+	if (opties.length <= 5) {
+		return (
+			<form method="post" action={postUrl} className="flex flex-wrap items-center gap-2">
+				<input type="hidden" name="next" value={next} />
+				{opties.map((o) => (
+					<button
+						key={o.id}
+						type="submit"
+						name="organization"
+						value={o.id}
+						aria-pressed={o.id === actief}
+						className={o.id === actief ? "org-pill org-pill--active" : "org-pill"}
+					>
+						{o.name}
+					</button>
+				))}
+			</form>
+		);
+	}
 	return (
 		<form method="post" action={postUrl} className="flex items-center gap-2">
-			<label htmlFor="bedrijf-kiezen" className="text-muted-foreground">Bedrijf</label>
 			<select
-				id="bedrijf-kiezen"
 				name="organization"
 				defaultValue={actief}
+				aria-label="Bedrijf wisselen"
 				onChange={(e) => e.currentTarget.form?.requestSubmit()}
-				className="bg-background text-foreground border-border h-8 rounded-md border px-2 text-sm"
+				className="org-select"
 			>
 				{opties.map((o) => (
 					<option key={o.id} value={o.id}>{o.name}</option>
 				))}
 			</select>
 			<input type="hidden" name="next" value={next} />
-			<noscript>
-				<button type="submit" className="border-border h-8 rounded-md border px-3 text-sm">Wisselen</button>
-			</noscript>
 		</form>
 	);
 }

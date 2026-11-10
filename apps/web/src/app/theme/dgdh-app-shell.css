@@ -40,7 +40,6 @@
 .dgdh-shell-link.dgdh-shell-link[aria-current],
 .dgdh-shell-link.dgdh-shell-link.is-active{
   color:var(--accent-text,#4A1D20);font-weight:600;
-  background:color-mix(in srgb,var(--accent-solid,#4A1D20) 10%,transparent);
   box-shadow:inset 0 -2px 0 var(--accent-solid,#4A1D20);
 }
 
@@ -50,6 +49,55 @@
   box-sizing:border-box;height:var(--shell-ctl-h);min-height:var(--shell-ctl-h);
   font:500 13px/1 var(--font-body,"Instrument Sans",sans-serif);
 }
+
+/* 3b. Gebruikersmenu (NAVFIX2 10-11). EEN menu rechts: thema-kiezer, e-mailadres en uitloggen
+   horen hierin, NIET los in de balk. Trigger = avatar/initialen-knop 32px. Lang e-mailadres
+   nooit in de balk; in het panel wordt het afgekapt. Structuur: zie NAVFIX-PATROON.md §Gebruikersmenu. */
+.dgdh-user-menu.dgdh-user-menu{position:relative;display:inline-flex;align-items:center;flex:0 0 auto}
+.dgdh-user-menu__trigger.dgdh-user-menu__trigger{
+  box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;
+  height:var(--shell-ctl-h);min-height:var(--shell-ctl-h);width:var(--shell-ctl-h);min-width:var(--shell-ctl-h);
+  padding:0;border-radius:999px;border:1px solid var(--shell-line);
+  background:var(--surface-2,#F4EEE7);color:var(--ink,#32191F);
+  font:600 13px/1 var(--font-body,"Instrument Sans",sans-serif);cursor:pointer;
+}
+.dgdh-user-menu__trigger:hover{background:color-mix(in srgb,var(--surface-2,#F4EEE7) 70%,var(--ink,#32191F))}
+.dgdh-user-menu__trigger:focus-visible{outline:2px solid var(--focus-ring,#4A1D20);outline-offset:2px}
+.dgdh-user-menu__panel.dgdh-user-menu__panel{
+  position:absolute;top:calc(var(--shell-ctl-h) + 8px);right:0;z-index:50;
+  min-width:240px;max-width:min(320px,calc(100vw - 24px));
+  background:var(--surface,#fff);color:var(--ink,#32191F);
+  border:1px solid var(--shell-line);border-radius:var(--radius-md,6px);
+  box-shadow:0 8px 24px rgba(50,25,31,.12);padding:6px;
+}
+.dgdh-user-menu__identity.dgdh-user-menu__identity{
+  display:block;padding:8px 10px;border-bottom:1px solid var(--shell-line);margin-bottom:4px;
+  min-width:0;
+}
+.dgdh-user-menu__name.dgdh-user-menu__name{
+  display:block;font:600 14px/1.2 var(--font-body,"Instrument Sans",sans-serif);
+  color:var(--ink,#32191F);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.dgdh-user-menu__email.dgdh-user-menu__email{
+  display:block;font:400 12px/1.4 var(--font-body,"Instrument Sans",sans-serif);
+  color:var(--ink-muted,#5E4A44);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.dgdh-user-menu__item.dgdh-user-menu__item{
+  box-sizing:border-box;display:flex;align-items:center;gap:8px;width:100%;
+  height:var(--shell-ctl-h);padding:0 10px;border:0;border-radius:4px;margin:1px 0;
+  background:transparent;color:var(--ink,#32191F);
+  font:500 13px/1 var(--font-body,"Instrument Sans",sans-serif);text-align:left;cursor:pointer;text-decoration:none;
+}
+.dgdh-user-menu__item:hover{background:var(--surface-2,#F4EEE7)}
+.dgdh-user-menu__item--danger{color:var(--danger,#A8261C)}
+.dgdh-user-menu__item--danger:hover{background:var(--danger-bg,#F8E3DF)}
+.dgdh-user-menu__section-title.dgdh-user-menu__section-title{
+  display:block;padding:6px 10px 2px;font:600 11px/1 var(--font-body,"Instrument Sans",sans-serif);
+  letter-spacing:.04em;text-transform:uppercase;color:var(--ink-muted,#5E4A44);
+}
+/* Thema-kiezer in het gebruikersmenu (Systeem/Licht/Donker): 32px knoppen, volle breedte. */
+.dgdh-user-menu .dgdh-theme-switch{display:flex;width:100%;border-radius:10px;padding:2px;margin:2px 0}
+.dgdh-user-menu .dgdh-theme-switch button{min-width:0;min-height:32px;flex:1 1 0;border-radius:8px}
 
 /* 4. Sidebar (apps die er al een hebben): zelfde tokens, zelfde actieve staat */
 .dgdh-shell-side.dgdh-shell-side{
@@ -71,4 +119,24 @@
   .dgdh-shell-top.has-strip>:not(.dgdh-shell-nav){margin-top:0}
   .dgdh-shell-top.has-strip .dgdh-shell-row{display:flex;align-items:center;gap:var(--shell-gap);height:calc(var(--shell-h) - 1px);padding:0 var(--shell-pad-x);flex:0 0 100%}
   .dgdh-shell-end :is(select){max-width:140px}
+}
+/* NAVFIX2: bedrijfswisselaar — pills (<=5) of select (>5), 32px, geen 'Wissel'-knop of dubbel label. */
+.org-pill {
+  box-sizing: border-box; display: inline-flex; align-items: center;
+  height: 32px; min-height: 32px; padding: 0 12px;
+  border: 1px solid var(--shell-line, var(--line)); border-radius: 999px;
+  background: transparent; color: var(--ink-muted, #5E4A44);
+  font: 500 13px/1 var(--font-body, "Instrument Sans", sans-serif);
+  cursor: pointer; white-space: nowrap;
+}
+.org-pill:hover { background: var(--surface-2, #F4EEE7); color: var(--ink, #32191F); }
+.org-pill--active, .org-pill[aria-pressed="true"] {
+  background: var(--accent-solid, #4A1D20); color: var(--accent-on, #FBF9F6);
+  border-color: var(--accent-solid, #4A1D20);
+}
+.org-select {
+  box-sizing: border-box; height: 32px; min-height: 32px; padding: 0 8px;
+  border: 1px solid var(--shell-line, var(--line)); border-radius: var(--radius-md, 6px);
+  background: var(--surface, #fff); color: var(--ink, #32191F);
+  font: 500 13px/1 var(--font-body, "Instrument Sans", sans-serif); max-width: 220px;
 }

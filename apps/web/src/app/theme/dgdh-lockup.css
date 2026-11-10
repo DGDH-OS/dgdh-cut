@@ -45,3 +45,16 @@
   .dgdh-lockup__mark { width: 28px; height: 28px; border-radius: 5px; }
   .dgdh-lockup__name { font-size: 14px; }
 }
+
+/* Tegelkleuren: licht Cherry Velvet-tegel + wit monogram; donker Vanilla Silk-tegel + Cherry-monogram
+   (Cherry op een donkere balk is anders onleesbaar). De SVG gebruikt hier de CSS-vars zodat hij het thema volgt. */
+:root {
+  --lockup-tile: #4A1D20;
+  --lockup-glyph: #FBF9F6;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --lockup-tile: #EEE2D4; --lockup-glyph: #4A1D20; }
+}
+:root[data-theme="dark"] { --lockup-tile: #EEE2D4; --lockup-glyph: #4A1D20; }
+.dgdh-lockup__mark rect { fill: var(--lockup-tile, #4A1D20); }
+.dgdh-lockup__mark text { fill: var(--lockup-glyph, #FBF9F6); }
