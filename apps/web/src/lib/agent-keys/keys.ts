@@ -18,6 +18,8 @@ export type AgentKeyRecord = {
 	created_at: string;
 	revoked_at: string | null;
 	last_used_at: string | null;
+	/** true = OAuth-identiteit (Suite-token), geen rij in agent_api_keys. */
+	oauth?: boolean;
 };
 
 export const hashKey = (key: string) => createHash("sha256").update(key).digest("hex");

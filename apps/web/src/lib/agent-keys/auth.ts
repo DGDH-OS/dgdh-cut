@@ -1,4 +1,4 @@
-import { hashKey, KEY_PREFIX, safeEqualHex, type AgentKeyRecord, type Scope } from "./keys";
+import { hashKey, KEY_PREFIX, safeEqualHex, ALL_SCOPES, type AgentKeyRecord, type Scope } from "./keys";
 import { rateLimit } from "./ratelimit";
 import { randomUUID } from "node:crypto";
 import { z } from "zod";
@@ -6,16 +6,46 @@ import { budgetState, checkBudget, monthStartIso, AUTO_ACCEPT_MS } from "./billi
 import { getStore, type UsageEvent } from "./store";
 import { computePrice, priceHelpers, toolByName, ToolError, type ToolCtx } from "./tools";
 import { devAuthEnabled } from "@/lib/suite-auth/config";
+import { verifyBearer, prmUrl } from "@/lib/oauth/verify";
+
+/** Canonieke MCP-URL van deze app (= OAuth audience / resource). */
+export const OAUTH_RESOURCE = "https://studio.dgdh-os.com/api/mcp";
+/** App-slug in de Suite-catalogus. */
+export const OAUTH_APP = "cut";
 
 export type AuthResult =
 	| { ok: true; key: AgentKeyRecord }
 	| { ok: false; response: Response };
 
 const deny = (status: number, error: string, extra: Record<string, string> = {}) =>
-	({ ok: false as const, response: Response.json({ ok: false, error }, { status, headers: { "www-authenticate": 'Bearer realm="dgdh-cut"', ...extra } }) });
+	({ ok: false as const, response: Response.json({ ok: false, error }, { status, headers: { "www-authenticate": `Bearer realm="dgdh-cut", resource_metadata="${prmUrl(OAUTH_RESOURCE)}"`, "cache-control": "no-store", ...extra } }) });
 
 /** Bearer API-key check: hash lookup, revoked, rate limit. Fail closed. */
 export async function authenticate(request: Request): Promise<AuthResult> {
+	// 1. OAuth-token (JWT) van de Suite. Alleen JWT's worden hier afgehandeld; API-keys vallen terug.
+	const oauth = await verifyBearer(request, { resource: OAUTH_RESOURCE, app: OAUTH_APP });
+	if (oauth.kind === "oauth") {
+		if (oauth.ok) {
+			const id = oauth.identity;
+			const key: AgentKeyRecord = {
+				id: `oauth:${id.grantId}`,
+				org: id.org,
+				name: `oauth:${id.clientId}`,
+				key_prefix: "oauth",
+				key_hash: "",
+				scopes: id.scopes.filter((s): s is Scope => (ALL_SCOPES as readonly string[]).includes(s)),
+				rate_limit_per_min: 60,
+				created_at: new Date(0).toISOString(),
+				revoked_at: null,
+				last_used_at: null,
+				oauth: true,
+			};
+			return { ok: true, key };
+		}
+		return { ok: false, response: oauth.response };
+	}
+
+	// 2. Bearer-API-key.
 	const h = request.headers.get("authorization") ?? "";
 	const m = /^Bearer\s+(\S+)$/i.exec(h);
 	if (!m || !m[1].startsWith(KEY_PREFIX)) return deny(401, "missing or invalid API key");
