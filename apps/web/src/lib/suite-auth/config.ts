@@ -18,6 +18,7 @@ export const appUrl = () => (process.env.CUT_APP_URL ?? "").replace(/\/$/, "");
 
 const PUBLIC_EXACT = new Set([
 	"/favicon.ico",
+	"/icon.svg",
 	"/robots.txt",
 	"/manifest.json",
 	"/browserconfig.xml",

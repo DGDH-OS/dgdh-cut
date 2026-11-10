@@ -5,8 +5,8 @@ export const SITE_INFO = {
 	description:
 		"DGDH CUT: de videobewerker in je browser voor korte video. Knip, kleur en exporteer reels snel.",
 	url: SITE_URL,
-	openGraphImage: "/open-graph/default.jpg",
-	twitterImage: "/open-graph/default.jpg",
+	openGraphImage: "/open-graph/default.png",
+	twitterImage: "/open-graph/default.png",
 	favicon: "/favicon.ico",
 };
 
