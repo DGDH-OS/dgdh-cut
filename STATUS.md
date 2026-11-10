@@ -32,3 +32,5 @@ Laatst bijgewerkt: 2026-11-09
 - 2026-11-10 20:45, Hermes: NAVFIX app-shell live: commit 77707446, image dgdh-cut-web:navfix-77707446, container dgdh-cut-web-web-20261110T194224. Bedrijfsbalk = topbar 56px met lockup (mark + CUT), projecten-toolbar 56px, controls 32px. Shell-gate ingelogd 4/4 groen. Rollback: start dgdh-cut-web-web-20261110T173737 (header2-66e982ca), stop de nieuwe. Rapport 1. OPS/REBRAND-20261110/NAVFIX-g1-RAPPORT.md
 
 - 2026-11-10 lockup: DG/DH-tegel lockup (dgdh-lockup.css, GALERIE-norm) live, ingelogd gemeten 1440/390 licht/donker ok. Rapport 1. OPS/REBRAND-20261110/UITROL-LOCKUP-L3-RAPPORT.md
+
+- 2026-11-10 22:25 — Hermes — UITROL-MCP-DEPLOY: OAuth + PRM + openapi.json LIVE (image mcp-502e6a59, daarna overgenomen door navfix2-dfa2340f met dezelfde code). Proxy laat PRM publiek (anders 307). MCP-client 23/23: key+OAuth, write (project), 403, org-isolatie, revoke=401. Rollback container dgdh-cut-web-web-20261110T201512 (lockup-e0493c99). Rapport 1. OPS/REBRAND-20261110/UITROL-MCP-DEPLOY-RAPPORT.md
