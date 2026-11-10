@@ -6,3 +6,4 @@
 - Nooit een route zonder sessie of key openzetten: machine-paden zijn `/api/mcp`, `/api/v1/*` (behalve keys), `/api/agent/*` (key of sessie), `/api/health`.
 - Deploy: image lokaal bouwen (`docker buildx build --platform linux/amd64 --output type=docker,dest=...`), `cat tar | ssh dgdh-os docker load && compose up -d --no-build` in EEN ssh-commando (disk-guard prunet ongebruikte images). Rollback-punt eerst noteren.
 - Teksten Nederlands, Atelier, geen em-dash, geen emoji.
+- Agent-surface (10-11-2026 live): `upload_media_from_url` is SSRF-veilig (`safe-fetch.ts`), `publish_to_social` heeft geen `tenant_slug` meer. Live image tag `20261110a-5a2f0b69`, bouw lokaal.

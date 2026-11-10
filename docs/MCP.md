@@ -59,3 +59,7 @@ Foutcodes: 400 args ongeldig · 401 key · 402 maandbudget op · 403 scope · 42
 
 ## Tests
 `bun scripts/agent/test-agent-api.ts` (MCP-SDK-client + REST; 58 checks: tools/list, calls, dry_run/estimate, budget 402/429, 401, usage-events, accept/void, project-store, edit_timeline). Draai met `CUT_URL`, `CUT_KEYS_DIR` (= `CUT_AGENT_KEYS_DIR` van de server) en de engine op `:8765`.
+
+## Veiligheid (beleid 09-11-2026, A1 en A3)
+- `upload_media_from_url` haalt alleen publieke `https`-URL's op: geen credentials in de URL, geen localhost/`.internal`/IP-literals, hosts die naar private, loopback, link-local of CGNAT-adressen resolven worden geweigerd, ook na elke redirect (max 3, handmatig gevolgd), en de grootte (95 MB) wordt tijdens het lezen begrensd. Code: `apps/web/src/lib/agent-keys/safe-fetch.ts`, tests `__tests__/safe-fetch.test.ts`. Rest-risico: DNS-rebinding tussen controle en verbinding (dicht te zetten met een egress-proxy).
+- `publish_to_social` heeft geen `tenant_slug`-argument meer: de Social-tenant komt uit de engine-configuratie, nooit uit modelinvoer. Het blijft een concept (draft_only), nooit publiceren.

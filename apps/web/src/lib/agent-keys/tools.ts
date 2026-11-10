@@ -3,6 +3,7 @@ import { z } from "zod";
 import type { AgentKeyRecord, Scope } from "./keys";
 import { buildPrice, type Price, type PriceInput } from "./pricing";
 import { AUTO_ACCEPT_MS, effective } from "./billing";
+import { safeFetchBytes, UrlBlockedError } from "./safe-fetch";
 import { getStore } from "./store";
 import { applyOps, OpSchema, summarize } from "../../services/agent-import/ops";
 import { getProject, listProjects, updateProject } from "../../services/agent-import/server-store";
@@ -110,14 +111,19 @@ export const TOOLS: ToolDef[] = [
 		description: "Fetch a video/image from an https URL into the media bin (max 95 MB; mp4 mov m4v webm jpg png webp heic).",
 		shape: { url: z.url().describe("https URL to download"), name: z.string().regex(/^[\w.-]+$/).optional().describe("target file name incl. extension") },
 		run: async ({ url, name }) => {
-			if (!/^https:\/\//i.test(url)) throw new ToolError("only https URLs");
-			const res = await fetch(url, { redirect: "follow" }).catch(() => null);
-			if (!res?.ok) throw new ToolError(`download failed (${res?.status ?? "network"})`);
-			const buf = await res.arrayBuffer();
-			if (buf.byteLength > MAX_UPLOAD) throw new ToolError("file exceeds 95 MB");
-			const fname = name ?? (new URL(url).pathname.split("/").pop() || "upload.mp4");
+			// SSRF-veilig (beleid 4.8): alleen https, geen private/interne adressen (ook niet na redirects), grootte tijdens het lezen begrensd.
+			let fetched: Awaited<ReturnType<typeof safeFetchBytes>>;
+			try {
+				fetched = await safeFetchBytes(url, { maxBytes: MAX_UPLOAD });
+			} catch (e) {
+				if (e instanceof UrlBlockedError) throw new ToolError(`URL not allowed: ${e.message}. Use a public https URL.`);
+				if (e instanceof RangeError) throw new ToolError("file exceeds 95 MB");
+				throw new ToolError(e instanceof Error ? e.message : "download failed");
+			}
+			const buf = fetched.bytes;
+			const fname = name ?? (new URL(fetched.url).pathname.split("/").pop() || "upload.mp4");
 			const form = new FormData();
-			form.append("file", new Blob([buf]), fname);
+			form.append("file", new Blob([buf as BlobPart]), fname);
 			return engine("/api/media-upload", undefined, form);
 		},
 	}),
@@ -288,9 +294,10 @@ export const TOOLS: ToolDef[] = [
 	t({
 		name: "publish_to_social", scope: "publish",
 		description: "Send a media-bin export to DGDH SOCIAL as a DRAFT (concept). Never publishes or schedules; a human approves in the SOCIAL app. Needs the engine's SOCIAL_API_* and CUT_PUBLIC_URL configured, else a clear error is returned.",
-		shape: { file, platform: z.string().min(1).max(40), text: z.string().max(2200).optional(), tenant_slug: z.string().regex(/^[\w-]+$/).optional() },
-		run: async ({ file, platform, text, tenant_slug }) => {
-			const r = await engine("/api/auto-reel/publish", { file, platform, text, ...(tenant_slug ? { tenantSlug: tenant_slug } : {}) });
+		shape: { file, platform: z.string().min(1).max(40), text: z.string().max(2200).optional() },
+		// Geen tenant-argument: de Social-tenant wordt door de engine-configuratie bepaald, nooit door modelinvoer (beleid 4.1).
+		run: async ({ file, platform, text }) => {
+			const r = await engine("/api/auto-reel/publish", { file, platform, text });
 			return { ...r, draft_only: true };
 		},
 	}),
