@@ -35,22 +35,22 @@ export function Footer() {
 				<div className="mb-8 grid grid-cols-1 gap-12 md:grid-cols-2">
 					{/* Brand Section */}
 					<div className="max-w-sm md:col-span-1">
-						<div className="mb-4 flex items-center justify-start gap-2">
+						<div className="mb-4 flex items-center justify-start gap-2.5">
 							<Image
 								src={DEFAULT_LOGO_URL_LIGHT}
 								alt=""
-								width={24}
-								height={24}
+								width={32}
+								height={32}
 								
 							className="dgdh-logo-light" />
 <Image
 								src={DEFAULT_LOGO_URL}
 								alt=""
-								width={24}
-								height={24}
+								width={32}
+								height={32}
 								
 							className="dgdh-logo-dark" />
-							<span className="text-lg font-medium uppercase tracking-wide">DGDH CUT</span>
+							<span className="text-base font-medium tracking-[0.02em]">CUT</span>
 						</div>
 						<p className="text-muted-foreground mb-5 text-sm md:text-left">
 							De videobewerker in je browser voor korte video.
