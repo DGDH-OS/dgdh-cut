@@ -56,8 +56,8 @@ export function Header() {
 									width={32}
 									height={32}
 								className="dgdh-logo-dark" />
-								<span className="text-base font-medium tracking-wide uppercase">
-									DGDH CUT
+								<span className="text-base font-medium tracking-[0.02em]">
+									CUT
 								</span>
 							</Link>
 						</ContextMenuTrigger>
