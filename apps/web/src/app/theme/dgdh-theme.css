@@ -1,6 +1,6 @@
 /* AUTO-GENERATED door 1. OPS/tools/theme/sync.sh uit dgdh-theme.css. NIET HANDMATIG WIJZIGEN. */
 /*
- * DGDH Atelier theme tokens (licht + donker). EEN BRON voor alle DGDH-apps.
+ * DGDH Maison Claire theme tokens (gegenereerd door emit_claire.py uit tokens-claire.json, NIET handmatig wijzigen) (licht + donker). EEN BRON voor alle DGDH-apps.
  * Bron: 1. OPS/tools/theme/dgdh-theme.css. Niet per app aanpassen; draai `1. OPS/tools/theme/sync.sh`.
  * Contrast gemeten door `python3 contrast.py` (leest dit bestand, faalt onder 4,5:1 tekst / 3:1 UI).
  *
@@ -8,92 +8,103 @@
  * op <html> forceert een keuze (gezet door het blokkerende head-script uit dgdh-theme.js voor de eerste paint).
  * Elke token is een enkele light-dark(licht, donker); geen dubbele donker-blokken.
  *
- * Regels: geen puur #000/#fff; accent racing green #00665E alleen voor primaire actie/link/focus;
+ * Regels: geen puur #000/#fff; accent cherry velvet #4A1D20 (donker: alpine oat #D7C6B6) alleen voor primaire actie/link/focus;
  * bronze (--bronze-line) alleen lijnen/iconen/vlakken, nooit tekst (tekst = --bronze-text).
  */
+@font-face { font-family: "Cormorant Garamond"; src: url("./fonts/cormorant-garamond.woff2") format("woff2"); font-weight: 300 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Cormorant Garamond"; src: url("./fonts/cormorant-garamond-italic.woff2") format("woff2"); font-weight: 300 700; font-style: italic; font-display: swap; }
+@font-face { font-family: "Instrument Sans"; src: url("./fonts/instrument-sans.woff2") format("woff2"); font-weight: 400 700; font-style: normal; font-display: swap; }
 :root {
   color-scheme: light dark;
 
   /* Vlakken */
-  --canvas: light-dark(#f5f3ee, #121212);
-  --surface: light-dark(#fbfaf7, #161a21);
-  --surface-2: light-dark(#ece9e2, #1e232c);
+  --canvas: light-dark(#FBF9F6, #211114);
+  --surface: light-dark(#FFFFFF, #2B171B);
+  --surface-2: light-dark(#F4EEE7, #341D21);
 
   /* Tekst */
-  --ink: light-dark(#16191d, #f1efea);
-  --ink-muted: light-dark(#4f555e, #a7a9ae);
-  --ink-on: light-dark(#f5f3ee, #161a11); /* tekst op een ink-gevuld vlak (primaire knop) */
-  --placeholder: light-dark(#5f656e, #9a9da3);
+  --ink: light-dark(#32191F, #EEE2D4);
+  --ink-muted: light-dark(#5E4A44, #C9B8A9);
+  --ink-on: light-dark(#FBF9F6, #32191F); /* tekst op een ink-gevuld vlak (primaire knop) */
+  --placeholder: light-dark(#6B5750, #B9A89B);
 
   /* Lijnen. line = scheiding (decoratief), line-strong = velden/knoppen/iconen (niet-tekst, >= 3:1) */
-  --line: light-dark(#d6d1c6, #2a303b);
-  --line-strong: light-dark(#757a83, #7a808c);
+  --line: light-dark(#E6DCD1, #4A2E31);
+  --line-strong: light-dark(#85726A, #A08F86);
 
-  /* Accent racing green. accent-solid = vulling met accent-on erop; accent-text = links/iconen/tekst op vlakken */
-  --accent-solid: #00665e;
-  --accent-on: #f8f7f4;
-  --accent-hover: light-dark(#00524c, #00796f);
-  --accent-text: light-dark(#00665e, #4dbfb1);
-  --focus-ring: light-dark(#00665e, #6fd0c3);
+  /* Accent cherry velvet. accent-solid = vulling met accent-on erop; accent-text = links/iconen/tekst op vlakken */
+  --accent-solid: light-dark(#4A1D20, #D7C6B6);
+  --accent-on: light-dark(#FBF9F6, #32191F);
+  --accent-hover: light-dark(#32191F, #E6D8CA);
+  --accent-text: light-dark(#4A1D20, #E3D3C3);
+  --focus-ring: light-dark(#4A1D20, #E3D3C3);
 
   /* Status: tekst/icoon op canvas/surface/surface-2; -bg = tintvlak (tekst in dezelfde kleur >= 4,5);
      -solid = gevulde knop/badge met -on erop. */
-  --danger: light-dark(#b3261e, #f2827a);
-  --danger-bg: light-dark(#fbe9e7, #3a1d1b);
-  --danger-solid: light-dark(#b3261e, #b83a32);
-  --danger-on: #fbfaf7;
-  --warn: light-dark(#7f5200, #e0a23a);
-  --warn-bg: light-dark(#fdf1d8, #33270f);
-  --warn-solid: light-dark(#7f5200, #e0a23a);
-  --warn-on: light-dark(#fbfaf7, #161a11);
-  --success: light-dark(#1c6b47, #4dba8c);
-  --success-bg: light-dark(#e3f3ea, #142b22);
-  --success-solid: light-dark(#1c6b47, #4dba8c);
-  --success-on: light-dark(#fbfaf7, #0f1a14);
-  --info: light-dark(#005a6e, #6fc3d6);
-  --info-bg: light-dark(#e4eef0, #14282b);
+  --danger: light-dark(#A8261C, #F0958A);
+  --danger-bg: light-dark(#F8E3DF, #40171A);
+  --danger-solid: light-dark(#A8261C, #B83A32);
+  --danger-on: light-dark(#FBF9F6, #FBF9F6);
+  --warn: light-dark(#7A4E00, #E3B45F);
+  --warn-bg: light-dark(#F6E8CC, #3A2810);
+  --warn-solid: light-dark(#7A4E00, #E3B45F);
+  --warn-on: light-dark(#FBF9F6, #32191F);
+  --success: light-dark(#1F6240, #8FCBA2);
+  --success-bg: light-dark(#DFEEE4, #163220);
+  --success-solid: light-dark(#1F6240, #8FCBA2);
+  --success-on: light-dark(#FBF9F6, #32191F);
+  --info: light-dark(#1E5A70, #8EC3D6);
+  --info-bg: light-dark(#DCEBF0, #13303A);
 
   /* Disabled: leesbaar (>= 4,5), onderscheid via vlak + cursor, niet via opacity */
-  --disabled-ink: light-dark(#5e636b, #8b8e95);
-  --disabled-bg: light-dark(#e4e1da, #1e232c);
+  --disabled-ink: light-dark(#6E5E58, #A8958A);
+  --disabled-bg: light-dark(#EFE9E2, #33201F);
 
   /* Bronze: lijnen, iconen, vlakken. Tekst alleen via --bronze-text. */
-  --bronze-line: light-dark(#8a6845, #b58c67);
-  --bronze-text: light-dark(#6b4e34, #c8aa8e);
+  --bronze-line: light-dark(#7F6358, #B3978A);
+  --bronze-text: light-dark(#5F4034, #D3B8A6);
 
   /* Diepte */
-  --overlay: light-dark(rgb(22 25 29 / 0.5), rgb(0 0 0 / 0.66));
-  --shadow-sm: light-dark(0 1px 2px rgb(22 25 29 / 0.08), 0 1px 2px rgb(0 0 0 / 0.4));
-  --shadow-md: light-dark(0 8px 24px rgb(22 25 29 / 0.1), 0 12px 32px rgb(0 0 0 / 0.45));
-  --glass-fill: light-dark(rgb(251 250 247 / 0.78), rgb(18 18 18 / 0.48));
-  --glass-stroke: light-dark(rgb(22 25 29 / 0.26), rgb(248 247 244 / 0.24));
-  --canvas-glow-a: light-dark(rgb(0 102 94 / 0.1), rgb(0 102 94 / 0.38));
-  --canvas-glow-b: light-dark(rgb(181 140 103 / 0.14), rgb(181 140 103 / 0.16));
-  --canvas-glow-c: light-dark(rgb(0 102 94 / 0.06), rgb(0 102 94 / 0.22));
-  --canvas-top: light-dark(#f8f6f1, #0c1014);
-  --canvas-bottom: light-dark(#ece9e2, #0a0c0e);
-  --skeleton-a: light-dark(#e4e1da, #1e232c);
-  --skeleton-b: light-dark(#d6d1c6, #2a303b);
-  --code-bg: light-dark(#ece9e2, #1b2029);
-  --code-ink: light-dark(#16191d, #e6e4de);
+  --overlay: light-dark(rgb(50 25 31 / 0.5), rgb(0 0 0 / 0.66));
+  --shadow-sm: light-dark(0 1px 2px rgb(50 25 31 / 0.08), 0 1px 2px rgb(0 0 0 / 0.5));
+  --shadow-md: light-dark(0 8px 24px rgb(50 25 31 / 0.12), 0 12px 32px rgb(0 0 0 / 0.55));
+  --glass-fill: light-dark(rgb(255 255 255 / 0.78), rgb(33 17 20 / 0.55));
+  --glass-stroke: light-dark(rgb(50 25 31 / 0.26), rgb(238 226 212 / 0.24));
+  --canvas-glow-a: light-dark(rgb(74 29 32 / 0.09), rgb(84 20 9 / 0.55));
+  --canvas-glow-b: light-dark(rgb(155 129 116 / 0.16), rgb(155 129 116 / 0.14));
+  --canvas-glow-c: light-dark(rgb(74 29 32 / 0.05), rgb(84 20 9 / 0.32));
+  --canvas-top: light-dark(#fcfbf9, #150b0d);
+  --canvas-bottom: light-dark(#f7f2ed, #0f0809);
+  --skeleton-a: light-dark(#F4EEE7, #341D21);
+  --skeleton-b: light-dark(#E6DCD1, #4A2E31);
+  --code-bg: light-dark(#F4EEE7, #341D21);
+  --code-ink: light-dark(#32191F, #EEE2D4);
 
   /* Grafiek-reeks: elk >= 3:1 op canvas/surface/surface-2; naast kleur altijd label/patroon. */
-  --chart-1: light-dark(#00665e, #4dbfb1);
-  --chart-2: light-dark(#8a4b0f, #e0a23a);
-  --chart-3: light-dark(#3b5ba5, #7fa4f0);
-  --chart-4: light-dark(#9b2f6b, #e58ab8);
-  --chart-5: light-dark(#5e6b00, #b7c94a);
-  --chart-6: light-dark(#6b4e9e, #b79bea);
-  --chart-grid: light-dark(#d6d1c6, #2a303b);
+  --chart-1: light-dark(#4A1D20, #E3D3C3);
+  --chart-2: light-dark(#8A4B0F, #E0A23A);
+  --chart-3: light-dark(#3B5BA5, #7FA4F0);
+  --chart-4: light-dark(#9B2F6B, #E58AB8);
+  --chart-5: light-dark(#5E6B00, #B7C94A);
+  --chart-6: light-dark(#6B4E9E, #B79BEA);
+  --chart-grid: light-dark(#E6DCD1, #4A2E31);
 
   /* Logo: licht/donker variant via filter-vrije wissel (.dgdh-logo-light / .dgdh-logo-dark) */
   --logo-light-display: block;
   --logo-dark-display: none;
 
   /* QR-codes en barcodes hebben altijd een licht vlak nodig, ook in donker. */
-  --qr-bg: #fbfaf7;
+  --qr-bg: #ffffff;
   /* Vinkje in een ink-gevulde checkbox: donker op licht vlak (donker thema), licht op donker vlak (licht thema). */
-  --check-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23f5f3ee' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5l3.2 3.2L13 4.8'/%3E%3C/svg%3E");
+  --check-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23fbf9f6' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5l3.2 3.2L13 4.8'/%3E%3C/svg%3E");
+
+  /* Fonts (Maison Claire): lokaal gehost in ./fonts, geen externe CDN */
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --display-weight: 500;
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
 
   /* Compat-aliassen voor bestaande apps (niet voor nieuwe code) */
   --surface-raised: var(--surface-2);
@@ -120,13 +131,13 @@
   :root:not([data-theme="light"]) {
     --logo-light-display: none;
     --logo-dark-display: block;
-    --check-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23161a11' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5l3.2 3.2L13 4.8'/%3E%3C/svg%3E");
+    --check-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%2332191f' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5l3.2 3.2L13 4.8'/%3E%3C/svg%3E");
   }
 }
 :root[data-theme="dark"] {
   --logo-light-display: none;
   --logo-dark-display: block;
-  --check-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23161a11' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5l3.2 3.2L13 4.8'/%3E%3C/svg%3E");
+  --check-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%2332191f' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5l3.2 3.2L13 4.8'/%3E%3C/svg%3E");
 }
 .dgdh-logo-light {
   display: var(--logo-light-display);
@@ -138,16 +149,16 @@
 /* Meer contrast (OS-instelling): sterkere randen en tekst, zelfde kleurfamilie. */
 @media (prefers-contrast: more) {
   :root {
-    --ink: light-dark(#000000, #ffffff);
-    --ink-muted: light-dark(#2e3238, #d4d6da);
-    --placeholder: light-dark(#3d424a, #c3c6cb);
-    --line: light-dark(#4a4f57, #a9aeb8);
-    --line-strong: light-dark(#3a3f47, #c9ccd2);
-    --accent-text: light-dark(#004a44, #7fe0d3);
-    --focus-ring: light-dark(#003f3a, #9ae8dd);
-    --disabled-ink: light-dark(#454a52, #aab0b9);
-    --bronze-text: light-dark(#523a24, #e0c6ab);
-    --glass-stroke: light-dark(rgb(22 25 29 / 0.6), rgb(248 247 244 / 0.6));
+    --ink: light-dark(#1A0A0D, #FFFFFF);
+    --ink-muted: light-dark(#3A2822, #E3D2C4);
+    --placeholder: light-dark(#4A3832, #D2C0B2);
+    --line: light-dark(#5C4A44, #BDA99C);
+    --line-strong: light-dark(#4A3A34, #D6C4B6);
+    --accent-text: light-dark(#3A0A10, #F4E8DC);
+    --focus-ring: light-dark(#2A070C, #F4E8DC);
+    --disabled-ink: light-dark(#54443E, #BBA89B);
+    --bronze-text: light-dark(#4A2F22, #E6CBB5);
+    --glass-stroke: light-dark(rgb(50 25 31 / 0.6), rgb(238 226 212 / 0.6));
   }
 }
 
@@ -184,6 +195,11 @@
 html {
   background: var(--canvas);
   color: var(--ink);
+  font-family: var(--font-body);
+}
+h1, h2, h3, .dgdh-display {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
 }
 *:focus-visible {
   outline: 2px solid var(--focus-ring);

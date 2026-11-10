@@ -11,7 +11,7 @@
 (function () {
   var NAME = "dgdh-theme";
   var PREFS = ["system", "light", "dark"];
-  var COLORS = { light: "#f5f3ee", dark: "#121212" };
+  var COLORS = { light: "#FBF9F6", dark: "#211114" };
   var API = "https://id.dgdh-os.com/api/theme";
   var d = document.documentElement;
   var mq = window.matchMedia ? matchMedia("(prefers-color-scheme: dark)") : { matches: false };
@@ -90,7 +90,8 @@
     } catch (e) {}
     fetch(API, { credentials: "include" })
       .then(function (r) {
-        return r.ok ? r.json() : null;
+        // Body altijd lezen: een ongelezen 401-body houdt het verzoek open (networkidle hangt in tests).
+        return r.ok ? r.json() : r.text().then(function () { return null; });
       })
       .then(function (j) {
         if (j && PREFS.indexOf(j.theme) > -1 && j.theme !== "system") {
