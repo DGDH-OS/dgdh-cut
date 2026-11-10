@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ThemeSwitch } from "@/app/theme/theme-switch";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { KeyboardEvent, MouseEvent } from "react";
@@ -183,6 +184,7 @@ function ProjectsHeader() {
 				</div>
 
 				<div className="flex items-center gap-3 md:gap-4">
+					<ThemeSwitch />
 					<SearchBar className="hidden md:block" />
 					<NewProjectButton />
 				</div>

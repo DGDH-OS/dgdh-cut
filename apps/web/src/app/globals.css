@@ -1,104 +1,51 @@
 @import "tailwindcss";
-
-/* Custom variant for dark mode */
-@custom-variant dark (&:where(.dark, .dark *));
+/* DGDH: licht + donker + Systeem uit de gedeelde bron; de brug zet de shadcn-tokens en de Tailwind `dark:`-variant. */
+@import "./theme/dgdh-theme.css";
+@import "./theme/dgdh-theme-shadcn.css";
 
 /* Plugins */
 @plugin "@tailwindcss/typography";
 @plugin "tailwindcss-animate";
 
 /* ══════════════════════════════════════════════════════════════════════════
-   DGDH CUT — DGDH Atelier v3 (dark Apple glass)
-   Bron: 1. OPS/one-stack/design-system (DESIGN.md, dgdh-atelier.css) en
-   1. OWN WEBSITE atelier.css. Atelier is DONKER-ONLY: elke scope (:root,
-   .dark, .panel) krijgt dezelfde tokens. Eén bestand, geen hex in components.
-
-   Contrast (gemeten, WCAG 2.2):
-     ink #f8f7f4 op canvas #121212        17,0:1  AAA
-     muted #a7a9ae op canvas              8,0:1   AAA
-     primary-knop #16130e op #f8f7f4      16,0:1  AAA
-     brons-tekst #c8aa8e op canvas        8,5:1   AAA (canvas 8,54 · surface 8,08 · raised 7,22)
-     brons #b58c67 (lijnen/iconen/vlak)  6,2:1 op canvas, niet voor tekst
-     groen #00665e met tekst #f8f7f4      6,4:1   AA (merkvlak, niet voor UI-randen)
-     danger #e0584f op canvas             5,4:1   AA
+   DGDH CUT: DGDH Atelier v3, licht + donker (Systeem / Licht / Donker).
+   Alle kleuren komen uit ./theme/dgdh-theme.css (light-dark(), gemeten door 1. OPS/tools/theme/contrast.py)
+   en ./theme/dgdh-theme-shadcn.css (shadcn-tokens). Hier alleen CUT-eigen aliassen. Geen hex in components:
+   de videovlakken (preview, scopes) blijven bewust donker, want dat is beeld, geen interface.
    ══════════════════════════════════════════════════════════════════════════ */
-:root,
-.dark,
-:root.dark {
-  color-scheme: dark;
-
-  --canvas: #14120f;
-  --surface: #1b1815;
-  --surface-raised: #26221d;
-  --ink: #f8f7f4;
-  --ink-dark: #16130e;
-  --muted-ink: #b3ada4;
-  --brand: #8a5f3a; /* diep brons: merkvlak, tooltip */
-  --brand-hover: #9a6b43;
-  --bronze-text: #c8aa8e; /* bronze TEKST op donker (AAA). Licht vlak: #6b4e34. */
-  --bronze: #b58c67; /* eer: eyebrows, badges. Nooit vlakken. */
-  --line: #3a352f;
-  --line-strong: #7f7970;
-
-  --glass-fill: rgba(20, 18, 15, 0.48);
-  --glass-fill-solid: rgba(20, 18, 15, 0.9);
-  --glass-stroke: rgba(248, 247, 244, 0.14);
+:root {
+  --font-ui: var(--font-albert-sans);
   --glass-blur: 28px;
   --glass-sat: 1.35;
+  --glass-fill-solid: color-mix(in srgb, var(--canvas) 92%, transparent);
 
-  --font-ui: var(--font-albert-sans);
+  /* CUT-aliassen (compat met bestaande componenten) */
+  --muted-ink: var(--ink-muted);
+  --ink-dark: var(--ink-on);
+  --brand: var(--bronze-line);
+  --brand-hover: var(--bronze-text);
 
-  /* shadcn-semantiek -> Atelier */
-  --background: var(--canvas);
-  --foreground: var(--ink);
-  --card: var(--surface);
-  --card-foreground: var(--ink);
-  --popover: var(--surface);
-  --popover-hover: var(--surface-raised);
-  --popover-foreground: var(--ink);
-  --primary: #f8f7f4;
-  --primary-foreground: #16130e;
-  --secondary: var(--surface-raised);
+  /* extra shadcn-semantiek van CUT */
+  --popover-hover: var(--surface-2);
   --secondary-border: var(--line);
-  --secondary-foreground: var(--ink);
-  --muted: var(--surface-raised);
-  --muted-foreground: var(--muted-ink);
-  --accent: var(--surface-raised);
-  --accent-foreground: var(--ink);
-  --destructive: #e0584f;
-  --destructive-foreground: #16130e;
-  --constructive: #3fa37a;
-  --constructive-foreground: #16130e;
-  --caution: var(--bronze);
-  --caution-foreground: #16130e;
-  --border: var(--line);
-  --input: var(--surface);
-  --ring: #f8f7f4;
-  --chart-1: #f8f7f4;
-  --chart-2: #b58c67;
-  --chart-3: #3fa37a;
-  --chart-4: #a7a9ae;
-  --chart-5: #e0584f;
-  --sidebar-background: var(--surface);
-  --sidebar-foreground: var(--ink);
-  --sidebar-primary: var(--ink);
-  --sidebar-primary-foreground: var(--ink-dark);
-  --sidebar-accent: var(--surface-raised);
-  --sidebar-accent-foreground: var(--ink);
-  --sidebar-border: var(--line);
-  --sidebar-ring: #f8f7f4;
-  --sidebar: var(--surface);
+  --constructive: var(--success-solid);
+  --constructive-foreground: var(--success-on);
+  --caution: var(--bronze-line);
+  --caution-foreground: var(--ink-on);
+  --destructive-foreground: var(--danger-on);
+  --primary: var(--ink);
+  --primary-foreground: var(--ink-on);
+  --input: var(--line-strong);
+  --chart-1: var(--ink);
 }
 
 /* Editor-panelen: een trede lichter dan het canvas (laag 2). */
-.panel,
-.dark .panel {
+.panel {
   --background: var(--surface);
   --card: var(--surface);
-  --input: var(--canvas);
-  --secondary: var(--surface-raised);
-  --muted: var(--surface-raised);
-  --accent: var(--surface-raised);
+  --secondary: var(--surface-2);
+  --muted: var(--surface-2);
+  --accent: var(--surface-2);
   --border: var(--line);
 }
 
@@ -114,24 +61,21 @@
     @apply border-border outline-ring/50;
   }
   html {
-    background: #0e0c0a;
+    background: var(--canvas);
   }
   /* Canvas: de enige gradient in het ontwerp. Vast, scrolt niet mee. */
   body {
     @apply text-foreground;
     font-family: var(--font-ui), "Helvetica Neue", Arial, sans-serif;
-    background-color: #0e0c0a;
+    background-color: var(--canvas);
     background-image:
-      radial-gradient(80% 60% at 10% -10%, rgba(181, 140, 103, 0.14), transparent 60%),
-      linear-gradient(180deg, #16130f 0%, #14120f 45%, #0e0c0a 100%);
+      radial-gradient(80% 60% at 10% -10%, var(--canvas-glow-b), transparent 60%),
+      linear-gradient(180deg, var(--canvas-top) 0%, var(--canvas) 45%, var(--canvas-bottom) 100%);
     background-attachment: fixed;
     /* Prevent back/forward swipe */
     overscroll-behavior-x: contain;
   }
-  ::selection {
-    background: rgba(181, 140, 103, 0.45);
-    color: #f8f7f4;
-  }
+
   h1,
   h2,
   h3 {
@@ -154,16 +98,16 @@
     font-variant-numeric: tabular-nums;
   }
   :focus-visible {
-    outline: 2px solid #f8f7f4;
+    outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
-    box-shadow: 0 0 0 4px rgba(181, 140, 103, 0.75);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--bronze-line) 75%, transparent);
   }
   @media (prefers-reduced-motion: reduce) {
     *,
     ::before,
     ::after {
       animation-duration: 0.01ms !important;
-      transition-duration: 0.01ms !important;
+      transition-duration: 0s !important;
     }
   }
 }
@@ -175,8 +119,8 @@
   backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
   box-shadow:
-    inset 0 1px 0 rgba(248, 247, 244, 0.12),
-    0 24px 80px rgba(0, 0, 0, 0.35);
+    inset 0 1px 0 color-mix(in srgb, var(--ink) 12%, transparent),
+    var(--shadow-md);
 }
 
 /* Eyebrow-label: brons, klein, gespatieerd. */

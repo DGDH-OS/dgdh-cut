@@ -1,0 +1,38 @@
+/* AUTO-GENERATED door 1. OPS/tools/theme/sync.sh uit dgdh-theme.shadcn.css. NIET HANDMATIG WIJZIGEN. */
+/*
+ * Brug tussen dgdh-theme.css en shadcn/ui (Tailwind v4, CRM). Importeer NA dgdh-theme.css.
+ * shadcn-tokens wijzen naar de DGDH-tokens, dus ook de upstream-componenten volgen Licht/Donker/Systeem
+ * zonder dat upstream-bestanden hoeven te veranderen. Het `.dark`-blok van shadcn wordt NIET meer gebruikt.
+ * Tailwind `dark:`-variant: zie @custom-variant onderaan (volgt het effectieve schema, ook bij Systeem).
+ */
+:root {
+  --background: var(--canvas);
+  --foreground: var(--ink);
+  --card: var(--surface);
+  --card-foreground: var(--ink);
+  --popover: var(--surface);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--ink-on);
+  --secondary: var(--surface-2);
+  --secondary-foreground: var(--ink);
+  --muted: var(--surface-2);
+  --muted-foreground: var(--ink-muted);
+  --accent: var(--surface-2);
+  --accent-foreground: var(--ink);
+  --destructive: var(--danger-solid);
+  --destructive-foreground: var(--danger-on);
+  --border: var(--line);
+  --input: var(--line-strong);
+  --ring: var(--focus-ring);
+  --sidebar: var(--surface);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--ink);
+  --sidebar-primary-foreground: var(--ink-on);
+  --sidebar-accent: var(--surface-2);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--line);
+  --sidebar-ring: var(--focus-ring);
+}
+/* Tailwind v4: `dark:` volgt data-theme-effective (gezet door het head-script, ook bij Systeem). */
+@custom-variant dark (&:where([data-theme-effective="dark"], [data-theme-effective="dark"] *));

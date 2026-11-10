@@ -16,7 +16,7 @@ import { useRouter } from "next/navigation";
 import { FaDiscord } from "react-icons/fa6";
 import { ExportButton } from "./export-button";
 import { FeedbackPopover } from "@/feedback/components/feedback-popover";
-import { DEFAULT_LOGO_URL } from "@/site/brand";
+import { DEFAULT_LOGO_URL_LIGHT, DEFAULT_LOGO_URL } from "@/site/brand";
 import { SOCIAL_LINKS } from "@/site/social";
 import { toast } from "sonner";
 import { useEditor } from "@/editor/use-editor";
@@ -24,6 +24,7 @@ import { CommandIcon, Logout05Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ShortcutsDialog } from "@/actions/components/shortcuts-dialog";
 import Image from "next/image";
+import { ThemeSwitch } from "@/app/theme/theme-switch";
 import { cn } from "@/utils/ui";
 import { WorkspaceSwitcher } from "./workspaces/workspace-switcher";
 
@@ -42,6 +43,7 @@ export function EditorHeader() {
 					<WorkspaceSwitcher />
 				</div>
 				<nav className="flex shrink-0 items-center gap-2">
+					<ThemeSwitch />
 					<div className="hidden sm:block">
 						<FeedbackPopover />
 					</div>
@@ -125,12 +127,17 @@ function ProjectDropdown() {
 				<DropdownMenuTrigger asChild>
 					<Button variant="ghost" size="icon" className="p-1 rounded-sm size-8">
 						<Image
+							src={DEFAULT_LOGO_URL_LIGHT}
+							alt="Projectminiatuur"
+							width={32}
+							height={32}
+							className="size-5 dgdh-logo-light" />
+<Image
 							src={DEFAULT_LOGO_URL}
 							alt="Projectminiatuur"
 							width={32}
 							height={32}
-							className="invert dark:invert-0 size-5"
-						/>
+							className="size-5 dgdh-logo-dark" />
 					</Button>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align="start" className="z-100 w-44">

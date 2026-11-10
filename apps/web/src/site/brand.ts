@@ -11,3 +11,5 @@ export const SITE_INFO = {
 };
 
 export const DEFAULT_LOGO_URL = "/logos/dgdh-cut/svg/logo.svg";
+/** Variant met donkere lijnen voor het lichte thema (.dgdh-logo-light / .dgdh-logo-dark in theme/dgdh-theme.css). */
+export const DEFAULT_LOGO_URL_LIGHT = "/logos/dgdh-cut/svg/logo-light.svg";

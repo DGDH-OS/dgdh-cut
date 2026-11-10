@@ -1,6 +1,6 @@
-import { ThemeProvider } from "next-themes";
 import Script from "next/script";
 import "./globals.css";
+import { DGDH_THEME_SCRIPT } from "./theme/dgdh-theme.inline";
 import { Toaster } from "../components/ui/sonner";
 import { ChangelogNotification } from "@/changelog/components/changelog-notification";
 import { TooltipProvider } from "../components/ui/tooltip";
@@ -36,8 +36,10 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="nl" className={`dark ${albertSans.variable} ${plexMono.variable}`} suppressHydrationWarning>
+		<html lang="nl" className={`${albertSans.variable} ${plexMono.variable}`} suppressHydrationWarning>
 			<head>
+				{/* Blokkerend: data-theme + theme-color + color-scheme voor de eerste paint (geen flits). */}
+				<script dangerouslySetInnerHTML={{ __html: DGDH_THEME_SCRIPT }} />
 				<BotIdClient protect={protectedRoutes} />
 				{process.env.NODE_ENV === "development" && (
 					<>
@@ -52,13 +54,6 @@ export default function RootLayout({
 			<body
 				className={`font-sans antialiased`}
 			>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="dark"
-					forcedTheme="dark"
-					enableSystem={false}
-					disableTransitionOnChange={true}
-				>
 					<TooltipProvider>
 						<Toaster />
 						<Script
@@ -75,7 +70,6 @@ export default function RootLayout({
 						/>
 						{children}
 					</TooltipProvider>
-				</ThemeProvider>
 			</body>
 		</html>
 	);

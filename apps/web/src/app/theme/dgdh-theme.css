@@ -1,0 +1,263 @@
+/* AUTO-GENERATED door 1. OPS/tools/theme/sync.sh uit dgdh-theme.css. NIET HANDMATIG WIJZIGEN. */
+/*
+ * DGDH Atelier theme tokens (licht + donker). EEN BRON voor alle DGDH-apps.
+ * Bron: 1. OPS/tools/theme/dgdh-theme.css. Niet per app aanpassen; draai `1. OPS/tools/theme/sync.sh`.
+ * Contrast gemeten door `python3 contrast.py` (leest dit bestand, faalt onder 4,5:1 tekst / 3:1 UI).
+ *
+ * Werking: `color-scheme: light dark` laat de browser het OS volgen (Systeem). `[data-theme=light|dark]`
+ * op <html> forceert een keuze (gezet door het blokkerende head-script uit dgdh-theme.js voor de eerste paint).
+ * Elke token is een enkele light-dark(licht, donker); geen dubbele donker-blokken.
+ *
+ * Regels: geen puur #000/#fff; accent racing green #00665E alleen voor primaire actie/link/focus;
+ * bronze (--bronze-line) alleen lijnen/iconen/vlakken, nooit tekst (tekst = --bronze-text).
+ */
+:root {
+  color-scheme: light dark;
+
+  /* Vlakken */
+  --canvas: light-dark(#f5f3ee, #121212);
+  --surface: light-dark(#fbfaf7, #161a21);
+  --surface-2: light-dark(#ece9e2, #1e232c);
+
+  /* Tekst */
+  --ink: light-dark(#16191d, #f1efea);
+  --ink-muted: light-dark(#4f555e, #a7a9ae);
+  --ink-on: light-dark(#f5f3ee, #161a11); /* tekst op een ink-gevuld vlak (primaire knop) */
+  --placeholder: light-dark(#5f656e, #9a9da3);
+
+  /* Lijnen. line = scheiding (decoratief), line-strong = velden/knoppen/iconen (niet-tekst, >= 3:1) */
+  --line: light-dark(#d6d1c6, #2a303b);
+  --line-strong: light-dark(#757a83, #7a808c);
+
+  /* Accent racing green. accent-solid = vulling met accent-on erop; accent-text = links/iconen/tekst op vlakken */
+  --accent-solid: #00665e;
+  --accent-on: #f8f7f4;
+  --accent-hover: light-dark(#00524c, #00796f);
+  --accent-text: light-dark(#00665e, #4dbfb1);
+  --focus-ring: light-dark(#00665e, #6fd0c3);
+
+  /* Status: tekst/icoon op canvas/surface/surface-2; -bg = tintvlak (tekst in dezelfde kleur >= 4,5);
+     -solid = gevulde knop/badge met -on erop. */
+  --danger: light-dark(#b3261e, #f2827a);
+  --danger-bg: light-dark(#fbe9e7, #3a1d1b);
+  --danger-solid: light-dark(#b3261e, #b83a32);
+  --danger-on: #fbfaf7;
+  --warn: light-dark(#7f5200, #e0a23a);
+  --warn-bg: light-dark(#fdf1d8, #33270f);
+  --warn-solid: light-dark(#7f5200, #e0a23a);
+  --warn-on: light-dark(#fbfaf7, #161a11);
+  --success: light-dark(#1c6b47, #4dba8c);
+  --success-bg: light-dark(#e3f3ea, #142b22);
+  --success-solid: light-dark(#1c6b47, #4dba8c);
+  --success-on: light-dark(#fbfaf7, #0f1a14);
+  --info: light-dark(#005a6e, #6fc3d6);
+  --info-bg: light-dark(#e4eef0, #14282b);
+
+  /* Disabled: leesbaar (>= 4,5), onderscheid via vlak + cursor, niet via opacity */
+  --disabled-ink: light-dark(#5e636b, #8b8e95);
+  --disabled-bg: light-dark(#e4e1da, #1e232c);
+
+  /* Bronze: lijnen, iconen, vlakken. Tekst alleen via --bronze-text. */
+  --bronze-line: light-dark(#8a6845, #b58c67);
+  --bronze-text: light-dark(#6b4e34, #c8aa8e);
+
+  /* Diepte */
+  --overlay: light-dark(rgb(22 25 29 / 0.5), rgb(0 0 0 / 0.66));
+  --shadow-sm: light-dark(0 1px 2px rgb(22 25 29 / 0.08), 0 1px 2px rgb(0 0 0 / 0.4));
+  --shadow-md: light-dark(0 8px 24px rgb(22 25 29 / 0.1), 0 12px 32px rgb(0 0 0 / 0.45));
+  --glass-fill: light-dark(rgb(251 250 247 / 0.78), rgb(18 18 18 / 0.48));
+  --glass-stroke: light-dark(rgb(22 25 29 / 0.16), rgb(248 247 244 / 0.14));
+  --canvas-glow-a: light-dark(rgb(0 102 94 / 0.1), rgb(0 102 94 / 0.38));
+  --canvas-glow-b: light-dark(rgb(181 140 103 / 0.14), rgb(181 140 103 / 0.16));
+  --canvas-glow-c: light-dark(rgb(0 102 94 / 0.06), rgb(0 102 94 / 0.22));
+  --canvas-top: light-dark(#f8f6f1, #0c1014);
+  --canvas-bottom: light-dark(#ece9e2, #0a0c0e);
+  --skeleton-a: light-dark(#e4e1da, #1e232c);
+  --skeleton-b: light-dark(#d6d1c6, #2a303b);
+  --code-bg: light-dark(#ece9e2, #1b2029);
+  --code-ink: light-dark(#16191d, #e6e4de);
+
+  /* Grafiek-reeks: elk >= 3:1 op canvas/surface/surface-2; naast kleur altijd label/patroon. */
+  --chart-1: light-dark(#00665e, #4dbfb1);
+  --chart-2: light-dark(#8a4b0f, #e0a23a);
+  --chart-3: light-dark(#3b5ba5, #7fa4f0);
+  --chart-4: light-dark(#9b2f6b, #e58ab8);
+  --chart-5: light-dark(#5e6b00, #b7c94a);
+  --chart-6: light-dark(#6b4e9e, #b79bea);
+  --chart-grid: light-dark(#d6d1c6, #2a303b);
+
+  /* Logo: licht/donker variant via filter-vrije wissel (.dgdh-logo-light / .dgdh-logo-dark) */
+  --logo-light-display: block;
+  --logo-dark-display: none;
+
+  /* QR-codes en barcodes hebben altijd een licht vlak nodig, ook in donker. */
+  --qr-bg: #fbfaf7;
+  /* Vinkje in een ink-gevulde checkbox: donker op licht vlak (donker thema), licht op donker vlak (licht thema). */
+  --check-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23f5f3ee' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5l3.2 3.2L13 4.8'/%3E%3C/svg%3E");
+
+  /* Compat-aliassen voor bestaande apps (niet voor nieuwe code) */
+  --surface-raised: var(--surface-2);
+  --muted: var(--ink-muted);
+  --ink-dark: var(--ink-on);
+  --brand: var(--accent-solid);
+  --brand-hover: var(--accent-hover);
+  --bronze: var(--bronze-line);
+  --danger-text: var(--danger);
+  --text: var(--ink);
+  --accent: var(--accent-solid);
+  --label: var(--bronze-text);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* Logo-wissel volgt het effectieve schema (ook bij Systeem). */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --logo-light-display: none;
+    --logo-dark-display: block;
+    --check-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23161a11' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5l3.2 3.2L13 4.8'/%3E%3C/svg%3E");
+  }
+}
+:root[data-theme="dark"] {
+  --logo-light-display: none;
+  --logo-dark-display: block;
+  --check-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23161a11' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5l3.2 3.2L13 4.8'/%3E%3C/svg%3E");
+}
+.dgdh-logo-light {
+  display: var(--logo-light-display);
+}
+.dgdh-logo-dark {
+  display: var(--logo-dark-display);
+}
+
+/* Meer contrast (OS-instelling): sterkere randen en tekst, zelfde kleurfamilie. */
+@media (prefers-contrast: more) {
+  :root {
+    --ink: light-dark(#000000, #ffffff);
+    --ink-muted: light-dark(#2e3238, #d4d6da);
+    --placeholder: light-dark(#3d424a, #c3c6cb);
+    --line: light-dark(#4a4f57, #a9aeb8);
+    --line-strong: light-dark(#3a3f47, #c9ccd2);
+    --accent-text: light-dark(#004a44, #7fe0d3);
+    --focus-ring: light-dark(#003f3a, #9ae8dd);
+    --disabled-ink: light-dark(#454a52, #aab0b9);
+    --bronze-text: light-dark(#523a24, #e0c6ab);
+    --glass-stroke: light-dark(rgb(22 25 29 / 0.6), rgb(248 247 244 / 0.6));
+  }
+}
+
+/* Windows hoog contrast / forced colors: systeemkleuren, randen blijven zichtbaar. */
+@media (forced-colors: active) {
+  :root {
+    --canvas: Canvas;
+    --surface: Canvas;
+    --surface-2: Canvas;
+    --ink: CanvasText;
+    --ink-muted: CanvasText;
+    --ink-on: Canvas;
+    --line: CanvasText;
+    --line-strong: CanvasText;
+    --accent-solid: Highlight;
+    --accent-on: HighlightText;
+    --accent-text: LinkText;
+    --focus-ring: Highlight;
+    --disabled-ink: GrayText;
+    --disabled-bg: Canvas;
+    --placeholder: GrayText;
+    --danger: CanvasText;
+    --warn: CanvasText;
+    --success: CanvasText;
+    --bronze-text: CanvasText;
+    --bronze-line: CanvasText;
+  }
+  *:focus-visible {
+    outline: 2px solid Highlight;
+  }
+}
+
+/* Basis die elke app deelt */
+html {
+  background: var(--canvas);
+  color: var(--ink);
+}
+*:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+::placeholder {
+  color: var(--placeholder);
+  opacity: 1;
+}
+::selection {
+  background: var(--accent-solid);
+  color: var(--accent-on);
+}
+.dgdh-canvas {
+  background-color: var(--canvas);
+  background-image:
+    radial-gradient(90% 70% at 8% -10%, var(--canvas-glow-a), transparent 58%),
+    radial-gradient(70% 50% at 108% 12%, var(--canvas-glow-b), transparent 52%),
+    radial-gradient(80% 60% at 50% 120%, var(--canvas-glow-c), transparent 60%),
+    linear-gradient(180deg, var(--canvas-top) 0%, var(--canvas) 42%, var(--canvas-bottom) 100%);
+  background-attachment: fixed;
+}
+/* Afbeeldingen met doorzichtige achtergrond of getekende diagrammen: dim in donker i.p.v. verblinden. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) img[data-dgdh-dim] {
+    filter: brightness(0.86) contrast(1.05);
+  }
+}
+:root[data-theme="dark"] img[data-dgdh-dim] {
+  filter: brightness(0.86) contrast(1.05);
+}
+
+/* Instelschakelaar (Systeem / Licht / Donker). Markup: zie dgdh-theme.js mountThemeSwitch(). */
+.dgdh-theme-switch {
+  display: inline-flex;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  background: var(--surface);
+}
+.dgdh-theme-switch button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--ink-muted);
+  cursor: pointer;
+}
+.dgdh-theme-switch button[aria-checked="true"] {
+  background: var(--ink);
+  color: var(--ink-on);
+}
+.dgdh-theme-switch button:hover:not([aria-checked="true"]) {
+  background: var(--surface-2);
+  color: var(--ink);
+}
+.dgdh-theme-switch svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+@media (forced-colors: active) {
+  .dgdh-theme-switch button[aria-checked="true"] {
+    background: Highlight;
+    color: HighlightText;
+    forced-color-adjust: none;
+  }
+}

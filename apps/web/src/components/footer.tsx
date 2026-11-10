@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { DEFAULT_LOGO_URL } from "@/site/brand";
+import { DEFAULT_LOGO_URL_LIGHT, DEFAULT_LOGO_URL } from "@/site/brand";
 
 type Category = "resources" | "company";
 
@@ -37,12 +37,19 @@ export function Footer() {
 					<div className="max-w-sm md:col-span-1">
 						<div className="mb-4 flex items-center justify-start gap-2">
 							<Image
+								src={DEFAULT_LOGO_URL_LIGHT}
+								alt=""
+								width={24}
+								height={24}
+								
+							className="dgdh-logo-light" />
+<Image
 								src={DEFAULT_LOGO_URL}
 								alt=""
 								width={24}
 								height={24}
 								
-							/>
+							className="dgdh-logo-dark" />
 							<span className="text-lg font-medium uppercase tracking-wide">DGDH CUT</span>
 						</div>
 						<p className="text-muted-foreground mb-5 text-sm md:text-left">

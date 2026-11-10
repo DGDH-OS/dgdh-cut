@@ -13,8 +13,9 @@ import {
 	Menu02Icon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
+import { ThemeSwitch } from "@/app/theme/theme-switch";
 import { cn } from "@/utils/ui";
-import { DEFAULT_LOGO_URL, SITE_URL } from "@/site/brand";
+import { DEFAULT_LOGO_URL_LIGHT, DEFAULT_LOGO_URL, SITE_URL } from "@/site/brand";
 import {
 	ContextMenu,
 	ContextMenuContent,
@@ -40,13 +41,21 @@ export function Header() {
 						<ContextMenuTrigger asChild>
 							<Link href="/" className="flex items-center gap-3 max-md:min-h-11">
 								<Image
+									src={DEFAULT_LOGO_URL_LIGHT}
+									alt=""
+									aria-hidden="true"
+									
+									width={32}
+									height={32}
+								className="dgdh-logo-light" />
+<Image
 									src={DEFAULT_LOGO_URL}
 									alt=""
 									aria-hidden="true"
 									
 									width={32}
 									height={32}
-								/>
+								className="dgdh-logo-dark" />
 								<span className="text-base font-medium tracking-wide uppercase">
 									DGDH CUT
 								</span>
@@ -94,7 +103,8 @@ export function Header() {
 					</nav>
 				</div>
 
-				<div className="relative z-10">
+				<div className="relative z-10 flex items-center gap-3">
+					<ThemeSwitch />
 					<div className="flex items-center gap-3 md:hidden">
 						<Button
 							variant="text"
