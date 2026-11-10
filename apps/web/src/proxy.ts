@@ -10,7 +10,7 @@ import { activeWorkspaceOrg, contextFor } from "@/lib/suite-auth/context";
 import { SUITE_ORG_COOKIE } from "@/lib/suite-auth/org";
 
 const isAgentApiPath = (p: string) =>
-	p === "/api/mcp" || p.startsWith("/api/agent/") || (p.startsWith("/api/v1/") && !p.startsWith("/api/v1/keys"));
+	p === "/api/mcp" || p.startsWith("/.well-known/oauth-protected-resource") || p.startsWith("/api/agent/") || (p.startsWith("/api/v1/") && !p.startsWith("/api/v1/keys"));
 
 // Suite-login gate for DGDH CUT. Protects every route except statics + /api/health,
 // including /api/engine and /api/export (401 JSON instead of redirect for /api/*).
