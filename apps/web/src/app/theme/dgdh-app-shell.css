@@ -1,0 +1,74 @@
+/* DGDH app-shell (NAVFIX 10-11-2026). Een patroon voor topbar en sidebar in ALLE apps.
+   Alleen kleur, font, spacing, hoogte, rand. Nooit indeling of tekst wijzigen.
+   Gebruik: pas de klassen toe op de bestaande elementen, of map ze met selectors in de
+   app-eigen CSS (zie NAVFIX-PATROON.md). Dubbele klasse-selectors winnen van Tailwind-utilities zonder !important. */
+:root{
+  --shell-h:56px;            /* vaste topbar-hoogte, incl. 1px rand (border-box) */
+  --shell-strip-h:44px;      /* mobiele nav-strip onder de topbar */
+  --shell-pad-x:24px;
+  --shell-gap:8px;
+  --shell-side-w:232px;      /* sidebar breedte (desktop) */
+  --shell-ctl-h:32px;        /* hoogte van alle knoppen/selects/toggles in de balk */
+  --shell-line:color-mix(in srgb,var(--ink,#32191F) 14%,transparent);
+}
+@media (max-width:640px){:root{--shell-pad-x:16px}}
+
+/* 1. Topbar */
+.dgdh-shell-top.dgdh-shell-top{
+  box-sizing:border-box;display:flex;align-items:center;gap:var(--shell-gap);
+  height:var(--shell-h);min-height:var(--shell-h);max-height:var(--shell-h);
+  padding:0 var(--shell-pad-x);margin:0;
+  background:var(--surface,#fff);color:var(--ink,#32191F);
+  border:0;border-bottom:1px solid var(--shell-line);box-shadow:none;
+  font-family:var(--font-body,"Instrument Sans",sans-serif);
+  position:sticky;top:0;z-index:40;
+  -webkit-backdrop-filter:none;backdrop-filter:none;
+}
+/* logo-lockup: bestaand dgdh-nav-brand (mark 32 / 28 op <=390 + productnaam 17px Cormorant) */
+.dgdh-shell-top .dgdh-nav-brand{flex:0 0 auto}
+
+/* 2. Primaire navigatie (tabs/links) */
+.dgdh-shell-nav.dgdh-shell-nav{display:flex;align-items:center;gap:4px;margin:0 0 0 12px;padding:0;min-width:0;flex:1 1 auto;overflow:hidden}
+.dgdh-shell-link.dgdh-shell-link{
+  box-sizing:border-box;display:inline-flex;align-items:center;gap:8px;
+  height:var(--shell-ctl-h);padding:0 12px;border-radius:var(--radius-md,6px);
+  font:500 14px/1 var(--font-body,"Instrument Sans",sans-serif);
+  color:var(--ink-muted,#5E4A44);background:transparent;border:0;text-decoration:none;white-space:nowrap;
+}
+.dgdh-shell-link.dgdh-shell-link:hover{background:var(--surface-2,#F4EEE7);color:var(--ink,#32191F)}
+.dgdh-shell-link.dgdh-shell-link:focus-visible{outline:2px solid var(--focus-ring,#4A1D20);outline-offset:2px}
+.dgdh-shell-link.dgdh-shell-link[aria-current],
+.dgdh-shell-link.dgdh-shell-link.is-active{
+  color:var(--accent-text,#4A1D20);font-weight:600;
+  background:color-mix(in srgb,var(--accent-solid,#4A1D20) 10%,transparent);
+  box-shadow:inset 0 -2px 0 var(--accent-solid,#4A1D20);
+}
+
+/* 3. Rechtercluster: thema-kiezer + gebruikers-/organisatiemenu, rechts uitgelijnd */
+.dgdh-shell-end.dgdh-shell-end{display:flex;align-items:center;gap:var(--shell-gap);margin-left:auto;flex:0 0 auto}
+.dgdh-shell-end :is(select,button,.dgdh-shell-ctl){
+  box-sizing:border-box;height:var(--shell-ctl-h);min-height:var(--shell-ctl-h);
+  font:500 13px/1 var(--font-body,"Instrument Sans",sans-serif);
+}
+
+/* 4. Sidebar (apps die er al een hebben): zelfde tokens, zelfde actieve staat */
+.dgdh-shell-side.dgdh-shell-side{
+  box-sizing:border-box;width:var(--shell-side-w);background:var(--surface,#fff);color:var(--ink,#32191F);
+  border:0;border-right:1px solid var(--shell-line);padding:0 8px 16px;
+}
+.dgdh-shell-side .dgdh-shell-brandrow{display:flex;align-items:center;height:var(--shell-h);padding:0 8px;margin:0 -8px 8px;border-bottom:1px solid var(--shell-line)}
+
+/* 5. Mobiel (<=640): topbar blijft 56px en 1 rij; primaire nav wordt een 44px horizontaal scrollbare strip
+      onder de topbar (geen wrapping, geen paginabrede overflow). Bestaand hamburger-gedrag blijft zoals het is. */
+@media (max-width:640px){
+  .dgdh-shell-nav.dgdh-shell-nav{
+    position:static;order:3;flex:0 0 100%;margin:0;overflow-x:auto;overflow-y:hidden;
+    height:var(--shell-strip-h);padding:0 var(--shell-pad-x);
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  }
+  .dgdh-shell-nav::-webkit-scrollbar{display:none}
+  .dgdh-shell-top.dgdh-shell-top.has-strip{flex-wrap:wrap;height:auto;max-height:none;min-height:var(--shell-h);padding:0}
+  .dgdh-shell-top.has-strip>:not(.dgdh-shell-nav){margin-top:0}
+  .dgdh-shell-top.has-strip .dgdh-shell-row{display:flex;align-items:center;gap:var(--shell-gap);height:calc(var(--shell-h) - 1px);padding:0 var(--shell-pad-x);flex:0 0 100%}
+  .dgdh-shell-end :is(select){max-width:140px}
+}

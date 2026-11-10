@@ -2,6 +2,8 @@
 /* DGDH: licht + donker + Systeem uit de gedeelde bron; de brug zet de shadcn-tokens en de Tailwind `dark:`-variant. */
 @import "./theme/dgdh-theme.css";
 @import "./theme/dgdh-theme-shadcn.css";
+@import "./theme/dgdh-nav-brand.css";
+@import "./theme/dgdh-app-shell.css";
 
 /* Plugins */
 @plugin "@tailwindcss/typography";
@@ -286,4 +288,35 @@
   &::-webkit-scrollbar-thumb:hover {
     background: var(--muted-foreground);
   }
+}
+
+/* NAVFIX app-shell (1. OPS/REBRAND-20261110/NAVFIX-PATROON.md): bedrijfsbalk = topbar 56px met lockup,
+   controls 32px; projecten-toolbar 56px. Alleen kleur/font/spacing/hoogte/rand. */
+.cut-org.dgdh-shell-top.dgdh-shell-top { position: relative; z-index: 30; gap: 16px; }
+.cut-org .cut-org__actief { margin-left: 8px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; }
+.cut-org .dgdh-shell-end label { font-size: 13px; font-weight: 500; }
+.cut-org .dgdh-shell-end select { max-width: 200px; padding: 0 8px; border-radius: 6px; }
+.cut-toolbar { padding-left: 24px; padding-right: 24px; }
+.cut-toolbar .cut-toolbar__row { height: 56px; padding-top: 0; gap: 12px; }
+.cut-toolbar .cut-toolbar__row > div:last-child > button,
+.cut-toolbar .cut-toolbar__row input { height: 32px; min-height: 32px; border-radius: 6px; font-size: 13px; }
+.cut-toolbar .cut-toolbar__row > div:first-child > div.border { height: 32px; padding: 0 2px; }
+.cut-toolbar .cut-toolbar__row > div:first-child > div.border button { width: 28px; height: 28px; }
+:is(.dgdh-shell-end, .cut-toolbar) .dgdh-theme-switch { height: 32px; padding: 1px; gap: 1px; border-radius: 6px; }
+:is(.dgdh-shell-end, .cut-toolbar) .dgdh-theme-switch button { min-width: 28px; min-height: 28px; width: 28px; height: 28px; padding: 0; border-radius: 5px; }
+:is(.dgdh-shell-end, .cut-toolbar) .dgdh-theme-switch svg { width: 16px; height: 16px; }
+@media (max-width: 640px) {
+  .cut-org.dgdh-shell-top.dgdh-shell-top { flex-wrap: wrap; height: auto; max-height: none; padding: 0 16px; row-gap: 0; }
+  .cut-org > .dgdh-nav-brand, .cut-org > .dgdh-shell-end { height: 55px; }
+  .cut-org .dgdh-shell-end select { max-width: 150px; }
+  .cut-org > .cut-org__actief {
+    order: 3; display: flex; align-items: center; gap: 4px; flex: 0 0 calc(100% + 32px); margin: 0 -16px; padding: 0 16px; height: 44px;
+    border-top: 1px solid var(--shell-line);
+  }
+  .cut-toolbar { padding-left: 16px; padding-right: 16px; }
+  .cut-toolbar .cut-toolbar__row { gap: 8px; }
+  .cut-toolbar .cut-toolbar__row > div:first-child { min-width: 0; }
+  .cut-toolbar .cut-toolbar__row nav li, .cut-toolbar .cut-toolbar__row nav a { white-space: nowrap; }
+  .cut-toolbar .cut-toolbar__row > div:last-child { gap: 8px; flex: 0 0 auto; }
+  .cut-toolbar .cut-toolbar__row > div:last-child > button { padding: 0 12px; }
 }

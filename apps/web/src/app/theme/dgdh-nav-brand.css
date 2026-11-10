@@ -1,0 +1,47 @@
+/* DGDH nav-lockup: vierkant merk (variant 01) + productnaam.
+   Met mark: alleen "CRM" / "Booking" / "Call". Zonder mark: "DGDH CRM".
+   Bron: 1. OPS/REBRAND-20261110/definitief/dgdh-nav-brand.html
+*/
+.dgdh-nav-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 32px;
+  max-height: 40px;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  min-width: 0;
+  line-height: 1;
+  vertical-align: middle;
+}
+.dgdh-nav-brand__mark {
+  width: 32px;
+  height: 32px;
+  display: block;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.dgdh-nav-brand__name {
+  font-family: var(--font-display, "Cormorant Garamond", Georgia, serif);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  white-space: nowrap;
+  color: inherit;
+}
+.dgdh-nav-brand--text .dgdh-nav-brand__name {
+  font-size: 1.0625rem;
+}
+@media (max-width: 390px) {
+  .dgdh-nav-brand { gap: 8px; min-height: 28px; }
+  .dgdh-nav-brand__mark { width: 28px; height: 28px; border-radius: 5px; }
+}

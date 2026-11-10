@@ -12,19 +12,25 @@ export async function BedrijfBalk() {
 	return (
 		<div
 			data-testid="bedrijf-balk"
-			className="border-border bg-background text-muted-foreground flex min-h-10 items-center justify-between gap-4 border-b px-8 py-1 text-sm"
+			className="cut-org dgdh-shell-top border-border bg-background text-muted-foreground flex min-h-10 items-center justify-between gap-4 border-b px-8 py-1 text-sm"
 		>
-			<span>
+			<span className="dgdh-nav-brand">
+				<img className="dgdh-nav-brand__mark" src="/brand/mark.png" alt="" width={32} height={32} />
+				<span className="dgdh-nav-brand__name">CUT</span>
+			</span>
+			<span className="cut-org__actief">
 				<span className="text-bronze-text uppercase tracking-wide text-xs">Bedrijf</span>{" "}
 				<span className="text-foreground" data-testid="bedrijf-actief">{active.name}</span>
 			</span>
 			{options.length > 1 && (
-				<BedrijfWisselen
-					opties={options.map((o) => ({ id: o.organization_id, name: o.name }))}
-					actief={active.organization_id}
-					postUrl={SUITE_ORG_POST()}
-					origin={process.env.CUT_APP_URL ?? "https://studio.dgdh-os.com"}
-				/>
+				<div className="dgdh-shell-end">
+					<BedrijfWisselen
+						opties={options.map((o) => ({ id: o.organization_id, name: o.name }))}
+						actief={active.organization_id}
+						postUrl={SUITE_ORG_POST()}
+						origin={process.env.CUT_APP_URL ?? "https://studio.dgdh-os.com"}
+					/>
+				</div>
 			)}
 		</div>
 	);
