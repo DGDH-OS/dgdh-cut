@@ -146,7 +146,7 @@ export function drawWaveform(ctx: Ctx, data: ScopeData, w: number, h: number) {
 	ctx.putImageData(img, 0, 0);
 	ctx.strokeStyle = GRATICULE;
 	ctx.fillStyle = LABEL;
-	ctx.font = "12px 'IBM Plex Mono', monospace";
+	ctx.font = "12px ui-monospace, Menlo, monospace";
 	ctx.lineWidth = 1;
 	for (const q of [0, 25, 50, 75, 100]) {
 		const y = Math.round((1 - q / 100) * (h - 1)) + 0.5;
@@ -197,7 +197,7 @@ export function drawVectorscope(ctx: Ctx, data: ScopeData, size: number) {
 	ctx.stroke();
 	// punten
 	const { counts, max } = data.vector;
-	ctx.fillStyle = "#f8f7f4";
+	ctx.fillStyle = "#EEE2D4";
 	const cell = size / VEC_SIZE;
 	for (let vx = 0; vx < VEC_SIZE; vx++) {
 		for (let vy = 0; vy < VEC_SIZE; vy++) {
@@ -211,7 +211,7 @@ export function drawVectorscope(ctx: Ctx, data: ScopeData, size: number) {
 	// doelvakjes
 	ctx.strokeStyle = LABEL;
 	ctx.fillStyle = LABEL;
-	ctx.font = "12px 'IBM Plex Mono', monospace";
+	ctx.font = "12px ui-monospace, Menlo, monospace";
 	for (const t of VECTOR_TARGETS) {
 		const { cb, cr } = rgbToCbCr(...t.rgb);
 		const x = (cb + 0.5) * size;

@@ -2,8 +2,8 @@
 	"name": "DGDH CUT",
 	"description": "The browser-based video editor for short-form.",
 	"display": "standalone",
-	"theme_color": "#121212",
-	"background_color": "#121212",
+	"theme_color": "#211114",
+	"background_color": "#211114",
 	"start_url": "/",
 	"icons": [
 		{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },

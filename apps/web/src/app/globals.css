@@ -14,7 +14,7 @@
    de videovlakken (preview, scopes) blijven bewust donker, want dat is beeld, geen interface.
    ══════════════════════════════════════════════════════════════════════════ */
 :root {
-  --font-ui: var(--font-albert-sans);
+  --font-ui: var(--font-body);
   --glass-blur: 28px;
   --glass-sat: 1.35;
   --glass-fill-solid: color-mix(in srgb, var(--canvas) 92%, transparent);
@@ -66,7 +66,7 @@
   /* Canvas: de enige gradient in het ontwerp. Vast, scrolt niet mee. */
   body {
     @apply text-foreground;
-    font-family: var(--font-ui), "Helvetica Neue", Arial, sans-serif;
+    font-family: var(--font-body);
     background-color: var(--canvas);
     background-image:
       radial-gradient(80% 60% at 10% -10%, var(--canvas-glow-b), transparent 60%),
@@ -79,15 +79,15 @@
   h1,
   h2,
   h3 {
-    font-family: var(--font-ui), "Helvetica Neue", Arial, sans-serif;
-    font-weight: 500;
+    font-family: var(--font-display);
+    font-weight: var(--display-weight);
     text-transform: uppercase;
     letter-spacing: 0.02em;
   }
   h4,
   h5,
   h6 {
-    font-family: var(--font-ui), "Helvetica Neue", Arial, sans-serif;
+    font-family: var(--font-body);
     font-weight: 500;
   }
   /* Tijd en codes: tabulaire cijfers. */
@@ -137,9 +137,9 @@
   --breakpoint-xs: 30rem;
 
   /* Typography */
-  --font-sans: var(--font-ui), "Helvetica Neue", Arial, sans-serif;
-  --font-serif: var(--font-ui), "Helvetica Neue", Arial, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-display);
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
 
   /* Font sizes */
   /* Editor is dense: floor 0.75rem (12px) so labels stay legible. */

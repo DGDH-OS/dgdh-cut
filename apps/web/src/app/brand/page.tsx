@@ -208,17 +208,17 @@ export default function BrandPage() {
 const CHECKER_STYLES: Record<"dark" | "light", CSSProperties> = {
 	light: {
 		backgroundImage:
-			"linear-gradient(45deg, #1e232c 25%, transparent 25%), linear-gradient(-45deg, #1e232c 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #1e232c 75%), linear-gradient(-45deg, transparent 75%, #1e232c 75%)",
+			"linear-gradient(45deg, #341D21 25%, transparent 25%), linear-gradient(-45deg, #341D21 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #341D21 75%), linear-gradient(-45deg, transparent 75%, #341D21 75%)",
 		backgroundSize: "18px 18px",
 		backgroundPosition: "0 0, 0 9px, 9px -9px, -9px 0px",
-		backgroundColor: "#121212",
+		backgroundColor: "#211114",
 	},
 	dark: {
 		backgroundImage:
-			"linear-gradient(45deg, #e6e5e1 25%, transparent 25%), linear-gradient(-45deg, #e6e5e1 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #e6e5e1 75%), linear-gradient(-45deg, transparent 75%, #e6e5e1 75%)",
+			"linear-gradient(45deg, #E6DCD1 25%, transparent 25%), linear-gradient(-45deg, #E6DCD1 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #E6DCD1 75%), linear-gradient(-45deg, transparent 75%, #E6DCD1 75%)",
 		backgroundSize: "18px 18px",
 		backgroundPosition: "0 0, 0 9px, 9px -9px, -9px 0px",
-		backgroundColor: "#f8f7f4",
+		backgroundColor: "#FBF9F6",
 	},
 };
 

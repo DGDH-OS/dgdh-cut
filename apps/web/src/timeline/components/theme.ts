@@ -15,12 +15,12 @@ export const TIMELINE_TRACK_THEME: Record<
 		elementClassName: "bg-border",
 		waveformColor: TIMELINE_AUDIO_WAVEFORM_COLOR,
 	},
-	graphic: { elementClassName: "bg-[color-mix(in_srgb,var(--bronze)_35%,#121212)]" },
-	effect: { elementClassName: "bg-[color-mix(in_srgb,var(--brand)_55%,#121212)]" },
+	graphic: { elementClassName: "bg-[color-mix(in_srgb,var(--bronze)_35%,#211114)]" },
+	effect: { elementClassName: "bg-[color-mix(in_srgb,var(--brand)_55%,#211114)]" },
 } as const;
 
 export const SELECTED_TRACK_ROW_CLASS = "bg-accent/50";
-export const DEFAULT_TIMELINE_BOOKMARK_COLOR = "#b58c67";
+export const DEFAULT_TIMELINE_BOOKMARK_COLOR = "#B3978A";
 
 export function getTimelineElementClassName({
 	type,

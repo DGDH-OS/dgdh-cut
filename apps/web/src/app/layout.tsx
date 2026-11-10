@@ -7,19 +7,6 @@ import { TooltipProvider } from "../components/ui/tooltip";
 import { baseMetaData } from "./metadata";
 import { BotIdClient } from "botid/client";
 import { webEnv } from "@/env/web";
-import { Albert_Sans, IBM_Plex_Mono } from "next/font/google";
-
-const albertSans = Albert_Sans({
-	subsets: ["latin"],
-	weight: ["400", "500", "600"],
-	variable: "--font-albert-sans",
-});
-
-const plexMono = IBM_Plex_Mono({
-	subsets: ["latin"],
-	weight: ["400", "500", "600"],
-	variable: "--font-plex-mono",
-});
 
 export const metadata = baseMetaData;
 
@@ -36,7 +23,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="nl" className={`${albertSans.variable} ${plexMono.variable}`} suppressHydrationWarning>
+		<html lang="nl" suppressHydrationWarning>
 			<head>
 				{/* Blokkerend: data-theme + theme-color + color-scheme voor de eerste paint (geen flits). */}
 				<script dangerouslySetInnerHTML={{ __html: DGDH_THEME_SCRIPT }} />
